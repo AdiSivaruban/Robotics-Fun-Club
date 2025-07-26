@@ -4,92 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paddle Boat Project</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #e3f2fd, #ffe0f0);
-      color: #333;
-    }
-    header {
-      background: linear-gradient(to right, #00bcd4, #8e24aa);
-      color: white;
-      padding: 1.5em 1em;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav {
-      background: #ffffff;
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      padding: 1em 0.5em;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 4.5em;
-      z-index: 999;
-      border-bottom: 2px solid #f0f0f0;
-    }
-    nav a {
-      text-decoration: none;
-      color: #673ab7;
-      font-weight: 600;
-      padding: 0.5em 1.2em;
-      border-radius: 8px;
-      background: #ede7f6;
-      transition: transform 0.3s ease, background 0.3s, color 0.3s;
-    }
-    nav a:hover {
-      background: #d1c4e9;
-      color: #311b92;
-      transform: scale(1.08);
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2em;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      color: #d81b60;
-    }
-    ul {
-      padding-left: 1.5em;
-    }
-    li {
-      margin-bottom: 0.5em;
-    }
-    .step {
-      background: #f1f8e9;
-      border-left: 5px solid #aed581;
-      padding: 1em;
-      margin-bottom: 1em;
-      border-radius: 5px;
-    }
-    .back-link {
-      display: inline-block;
-      margin-top: 2em;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-    .back-link:hover {
-      text-decoration: underline;
-    }
-    .highlight {
-      font-weight: bold;
-      color: #2e7d32;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="boat-body">
   <header>
     <h1>Robotics Fun Club Dashboard</h1>
     <p>Creative, calm, and clever robotics learning 🛠️</p>

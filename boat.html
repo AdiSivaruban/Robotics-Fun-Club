@@ -9,40 +9,44 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #e1f5fe, #fce4ec);
+      background: linear-gradient(to bottom right, #e3f2fd, #ffe0f0);
       color: #333;
     }
     header {
-      background: #cfd8dc;
-      color: #263238;
+      background: linear-gradient(to right, #00bcd4, #8e24aa);
+      color: white;
       padding: 1.5em 1em;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
     nav {
-      background: #b0bec5;
+      background: #ffffff;
       display: flex;
       justify-content: center;
       gap: 2em;
-      padding: 1em 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      padding: 1em 0.5em;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       position: sticky;
       top: 4.5em;
       z-index: 999;
+      border-bottom: 2px solid #f0f0f0;
     }
     nav a {
       text-decoration: none;
-      color: #37474f;
-      font-weight: bold;
-      padding: 0.5em 1em;
-      border-radius: 6px;
-      transition: background 0.3s;
+      color: #673ab7;
+      font-weight: 600;
+      padding: 0.5em 1.2em;
+      border-radius: 8px;
+      background: #ede7f6;
+      transition: transform 0.3s ease, background 0.3s, color 0.3s;
     }
     nav a:hover {
-      background: #90a4ae;
+      background: #d1c4e9;
+      color: #311b92;
+      transform: scale(1.08);
     }
     .container {
       max-width: 900px;
@@ -50,7 +54,7 @@
       padding: 2em;
       background: white;
       border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
     h2 {
       color: #d81b60;

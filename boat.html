@@ -13,11 +13,36 @@
       color: #333;
     }
     header {
-      background: #0288d1;
-      color: white;
-      padding: 2em 1em;
+      background: #cfd8dc;
+      color: #263238;
+      padding: 1.5em 1em;
       text-align: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      background: #b0bec5;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      padding: 1em 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 4.5em;
+      z-index: 999;
+    }
+    nav a {
+      text-decoration: none;
+      color: #37474f;
+      font-weight: bold;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #90a4ae;
     }
     .container {
       max-width: 900px;
@@ -62,9 +87,17 @@
 </head>
 <body>
   <header>
-    <h1>Paddle Boat Project</h1>
-    <p>Make your very own self-paddling boat using things you already have at home!</p>
+    <h1>Robotics Fun Club Dashboard</h1>
+    <p>Creative, calm, and clever robotics learning 🛠️</p>
   </header>
+
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="boat.html">🛶 Paddle Boat</a>
+    <a href="#">🧪 Projects</a>
+    <a href="#">📸 Upload</a>
+    <a href="#">📘 About</a>
+  </nav>
 
   <div class="container">
     <h2>🧰 Materials Needed</h2>

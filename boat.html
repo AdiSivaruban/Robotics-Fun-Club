@@ -6,47 +6,68 @@
   <title>Paddle Boat Project</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f9ff;
+      background: linear-gradient(to bottom right, #e1f5fe, #fce4ec);
       color: #333;
     }
     header {
-      background: #0077cc;
+      background: #0288d1;
       color: white;
-      padding: 1em;
+      padding: 2em 1em;
       text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       padding: 2em;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #d81b60;
     }
     ul {
       padding-left: 1.5em;
     }
-    a.back {
+    li {
+      margin-bottom: 0.5em;
+    }
+    .step {
+      background: #f1f8e9;
+      border-left: 5px solid #aed581;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+    .back-link {
       display: inline-block;
       margin-top: 2em;
       text-decoration: none;
-      color: #0077cc;
+      color: #0288d1;
       font-weight: bold;
+      font-size: 1.1em;
     }
-    a.back:hover {
+    .back-link:hover {
       text-decoration: underline;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #2e7d32;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Project: Paddle Boat</h1>
-    <p>Make a simple self-paddling boat using a water bottle and rubber band!</p>
+    <h1>Paddle Boat Project</h1>
+    <p>Make your very own self-paddling boat using things you already have at home!</p>
   </header>
 
   <div class="container">
-    <h2>Materials Needed:</h2>
+    <h2>🧰 Materials Needed</h2>
     <ul>
       <li>1 empty plastic water bottle (with cap)</li>
       <li>3 popsicle sticks</li>
@@ -54,15 +75,33 @@
       <li>Tape</li>
     </ul>
 
-    <h2>Instructions:</h2>
-    <p><strong>Step 1:</strong> Use the plastic bottle as the boat body. Make sure it floats and is tightly sealed. Decorate if you want!</p>
-    <p><strong>Step 2:</strong> Tape two popsicle sticks parallel on either side of the back of the bottle, leaving space between them.</p>
-    <p><strong>Step 3:</strong> Stretch the rubber band between the two sticks.</p>
-    <p><strong>Step 4:</strong> Cut a popsicle stick in half and slide one half into the center of the rubber band to make your paddle.</p>
-    <p><strong>Step 5:</strong> Twist the paddle backward, set the boat in water, and let go! The untwisting motion will spin the paddle and move the boat.</p>
+    <h2>🛠 Step-by-Step Instructions</h2>
+    <div class="step">
+      <p><span class="highlight">Step 1: Prepare the Bottle Hull</span><br>
+      Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!</p>
+    </div>
 
-    <a href="index.html" class="back">← Back to Projects</a>
+    <div class="step">
+      <p><span class="highlight">Step 2: Make the Paddle Axle</span><br>
+      Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.</p>
+    </div>
+
+    <div class="step">
+      <p><span class="highlight">Step 3: Attach the Rubber Band</span><br>
+      Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.</p>
+    </div>
+
+    <div class="step">
+      <p><span class="highlight">Step 4: Make and Insert the Paddle</span><br>
+      Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.</p>
+    </div>
+
+    <div class="step">
+      <p><span class="highlight">Step 5: Wind It Up and Launch</span><br>
+      Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Home</a>
   </div>
-
 </body>
 </html>

@@ -37,32 +37,31 @@
     }
 
     .logo {
-  font-family: 'Baloo 2', cursive; 
-  font-size: 1.8em; 
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 1px;
-}
+      font-family: 'Baloo 2', cursive; 
+      font-size: 1.8em; 
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
 
     nav {
       display: flex;
       gap: 1em;
     }
 
-  nav a {
-  text-decoration: none;
-  font-weight: 600;
-  color: var(--primary);
-  padding: 0.5em 1em;
-  border-radius: 5px;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--primary);
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
 
-nav a:hover {
-  transform: scale(1.1);
-  color: var(--accent);
-}
-
+    nav a:hover {
+      transform: scale(1.1);
+      color: var(--accent);
+    }
 
     .container {
       max-width: 1200px;
@@ -71,6 +70,14 @@ nav a:hover {
       background-color: var(--cream);
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .page-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.5em;
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 1em;
     }
 
     h2 {
@@ -129,19 +136,17 @@ nav a:hover {
 
     @media (max-width: 768px) {
       .logo {
-        font-size: 0.7em;
+        font-size: 1.2em;
       }
       nav {
         flex-direction: column;
         align-items: flex-start;
       }
     }
-     
   </style>
 </head>
 <body>
-<h1>How to Build Your Paddle Boat</h1>
-<h2>Step-by-Step Instructions</h2>
+
   <header>
     <div class="logo">ROBOTICS FUN CLUB</div>
     <nav>
@@ -154,6 +159,8 @@ nav a:hover {
   </header>
 
   <div class="container">
+    <h1 class="page-title">How to Build Your Paddle Boat</h1>
+
     <h2>Materials Needed</h2>
     <ul>
       <li>1 empty plastic water bottle (with cap)</li>
@@ -163,8 +170,7 @@ nav a:hover {
     </ul>
 
     <div class="section-divider">Let’s Build It!</div>
-    
-<h1 class="page-title">How to Build a Paddle Boat</h1>
+
     <h2>Step-by-Step Instructions</h2>
 
     <div class="step">

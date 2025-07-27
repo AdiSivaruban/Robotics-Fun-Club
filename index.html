@@ -1,15 +1,19 @@
-<nav>
-  <div class="nav-container">
-    <div class="logo">
-      <div class="robot-icon"></div>
-      Robotics Fun Club
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="feedback.html">Reviews</a></li>
-    </ul>
-  </div>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotics Fun Club - Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+  <script>
+    fetch('navbar.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('navbar').innerHTML = data);
+  </script>
+
+  <!-- page content... -->
+</body>
+</html>

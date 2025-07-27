@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Robotics Fun Club</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+  <script>
+    fetch('navbar.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('navbar').innerHTML = data);
+  </script>
+
+  <section class="section">
+    <h2 class="section-title">🌟 About Robotics Fun Club</h2>
+    <div class="about-content">
+      <!-- Your full About Us content: Welcome, Mission, What Makes Us Special -->
+    </div>
+  </section>
+</body>
+</html>

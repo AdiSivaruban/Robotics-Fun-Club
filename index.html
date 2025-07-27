@@ -4,39 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Robotics Fun Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fffdf6;
-      --grid-line: #e0e0e0;
-      --primary: #333;
-      --accent: #ff6b6b;
-      --blue: #60c3d2;
-      --green: #90be6d;
-      --pink: #fcb0b3;
-      --yellow: #ffd166;
+      --bg: #FFFDF4;
+      --primary: #2B2D42;
+      --accent: #EF476F;
+      --button: #FFD166;
+      --paper: #FFFFFF;
     }
 
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
       background-color: var(--bg);
-      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
-                        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
+      background-size: auto;
       color: var(--primary);
     }
 
     header {
+      background-color: var(--paper);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5em 2em;
-      background-color: white;
-      border-bottom: 3px dashed var(--accent);
+      padding: 1em 2em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 10;
     }
 
     .logo {
@@ -45,87 +41,51 @@
       color: var(--accent);
     }
 
+    nav {
+      display: flex;
+      gap: 1em;
+    }
+
     nav a {
       text-decoration: none;
-      margin: 0 1em;
       color: var(--primary);
-      font-weight: bold;
-      padding: 0.4em 0.8em;
-      border-radius: 8px;
-      transition: background 0.2s, transform 0.2s;
+      font-weight: 600;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      background-color: var(--button);
+      transition: transform 0.2s ease;
     }
 
     nav a:hover {
-      background-color: var(--yellow);
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .container {
       max-width: 1000px;
       margin: 3em auto;
-      background-color: #ffffffcc;
-      border-radius: 20px;
       padding: 2em;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background-color: var(--paper);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
     h1 {
-      text-align: center;
-      font-size: 2.5em;
+      font-size: 2.2em;
       color: var(--accent);
-      margin-bottom: 0.3em;
     }
 
-    p.description {
-      text-align: center;
+    .intro {
+      margin-top: 1em;
       font-size: 1.2em;
-      color: var(--primary);
-      margin-bottom: 2em;
-    }
-
-    .grid-icons {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 2em;
-    }
-
-    .icon {
-      background-color: var(--pink);
-      padding: 1em;
-      border-radius: 20px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-
-    .icon:hover {
-      transform: translateY(-5px);
-    }
-
-    .icon img {
-      width: 80px;
-      margin-bottom: 0.5em;
-    }
-
-    .icon h3 {
-      font-size: 1.2em;
-      margin: 0.3em 0;
+      line-height: 1.6;
     }
 
     footer {
       text-align: center;
+      margin-top: 4em;
       padding: 2em;
-      font-size: 0.9em;
-      color: #777;
-    }
-
-    @media (max-width: 600px) {
-      .grid-icons {
-        flex-direction: column;
-        align-items: center;
-      }
+      background-color: var(--primary);
+      color: white;
     }
   </style>
 </head>
@@ -133,7 +93,8 @@
   <header>
     <div class="logo">Robotics Fun Club</div>
     <nav>
-      <a href="#">Home</a>
+      <a href="index.html">Home</a>
+      <a href="boat.html">Paddle Boat</a>
       <a href="#">Projects</a>
       <a href="#">Upload</a>
       <a href="#">About</a>
@@ -141,29 +102,14 @@
   </header>
 
   <div class="container">
-    <h1>Welcome to the Club!</h1>
-    <p class="description">Explore fun STEAM projects made just for young creators.</p>
-    <div class="grid-icons">
-      <div class="icon" style="background-color: var(--yellow)">
-        <img src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f1f8-1f1e6.png" alt="Boat">
-        <h3>Paddle Boat</h3>
-        <p>Make a boat using bottles & rubber bands!</p>
-      </div>
-      <div class="icon" style="background-color: var(--blue)">
-        <img src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f52c.png" alt="Science">
-        <h3>Mini Lab</h3>
-        <p>Try safe science experiments at home.</p>
-      </div>
-      <div class="icon" style="background-color: var(--green)">
-        <img src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f9ee.png" alt="Engineering">
-        <h3>Build Bots</h3>
-        <p>Design cool creations with circuits and code!</p>
-      </div>
-    </div>
+    <h1>Welcome to the Robotics Fun Club!</h1>
+    <p class="intro">
+      We make STEM fun by turning everyday objects into creative, moving machines! Dive into our latest paddle boat project and explore more hands-on builds.
+    </p>
   </div>
 
   <footer>
-    🚀 Robotics Fun Club · Powered by Creativity · © 2025
+    🚀 Powered by Curiosity · Robotics Fun Club · © 2025
   </footer>
 </body>
 </html>

@@ -3,95 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paddle Boat Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <title>Robotics Fun Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #FFFDF4;
+      --primary: #2B2D42;
+      --accent: #EF476F;
+      --button: #FFD166;
+      --paper: #FFFFFF;
+    }
+
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
-      background-image: url('https://www.transparenttextures.com/patterns/graph-paper.png');
-      background-color: #fefefe;
-      color: #333;
-      padding: 1em;
+      background-color: var(--bg);
+      background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
+      background-size: auto;
+      color: var(--primary);
     }
 
     header {
-      background-color: #fdf3f3;
-      border-bottom: 3px dashed #ff9aa2;
-      padding: 1em 2em;
+      background-color: var(--paper);
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .logo {
-      font-weight: 600;
-      font-size: 1.6em;
-      color: #ff6363;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 1em;
     }
 
     nav a {
-      margin-left: 1em;
       text-decoration: none;
-      font-weight: bold;
-      color: #3d3d3d;
-      padding: 0.3em 0.6em;
-      border-radius: 5px;
-      transition: 0.2s;
+      color: var(--primary);
+      font-weight: 600;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      background-color: var(--button);
+      transition: transform 0.2s ease;
     }
 
     nav a:hover {
-      background-color: #ffe2e2;
+      transform: scale(1.05);
     }
 
     .container {
-      max-width: 900px;
-      margin: 2em auto;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 4px 4px 0 #ffd6d6;
+      max-width: 1000px;
+      margin: 3em auto;
       padding: 2em;
-      border: 2px dashed #ffc0cb;
+      background-color: var(--paper);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
-    h1, h2 {
-      text-align: center;
-      color: #ff4c60;
+    h1 {
+      font-size: 2.2em;
+      color: var(--accent);
     }
 
-    h2 {
-      font-size: 1.3em;
-      margin-top: 1.5em;
-    }
-
-    ul {
-      line-height: 1.8;
-    }
-
-    .step {
-      background-color: #fff9f9;
-      border-left: 6px solid #ffd166;
-      margin: 1.2em 0;
-      padding: 1em;
-      border-radius: 8px;
-    }
-
-    .step:hover {
-      background-color: #fff0f0;
+    .intro {
+      margin-top: 1em;
+      font-size: 1.2em;
+      line-height: 1.6;
     }
 
     footer {
-      margin-top: 4em;
       text-align: center;
-      padding: 1em;
-      background-color: #ffe9ec;
-      border-top: 3px dashed #ffb5c1;
-      font-size: 0.9em;
+      margin-top: 4em;
+      padding: 2em;
+      background-color: var(--primary);
+      color: white;
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">Robotics Fun Club</div>
     <nav>
@@ -104,47 +102,14 @@
   </header>
 
   <div class="container">
-    <h1>How to Build a Paddle Boat</h1>
-    
-    <h2>Materials Needed</h2>
-    <ul>
-      <li>1 empty plastic water bottle (with cap)</li>
-      <li>3 popsicle sticks</li>
-      <li>1 strong rubber band</li>
-      <li>Tape</li>
-    </ul>
-
-    <h2>Step-by-Step Instructions</h2>
-
-    <div class="step">
-      <strong>Step 1: Prepare the Bottle Hull</strong><br>
-      Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!
-    </div>
-
-    <div class="step">
-      <strong>Step 2: Make the Paddle Axle</strong><br>
-      Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.
-    </div>
-
-    <div class="step">
-      <strong>Step 3: Attach the Rubber Band</strong><br>
-      Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.
-    </div>
-
-    <div class="step">
-      <strong>Step 4: Make and Insert the Paddle</strong><br>
-      Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.
-    </div>
-
-    <div class="step">
-      <strong>Step 5: Wind It Up and Launch</strong><br>
-      Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!
-    </div>
+    <h1>Welcome to the Robotics Fun Club!</h1>
+    <p class="intro">
+      We make STEM fun by turning everyday objects into creative, moving machines! Dive into our latest paddle boat project and explore more hands-on builds.
+    </p>
   </div>
 
   <footer>
-    🚀 Powered by Creativity · Robotics Fun Club · © 2025
+    🚀 Powered by Curiosity · Robotics Fun Club · © 2025
   </footer>
-
 </body>
 </html>

@@ -7,81 +7,100 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Coming+Soon&display=swap" rel="stylesheet">
   <style>
     :root {
-      --forest: #2d6a4f;
-      --mint: #d8f3dc;
-      --cream: #f1f8f5;
-      --olive: #95d5b2;
-      --leaf: #1b4332;
+      --green: #8FCB9B;
+      --mint: #D8F3DC;
+      --forest: #40916C;
+      --dark: #2D6A4F;
+      --white: #f9f9f9;
+      --shadow: rgba(0, 0, 0, 0.1);
     }
 
     body {
       margin: 0;
-      font-family: 'Coming Soon', cursive;
-      background-color: var(--cream);
-      background-image: 
-        linear-gradient(0deg, transparent 24%, var(--mint) 25%, transparent 26%, transparent 74%, var(--mint) 75%, transparent 76%),
-        linear-gradient(90deg, transparent 24%, var(--mint) 25%, transparent 26%, transparent 74%, var(--mint) 75%, transparent 76%);
+      background-color: var(--mint);
+      background-image: linear-gradient(0deg, transparent 24%, #c4f1d6 25%, transparent 26%, transparent 74%, #c4f1d6 75%, transparent 76%),
+                        linear-gradient(90deg, transparent 24%, #c4f1d6 25%, transparent 26%, transparent 74%, #c4f1d6 75%, transparent 76%);
       background-size: 40px 40px;
-      color: var(--leaf);
+      font-family: 'Coming Soon', cursive;
+      color: var(--dark);
     }
 
     header {
-      background-color: var(--mint);
-      border-bottom: 3px solid var(--olive);
-      padding: 2em 1em;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      background-color: var(--green);
+      box-shadow: 0 4px 10px var(--shadow);
+      z-index: 1000;
+      padding: 1.5em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .title {
+    .logo {
       font-family: 'Fredoka One', cursive;
-      font-size: 3em;
-      color: var(--forest);
-      margin: 0;
+      font-size: 1.8em;
+      color: white;
+      text-shadow: 2px 2px 0 var(--dark);
     }
 
     nav {
-      margin-top: 1.5em;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
       gap: 1em;
     }
 
     nav a {
       font-family: 'Fredoka One', cursive;
-      background-color: var(--olive);
-      color: var(--leaf);
-      padding: 0.8em 1.4em;
+      background-color: white;
+      padding: 0.6em 1em;
       border-radius: 12px;
       text-decoration: none;
-      box-shadow: 3px 3px 0 var(--forest);
+      color: var(--forest);
+      box-shadow: 3px 3px 0 var(--dark);
       transition: all 0.2s ease;
     }
 
     nav a:hover {
-      background-color: var(--forest);
-      color: white;
-      transform: scale(1.05);
-      box-shadow: 2px 2px 0 var(--leaf);
+      transform: translateY(-3px);
+      box-shadow: 4px 4px 0 var(--dark);
+      background-color: #e1ffe6;
     }
 
     .main {
       padding: 4em 2em;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
-    .main h2 {
-      font-size: 2em;
+    .main h1 {
       font-family: 'Fredoka One', cursive;
-      color: var(--forest);
-      margin-bottom: 0.5em;
+      font-size: 2.8em;
+      margin-bottom: 0.3em;
     }
 
     .main p {
       font-size: 1.2em;
-      max-width: 600px;
-      margin: 0 auto;
+      margin-bottom: 2em;
+      color: #3a3a3a;
+    }
+
+    .main .start-btn {
+      background-color: var(--forest);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2em;
+      padding: 0.8em 2em;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 3px 3px 0 var(--dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .main .start-btn:hover {
+      transform: translateY(-2px);
+      background-color: var(--dark);
     }
 
     .characters {
@@ -89,37 +108,38 @@
       bottom: 0;
       width: 100%;
       pointer-events: none;
-    }
-
-    .char-left,
-    .char-right {
-      position: absolute;
-      bottom: 0;
-      height: 180px;
+      z-index: 0;
     }
 
     .char-left {
+      position: absolute;
       left: 0;
+      bottom: 0;
+      height: 220px;
     }
 
     .char-right {
+      position: absolute;
       right: 0;
+      bottom: 0;
+      height: 220px;
     }
 
     footer {
+      text-align: center;
+      padding: 2em;
+      font-size: 0.9em;
       background-color: var(--forest);
       color: white;
-      text-align: center;
-      padding: 1.5em;
-      font-size: 0.9em;
-      margin-top: 4em;
+      box-shadow: 0 -3px 10px var(--shadow);
+      margin-top: 3em;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1 class="title">Robotics Fun Club</h1>
+    <div class="logo">Robotics Fun Club</div>
     <nav>
       <a href="index.html">Home</a>
       <a href="boat.html">Paddle Boat</a>
@@ -130,8 +150,9 @@
   </header>
 
   <div class="main">
-    <h2>Welcome to Our Club!</h2>
-    <p>Explore fun, hands-on STEM projects with colorful characters, interactive guides, and exciting experiments. Let’s build and learn together!</p>
+    <h1>Welcome to Our STEM Playground!</h1>
+    <p>Explore hands-on robotics, engineering builds, and creative projects designed just for kids.</p>
+    <a href="boat.html"><button class="start-btn">Try the Paddle Boat!</button></a>
   </div>
 
   <div class="characters">
@@ -140,7 +161,7 @@
   </div>
 
   <footer>
-    © 2025 Robotics Fun Club · Powered by Curiosity 🌱
+    🚀 Powered by Creativity · Robotics Fun Club · © 2025
   </footer>
 
 </body>

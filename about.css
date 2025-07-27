@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Robotics Fun Club</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+        </div>
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="robot-icon"></div>
+                Robotics Fun Club
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">🌟 About Robotics Fun Club</h1>
+        <div class="content-card">
+            <h2>Welcome to Our STEM Adventure!</h2>
+            <p>
+                The Robotics Fun Club is a community workshop and website for younger kids to explore basic robotics and science concepts using simple, everyday materials like batteries, paperclips, foil, cardboard, and rubber bands. Our activities help kids get excited about robotics and learning without screens.
+            </p>
+            <p>
+                Founded by a passionate educator with experience teaching piano and helping run summer camps, our club brings together the joy of hands-on learning with the excitement of robotics. We've discovered that the best way to learn about science and technology is through getting your hands dirty and building real things!
+            </p>
+            
+            <h2>🎯 Our Mission</h2>
+            <p>
+                We're on a mission to make robotics and STEM education accessible to every child in our local community, regardless of their background or resources. Using simple materials you already have at home, we show kids they don't need expensive kits to explore the wonders of science and engineering.
+            </p>
+            
+            <h2>🏆 What Makes Us Special</h2>
+            <p>
+                <strong>Screen-Free Learning:</strong> All our projects encourage hands-on building and real-world problem solving<br><br>
+                <strong>Everyday Materials:</strong> Use items you already have at home<br><br>
+                <strong>Progressive Difficulty:</strong> Start easy and build up to more complex projects<br><br>
+                <strong>Safety First:</strong> All projects include clear safety guidelines<br><br>
+                <strong>Community Focus:</strong> Share your creations and get inspired by others through our photo upload feature
+            </p>
+            
+            <h2>🔬 What You'll Learn</h2>
+            <p>
+                Through our hands-on projects, kids discover fundamental concepts in physics, engineering, and robotics. From understanding how rubber band energy converts to motion in our boat project, to learning about mechanical advantage with the robot arm grabber, each activity builds real scientific knowledge through play and experimentation.
+            </p>
+            
+            <h2>👨‍🏫 Our Approach</h2>
+            <p>
+                Drawing from years of experience in education and working with children, we believe that the best learning happens when kids are actively engaged and having fun. Our projects are designed to be achievable yet challenging, encouraging problem-solving and creativity while building confidence in STEM subjects.
+            </p>
+            
+            <p style="margin-top: 30px; font-size: 1.1rem; text-align: center; color: #6c5ce7; font-weight: 600;">
+                Join us on this incredible journey of discovery, where science meets fun, and every project is a new adventure waiting to unfold!
+            </p>
+        </div>
+    </div>
+</body>
+</html>

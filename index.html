@@ -9,73 +9,94 @@
     body {
       margin: 0;
       font-family: 'Coming Soon', cursive;
-      background-color: #fffdf5;
       background-image: 
-        linear-gradient(0deg, transparent 24%, #fceee3 25%, transparent 26%, transparent 74%, #fceee3 75%, transparent 76%, transparent),
-        linear-gradient(90deg, transparent 24%, #fceee3 25%, transparent 26%, transparent 74%, #fceee3 75%, transparent 76%, transparent);
+        linear-gradient(0deg, transparent 24%, #fceee3 25%, transparent 26%, transparent 74%, #fceee3 75%, transparent 76%),
+        linear-gradient(90deg, transparent 24%, #fceee3 25%, transparent 26%, transparent 74%, #fceee3 75%, transparent 76%);
       background-size: 40px 40px;
+      background-color: #fffdf5;
       color: #333;
     }
 
     header {
-      text-align: center;
-      padding: 3em 2em 1em;
-      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5em 2em;
+      background-color: #fff;
+      border-bottom: 3px solid #ffe0ea;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    .title {
+    .logo {
       font-family: 'Fredoka One', cursive;
-      font-size: 3em;
-      margin: 0;
-      color: #ff5590;
-      text-shadow: 2px 2px #fbd0d0;
+      font-size: 2em;
+      color: #ff66a6;
     }
 
     nav {
-      margin-top: 2em;
       display: flex;
-      justify-content: center;
-      gap: 1.5em;
-      flex-wrap: wrap;
+      gap: 1.2em;
     }
 
     nav a {
       font-family: 'Fredoka One', cursive;
-      background-color: #ffe0ea;
-      color: #333;
       text-decoration: none;
-      padding: 0.8em 1.5em;
-      border-radius: 12px;
-      font-size: 1.1em;
-      box-shadow: 3px 3px 0 #888;
-      transition: all 0.2s ease;
+      background-color: #ffe0ea;
+      color: #000;
+      padding: 0.6em 1.1em;
+      border-radius: 10px;
+      box-shadow: 2px 2px 0 #555;
+      transition: all 0.25s ease;
     }
 
     nav a:hover {
-      transform: scale(1.07);
+      transform: scale(1.1);
       background-color: #ffc8d8;
-      box-shadow: 3px 3px 0 #444;
     }
 
     .main {
       text-align: center;
-      padding: 2em 1em 5em;
-      max-width: 800px;
-      margin: 0 auto;
+      padding: 5em 2em 3em;
+      position: relative;
     }
 
-    .main h2 {
+    .main h1 {
       font-family: 'Fredoka One', cursive;
-      font-size: 2em;
-      color: #d43f75;
-      margin-bottom: 0.5em;
+      font-size: 3em;
+      color: #ff66a6;
+      margin-bottom: 0.3em;
     }
 
     .main p {
-      font-size: 1.1em;
-      line-height: 1.7;
-      max-width: 600px;
+      font-size: 1.2em;
+      max-width: 700px;
       margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      margin-top: 3em;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #fff;
+      border: 3px dotted #ffbfd2;
+      border-radius: 15px;
+      padding: 2em;
+      width: 250px;
+      box-shadow: 6px 6px 0 #ff66a6;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
     }
 
     .characters {
@@ -83,47 +104,40 @@
       bottom: 0;
       width: 100%;
       pointer-events: none;
-      z-index: -1;
     }
 
     .char-left {
       position: absolute;
       left: 0;
       bottom: 0;
-      height: 200px;
+      height: 180px;
     }
 
     .char-right {
       position: absolute;
       right: 0;
       bottom: 0;
-      height: 200px;
+      height: 180px;
     }
 
     footer {
       text-align: center;
-      padding: 2em 1em;
+      padding: 2em;
       font-size: 0.9em;
       color: #777;
+      background-color: #fff;
+      border-top: 2px solid #ffe0ea;
+      margin-top: 5em;
     }
 
-    @media (max-width: 600px) {
-      .title {
-        font-size: 2.2em;
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1em;
       }
-
-      nav a {
-        padding: 0.6em 1em;
-        font-size: 1em;
-      }
-
-      .main h2 {
-        font-size: 1.5em;
-      }
-
-      .char-left,
-      .char-right {
-        height: 120px;
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   </style>
@@ -131,7 +145,7 @@
 <body>
 
   <header>
-    <h1 class="title">Robotics Fun Club</h1>
+    <div class="logo">Robotics Fun Club</div>
     <nav>
       <a href="index.html">Home</a>
       <a href="boat.html">Paddle Boat</a>
@@ -142,8 +156,21 @@
   </header>
 
   <div class="main">
-    <h2>Welcome to Our Club!</h2>
-    <p>Explore our awesome STEM projects, build cool creations, and share your work. Click a page above to get started!</p>
+    <h1>Welcome to the Robotics Fun Club</h1>
+    <p>Explore exciting STEM projects made by students like you! Let’s build, create, and tinker with hands-on activities and cool experiments. Get started with one of our projects below.</p>
+    
+    <div class="highlight">
+      <div class="card">
+        <h3>Paddle Boat</h3>
+        <p>Make a water-powered boat using a bottle and sticks. Super fun and floaty!</p>
+        <a href="boat.html">Build This →</a>
+      </div>
+      <div class="card">
+        <h3>More Projects</h3>
+        <p>Explore other fun DIY science and robotics challenges.</p>
+        <a href="#">Browse All →</a>
+      </div>
+    </div>
   </div>
 
   <div class="characters">
@@ -152,7 +179,7 @@
   </div>
 
   <footer>
-    © 2025 Robotics Fun Club · Powered by Cute Vibes ✨
+    © 2025 Robotics Fun Club · Designed with 💡 by Kids Who Tinker
   </footer>
 
 </body>

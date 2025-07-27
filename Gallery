@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery - Robotics Fun Club</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+  <script>
+    fetch('navbar.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('navbar').innerHTML = data);
+  </script>
+
+  <section class="section">
+    <h2 class="section-title">📸 Project Gallery</h2>
+    <p style="text-align:center; color:white; font-size:1.2rem; margin-bottom:30px;">
+      Share your amazing creations with the community!
+    </p>
+
+    <div class="upload-area" onclick="document.getElementById('photo-upload').click()">
+      <input type="file" id="photo-upload" accept="image/*" onchange="uploadPhoto(this)">
+      <h3 style="color: #6c5ce7; margin-bottom: 15px;">📷 Upload Your Project Photo</h3>
+      <p style="color: #666;">Click here to select a photo of your completed project</p>
+      <p style="color: #999; font-size: 0.9rem; margin-top: 10px;">Supported formats: JPG, PNG, GIF</p>
+    </div>
+
+    <div class="photo-gallery" id="photo-gallery">
+      <!-- Your sample gallery cards (Alex, Sam, Maya, etc.) -->
+    </div>
+  </section>
+</body>
+</html>

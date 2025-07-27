@@ -1,140 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paddle Boat Project</title>
-  <style>
-    :root {
-      --primary: #6C63FF;
-      --secondary: #A3A1FF;
-      --accent: #FF8A65;
-      --light-bg: #f8f9fc;
-      --box: #ffffff;
-      --text: #333;
-      --highlight: #5c6bc0;
-    }
+<body>
+  <header>
+    <div class="dashboard-header">
+      <div class="site-logo">🤖 Robotics Fun Club</div>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="boat.html">🛶 Paddle Boat</a>
+        <a href="#">🧪 Projects</a>
+        <a href="#">📸 Upload</a>
+        <a href="#">📘 About</a>
+      </nav>
+    </div>
+  </header>
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+  <div class="container">
+    <h2>🧰 Materials Needed</h2>
+    <ul>
+      <li>1 empty plastic water bottle (with cap)</li>
+      <li>3 popsicle sticks</li>
+      <li>1 strong rubber band</li>
+      <li>Tape</li>
+    </ul>
 
-    /* Floating Background Bubbles */
-    body::before, body::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(108, 99, 255, 0.08);
-      z-index: 0;
-    }
+    <div class="section-divider"><span>Let's Build It!</span></div>
 
-    body::before {
-      width: 200px;
-      height: 200px;
-      top: 100px;
-      left: -80px;
-    }
+    <h2>🛠 Step-by-Step Instructions</h2>
 
-    body::after {
-      width: 150px;
-      height: 150px;
-      bottom: 100px;
-      right: -60px;
-    }
+    <div class="step">
+      <span>Step 1: Prepare the Bottle Hull</span>
+      Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!
+    </div>
 
-    header {
-      background-color: #ffffff;
-      padding: 1em 2em;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+    <div class="step">
+      <span>Step 2: Make the Paddle Axle</span>
+      Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.
+    </div>
 
-    .dashboard-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
-    }
+    <div class="step">
+      <span>Step 3: Attach the Rubber Band</span>
+      Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.
+    </div>
 
-    .site-logo {
-      font-size: 1.7em;
-      font-weight: bold;
-      color: var(--primary);
-      padding: 0.5em 1em;
-      background: #eef1fd;
-      border-radius: 12px;
-      transition: 0.3s ease all;
-      animation: pulse 3s infinite;
-      box-shadow: 0 0 10px rgba(108, 99, 255, 0.1);
-    }
+    <div class="step">
+      <span>Step 4: Make and Insert the Paddle</span>
+      Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.
+    </div>
 
-    .site-logo:hover {
-      transform: scale(1.05) rotate(-2deg);
-      background-color: var(--secondary);
-      color: white;
-      box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
-    }
+    <div class="step">
+      <span>Step 5: Wind It Up and Launch</span>
+      Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!
+    </div>
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
-
-    nav {
-      display: flex;
-      gap: 1em;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      font-weight: 600;
-      color: white;
-      background-color: var(--primary);
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      transition: 0.3s ease;
-    }
-
-    nav a:hover {
-      background-color: var(--accent);
-      transform: scale(1.08);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 3em auto;
-      background-color: var(--box);
-      padding: 2em;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      position: relative;
-      z-index: 1;
-    }
-
-    h2 {
-      color: var(--highlight);
-      margin-top: 2em;
-    }
-
-    .section-divider {
-      text-align: center;
-      margin: 3em 0 2em;
-      position: relative;
-    }
-
-    .section-divider::before {
-      content: '';
-      height: 2px;
-      background: #ddd;
-      width: 100%;
-      position: absolute;
-      top: 50%;
+    <a href="index.html" class="back-link">← Back to Home</a>
+  </div>
+</body>

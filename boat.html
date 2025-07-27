@@ -1,303 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddle Boat Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-     :root {
-    --primary: #748DAE;
-    --accent: #F5CBCB;
-    --light-bg: #FFEAEA;
-    --box: #FFFFFF;
-    --highlight: #9ECAD6;
-    --sparkle: rgba(158, 202, 214, 0.05);
-  }
-    .main-header {
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 999;
-  padding: 0.8em 2em;
-}
+    :root {
+      --primary: #748DAE;
+      --accent: #F5CBCB;
+      --light-bg: #FFEAEA;
+      --box: #FFFFFF;
+      --highlight: #9ECAD6;
+      --sparkle: rgba(158, 202, 214, 0.05);
+    }
 
-.header-content {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.site-logo {
-  font-size: 1.6em;
-  font-weight: 700;
-  color: #2c3e50;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.site-logo:hover {
-  transform: scale(1.05);
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.4em;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-weight: 600;
-  color: #2c3e50;
-  padding: 0.4em 0.8em;
-  border-radius: 6px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.nav-links a:hover {
-  background-color: rgba(44, 62, 80, 0.1);
-  color: #000;
-}
-
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: hidden;
-  }
-
-  body {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 17px;
-  line-height: 1.6;
-  color: #333;
-  background-color: var(--light-bg);
-  position: relative;
-    background-color: var(--light-bg);
-    background-image:
-      url('https://www.transparenttextures.com/patterns/fabric-of-squares.png'),
-    background-repeat: repeat, no-repeat;
-    background-position: top left, center center;
-    background-size: 150px 150px, cover;
-    background-attachment: fixed, fixed; /* creates the parallax effect */
-    background-blend-mode: soft-light, normal;
-    position: relative;
+    * {
       margin: 0;
-  padding: 0;
-  font-family: 'Quicksand', sans-serif;
-  color: #333;
-  position: relative;
-  background: rgba(255, 255, 255, 0.85);
-  overflow-x: hidden;
-  }
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255, 234, 234, 0.8);
-    z-index: 0;
-    pointer-events: none;
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--light-bg);
+      background-image: url('https://www.transparenttextures.com/patterns/fabric-of-squares.png');
+      background-repeat: repeat;
+      background-attachment: fixed;
+      background-blend-mode: soft-light;
+      color: #333;
+    }
+
+    body::before {
       content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 110%;
-  height: 110%;
-  z-index: -2;
-  animation: moveBG 60s linear infinite;
-  transform: scale(1.02);
-  filter: brightness(0.95);
-  }
-@keyframes moveBG {
-  0% { transform: scale(1.02) translateX(0); }
-  50% { transform: scale(1.02) translateX(-10px); }
-  100% { transform: scale(1.02) translateX(0); }
-}
-  header {
-<header class="main-header">
-  <div class="header-content">
-    <a href="index.html" class="site-logo">Robotics Fun Club</a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="boat.html">Paddle Boat</a>
-      <a href="#">Projects</a>
-      <a href="#">Upload</a>
-      <a href="#">About</a>
-    </nav>
-  </div>
-</header>
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 110%;
+      height: 110%;
+      background: rgba(255, 234, 234, 0.8);
+      z-index: -2;
+      animation: moveBG 60s linear infinite;
+      transform: scale(1.02);
+      filter: brightness(0.95);
+      pointer-events: none;
+    }
 
-  }
+    @keyframes moveBG {
+      0% { transform: scale(1.02) translateX(0); }
+      50% { transform: scale(1.02) translateX(-10px); }
+      100% { transform: scale(1.02) translateX(0); }
+    }
 
-  .dashboard-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1100px;
-    margin: auto;
-  }
+    header {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 1em 2em;
+    }
 
-  .site-logo {
-    font-size: 1.7em;
-    font-weight: bold;
-    color: var(--primary);
-    padding: 0.5em 1em;
-    background: #eef1fd;
-    border-radius: 12px;
-    display: inline-block;
-    transition: transform 0.4s ease;
-  }
+    .header-content {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  .site-logo:hover {
-    animation: wiggle 0.6s ease;
-  }
+    .site-logo {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
 
-  .site-logo:active {
-    transform: scale(0.95);
-  }
+    .nav-links {
+      display: flex;
+      gap: 1.5em;
+    }
 
-  .site-logo a {
-    text-decoration: none;
-    color: var(--primary);
-  }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2c3e50;
+      padding: 0.4em 0.6em;
+      border-radius: 6px;
+      transition: background-color 0.2s, color 0.2s;
+    }
 
-  @keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(2deg); }
-    50% { transform: rotate(-2deg); }
-    75% { transform: rotate(2deg); }
-    100% { transform: rotate(0deg); }
-  }
+    .nav-links a:hover {
+      background-color: rgba(116, 141, 174, 0.1);
+      color: #000;
+    }
 
-  nav {
-    display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
-  }
+    .container {
+      max-width: 900px;
+      margin: 4em auto;
+      background-color: var(--box);
+      padding: 2.5em;
+      border-radius: 20px;
+      box-shadow: 0 25px 80px rgba(116, 141, 174, 0.25);
+      position: relative;
+      z-index: 1;
+    }
 
-  nav a {
-    text-decoration: none;
-    font-weight: 600;
-    color: white;
-    background-color: var(--primary);
-    padding: 0.6em 1.2em;
-    border-radius: 8px;
-    transition: 0.3s ease;
-  }
+    h2 {
+      color: var(--highlight);
+      margin-top: 2em;
+    }
 
-  nav a:hover {
-    background-color: var(--accent);
-    transform: scale(1.08);
-  }
+    .quote-bubble {
+      font-style: italic;
+      background: #f0f4ff;
+      border-left: 5px solid var(--primary);
+      padding: 1em;
+      border-radius: 10px;
+      margin-bottom: 2em;
+    }
 
-  .container {
-    max-width: 900px;
-    margin: 4em auto;
-    background-color: var(--box);
-    padding: 2.5em;
-    border-radius: 20px;
-    box-shadow: 0 25px 80px rgba(116, 141, 174, 0.25);
-    position: relative;
-    z-index: 1;
-  }
+    .section-divider {
+      text-align: center;
+      margin: 3em 0 2em;
+    }
 
-  h2 {
-    color: var(--highlight);
-    margin-top: 2em;
-  }
+    .section-divider span {
+      background: #fff;
+      padding: 0 1em;
+      color: var(--highlight);
+      font-weight: bold;
+      font-size: 1.2em;
+      position: relative;
+    }
 
-  .quote-bubble {
-    font-style: italic;
-    background: #f0f4ff;
-    border-left: 5px solid var(--primary);
-    padding: 1em;
-    border-radius: 10px;
-    margin-bottom: 2em;
-  }
+    ul {
+      padding-left: 1.5em;
+    }
 
-  .section-divider {
-    text-align: center;
-    margin: 3em 0 2em;
-  }
+    li {
+      margin-bottom: 0.5em;
+    }
 
-  .section-divider span {
-    background: #fff;
-    padding: 0 1em;
-    color: var(--highlight);
-    font-weight: bold;
-    font-size: 1.2em;
-    position: relative;
-  }
+    .step {
+      background: #f9fafe;
+      border-left: 5px solid var(--highlight);
+      padding: 1.2em;
+      margin-bottom: 1.2em;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
 
-  ul {
-    padding-left: 1.5em;
-  }
+    .step:hover {
+      transform: scale(1.01);
+    }
 
-  li {
-    margin-bottom: 0.5em;
-  }
+    .step span {
+      font-weight: bold;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.3em;
+    }
 
-  .step {
-    background: #f9fafe;
-    border-left: 5px solid var(--highlight);
-    padding: 1.2em;
-    margin-bottom: 1.2em;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-  }
+    .back-link {
+      display: inline-block;
+      margin-top: 2em;
+      text-decoration: none;
+      color: var(--highlight);
+      font-weight: bold;
+      font-size: 1.1em;
+    }
 
-  .step:hover {
-    transform: scale(1.01);
-  }
-
-  .step span {
-    font-weight: bold;
-    color: var(--primary);
-    display: block;
-    margin-bottom: 0.3em;
-  }
-
-  .back-link {
-    display: inline-block;
-    margin-top: 2em;
-    text-decoration: none;
-    color: var(--highlight);
-    font-weight: bold;
-    font-size: 1.1em;
-  }
-
-  .back-link:hover {
-    text-decoration: underline;
-  }
+    .back-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="dashboard-header">
-      <div class="site-logo"><a href="index.html"> Robotics Fun Club</a></div>
-      <nav>
-        <a href="index.html"> Home</a>
-        <a href="boat.html"> Paddle Boat</a>
-        <a href="#"> Projects</a>
-        <a href="#"> Upload</a>
-        <a href="#"> About</a>
+    <div class="header-content">
+      <a href="index.html" class="site-logo">Robotics Fun Club</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="boat.html">Paddle Boat</a>
+        <a href="#">Projects</a>
+        <a href="#">Upload</a>
+        <a href="#">About</a>
       </nav>
     </div>
   </header>
 
   <div class="container">
-    <div class="quote-bubble">💬 “Science floats your boat!”</div>
+    <div class="quote-bubble">“Science floats your boat!”</div>
 
-    <h2>🧰 Materials Needed</h2>
+    <h2>Materials Needed</h2>
     <ul>
       <li>1 empty plastic water bottle (with cap)</li>
       <li>3 popsicle sticks</li>
@@ -307,7 +208,7 @@
 
     <div class="section-divider"><span>Let’s Build It!</span></div>
 
-    <h2>🛠 Step-by-Step Instructions</h2>
+    <h2>Step-by-Step Instructions</h2>
 
     <div class="step">
       <span>Step 1: Prepare the Bottle Hull</span>

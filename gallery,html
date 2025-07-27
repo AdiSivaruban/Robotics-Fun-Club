@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Robotics Fun Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+        </div>
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="robot-icon"></div>
+                Robotics Fun Club
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">📸 Project Gallery</h1>
+        <p class="gallery-subtitle">Share your amazing creations with the community!</p>
+        
+        <div class="upload-area" onclick="document.getElementById('photo-upload').click()">
+            <input type="file" id="photo-upload" accept="image/*" onchange="uploadPhoto(this)">
+            <h3>📷 Upload Your Project Photo</h3>
+            <p>Click here to select a photo of your completed project</p>
+            <p class="upload-note">Supported formats: JPG, PNG, GIF</p>
+        </div>
+
+        <div class="photo-gallery" id="photo-gallery">
+            <div class="photo-item">
+                <div class="photo-placeholder">🚤</div>
+                <div class="photo-caption">Boat by Alex</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🦾</div>
+                <div class="photo-caption">Robot Arm by Emma</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🚀</div>
+                <div class="photo-caption">Rocket by Sam</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🏎️</div>
+                <div class="photo-caption">Car by Maya</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🚤</div>
+                <div class="photo-caption">Decorated Boat by Liam</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🦾</div>
+                <div class="photo-caption">Super Grabber by Zoe</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function uploadPhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const gallery = document.getElementById('photo-gallery');
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '15px';
+                    
+                    const caption = document.createElement('div');
+                    caption.className = 'photo-caption';
+                    caption.textContent = 'My Project';
+                    
+                    photoItem.appendChild(img);
+                    photoItem.appendChild(caption);
+                    gallery.appendChild(photoItem);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - Robotics Fun Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reviews.css">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+        </div>
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="robot-icon"></div>
+                Robotics Fun Club
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">⭐ Reviews & Feedback</h1>
+        
+        <div class="feedback-form">
+            <h3>Share Your Experience!</h3>
+            <form onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label for="reviewer-name">Your Name:</label>
+                    <input type="text" id="reviewer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="project-completed">Which project did you complete?</label>
+                    <select id="project-completed" required>
+                        <option value="">Select a project...</option>
+                        <option value="boat">Rubber Band Boat</option>
+                        <option value="robot">Robot Arm Grabber</option>
+                        <option value="rocket">Bottle Rocket</option>
+                        <option value="car">Balloon Car</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <select id="rating" required>
+                        <option value="">Rate your experience...</option>
+                        <option value="5">⭐⭐⭐⭐⭐ Amazing!</option>
+                        <option value="4">⭐⭐⭐⭐ Great!</option>
+                        <option value="3">⭐⭐⭐ Good</option>
+                        <option value="2">⭐⭐ Okay</option>
+                        <option value="1">⭐ Needs improvement</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Your Review:</label>
+                    <textarea id="review-text" rows="4" placeholder="Tell us about your experience building this project!" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Submit Review</button>
+            </form>
+        </div>
+
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">A</div>
+                    <div class="reviewer-info">
+                        <strong>Alex (Age 9)</strong>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"The rubber band boat was AWESOME! It actually worked and went super fast across our bathtub. My little sister wants to make one too!"</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">E</div>
+                    <div class="reviewer-info">
+                        <strong>Emma (Age 11)</strong>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"The robot arm was challenging but so cool! I can pick up pencils and small toys with it. I decorated it to look like a real robot. Thank you for the clear instructions!"</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">M</div>
+                    <div class="reviewer-info">
+                        <strong>Maya's Mom</strong>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"This website is fantastic! Maya has been building projects all week. It's so nice to see her away from screens and actually creating something with her hands. The safety instructions are very clear too."</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar">S</div>
+                    <div class="reviewer-info">
+                        <strong>Sam (Age 10)</strong>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"The balloon car project was epic! Mine went really far and my dad helped me make it even faster. Can't wait to try the rocket next (with adult supervision of course)!"</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reviewer-name').value;
+            const project = document.getElementById('project-completed').value;
+            const rating = document.getElementById('rating').value;
+            const reviewText = document.getElementById('review-text').value;
+            
+            // Create new review card
+            const reviewsContainer = document.querySelector('.reviews-container');
+            const newReview = document.createElement('div');
+            newReview.className = 'review-card';
+            
+            const stars = '⭐'.repeat(parseInt(rating));
+            const projectNames = {
+                'boat': 'Rubber Band Boat',
+                'robot': 'Robot Arm Grabber', 
+                'rocket': 'Bottle Rocket',
+                'car': 'Balloon Car'
+            };
+            
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <div class="reviewer-avatar">${name.charAt(0).toUpperCase()}</div>
+                    <div class="reviewer-info">
+                        <strong>${name}</strong>
+                        <div class="stars">${stars}</div>
+                        <div class="project-tag">${projectNames[project]}</div>
+                    </div>
+                </div>
+                <p>"${reviewText}"</p>
+            `;
+            
+            // Add to top of reviews
+            reviewsContainer.insertBefore(newReview, reviewsContainer.firstChild);
+            
+            // Reset form
+            event.target.reset();
+            
+            // Show success message
+            alert('Thank you for your review! It has been added to the gallery.');
+        }
+    </script>
+</body>
+</html>

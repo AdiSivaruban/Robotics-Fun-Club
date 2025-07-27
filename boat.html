@@ -4,28 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddle Boat Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fdf6e3;
-      --accent: #c6c1b8;
-      --primary: #333;
-      --note-yellow: #fff9b0;
-      --note-blue: #cdeeff;
-      --note-shadow: rgba(0, 0, 0, 0.15);
+      --bg-color: #fef4e8;
+      --primary: #003049;
+      --accent: #d62828;
+      --soft: #f77f00;
+      --cream: #fdf0d5;
     }
 
     body {
       margin: 0;
-      font-family: 'VT323', monospace;
-      background-color: var(--bg);
+      font-family: 'Work Sans', sans-serif;
+      background-color: var(--bg-color);
       color: var(--primary);
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      background-attachment: fixed;
+      background-size: auto;
     }
 
     header {
-      background: white;
+      background-color: var(--cream);
       padding: 1em 2em;
-      border-bottom: 2px solid var(--accent);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -34,106 +36,102 @@
       z-index: 1000;
     }
 
-    .site-title {
-      font-size: 2.2em;
-      letter-spacing: 1px;
-      color: var(--primary);
+    .logo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1em;
+      color: var(--accent);
     }
 
-    nav a {
-      text-decoration: none;
-      color: var(--primary);
-      font-size: 1.2em;
-      margin-left: 2em;
-      transition: transform 0.2s ease;
+    nav {
+      display: flex;
+      gap: 1em;
     }
 
-    nav a:hover {
-      transform: scale(1.1);
-    }
+  nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--primary);
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+nav a:hover {
+  transform: scale(1.1);
+  color: var(--accent);
+}
+
 
     .container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 3em auto;
       padding: 2em;
+      background-color: var(--cream);
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     }
 
     h2 {
-      border-bottom: 1px solid var(--accent);
-      padding-bottom: 0.2em;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.1em;
+      color: var(--accent);
+      margin-top: 2em;
     }
 
     ul {
-      list-style: square;
       padding-left: 1.5em;
+      line-height: 1.8;
+    }
+
+    .section-divider {
+      margin: 2em 0;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--soft);
     }
 
     .step {
-      background: white;
+      background-color: #fffaf3;
+      padding: 1em;
       border-left: 5px solid var(--accent);
-      margin-bottom: 1.5em;
-      padding: 1.2em;
-      box-shadow: 0 3px 6px var(--note-shadow);
+      margin: 1em 0;
+      border-radius: 8px;
+      transition: transform 0.2s ease;
     }
 
-    .sticky-note {
-      position: fixed;
-      width: 200px;
-      height: auto;
-      min-height: 120px;
-      padding: 1.2em 1em;
-      font-size: 1.1em;
-      line-height: 1.5;
-      font-weight: bold;
-      box-shadow: 4px 4px 20px var(--note-shadow);
-      transform: rotate(-3deg);
-      z-index: 0;
-      background: var(--note-yellow);
-      border: 1px solid #e0d68d;
-      background-image: linear-gradient(transparent 10px, rgba(0,0,0,0.02) 11px);
-      background-size: 100% 1.5em;
-    }
-
-    .sticky-note::before {
-      content: '';
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      background: rgba(0, 0, 0, 0.1);
-      top: -10px;
-      left: 10px;
-      border-radius: 50%;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-    }
-
-    .note-left {
-      top: 120px;
-      left: 30px;
-    }
-
-    .note-right {
-      top: 300px;
-      right: 30px;
-      background: var(--note-blue);
-      transform: rotate(3deg);
-      border: 1px solid #a0d3e5;
+    .step:hover {
+      transform: scale(1.01);
     }
 
     .back-link {
       display: inline-block;
       margin-top: 2em;
-      text-decoration: none;
+      color: var(--accent);
       font-weight: bold;
-      color: var(--primary);
+      text-decoration: none;
     }
 
     .back-link:hover {
       text-decoration: underline;
     }
 
+    footer {
+      margin-top: 5em;
+      padding: 2em;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
     @media (max-width: 768px) {
-      .sticky-note {
-        display: none;
+      .logo {
+        font-size: 0.7em;
+      }
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -141,7 +139,7 @@
 <body>
 
   <header>
-    <div class="site-title">Robotics Fun Club</div>
+    <div class="logo">ROBOTICS FUN CLUB</div>
     <nav>
       <a href="index.html">Home</a>
       <a href="boat.html">Paddle Boat</a>
@@ -150,14 +148,6 @@
       <a href="#">About</a>
     </nav>
   </header>
-
-  <!-- Sticky Notes -->
-  <div class="sticky-note note-left">
-    💡 Tip: Try decorating your boat with stickers or permanent markers — just don’t block the paddle!
-  </div>
-  <div class="sticky-note note-right">
-    ✅ Reminder: The tighter your rubber band, the faster your paddle will spin. Don’t overwind!
-  </div>
 
   <div class="container">
     <h2>Materials Needed</h2>
@@ -168,7 +158,9 @@
       <li>Tape</li>
     </ul>
 
-    <h2>Let’s Build It!</h2>
+    <div class="section-divider">Let’s Build It!</div>
+
+    <h2>Step-by-Step Instructions</h2>
 
     <div class="step">
       <strong>Step 1: Prepare the Bottle Hull</strong><br>
@@ -197,6 +189,10 @@
 
     <a href="index.html" class="back-link">← Back to Home</a>
   </div>
+
+  <footer>
+    🚀 Powered by Creativity · Robotics Fun Club · © 2025
+  </footer>
 
 </body>
 </html>

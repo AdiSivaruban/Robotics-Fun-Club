@@ -5,24 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddle Boat Project</title>
   <style>
+    :root {
+      --primary-color: #6C63FF;
+      --secondary-color: #A3A1FF;
+      --accent-color: #FF8A65;
+      --bg-gradient-start: #e3f2fd;
+      --bg-gradient-end: #f8bbd0;
+      --text-color: #333;
+      --header-bg: #f3e5f5;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #e3f2fd, #ffe0f0);
-      color: #333;
+      background: linear-gradient(to bottom right, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-color);
     }
 
-    /* Header with navigation dashboard style */
     header {
-      background: linear-gradient(to right, #ffecd2, #fcb69f);
-      color: #333;
-      padding: 1em 1.5em;
+      background: var(--header-bg);
+      padding: 1em 2em;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-bottom: 2px solid #f48fb1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .dashboard-header {
@@ -31,17 +38,25 @@
       justify-content: space-between;
       flex-wrap: wrap;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     .site-logo {
       font-size: 1.8em;
       font-weight: bold;
-      color: #d84315;
-      background: #fff3e0;
+      color: var(--primary-color);
+      background: white;
       padding: 0.5em 1.2em;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .site-logo:hover {
+      transform: scale(1.05) rotate(-2deg);
+      background-color: var(--secondary-color);
+      color: white;
     }
 
     .dashboard-nav {
@@ -56,18 +71,16 @@
       font-weight: 600;
       padding: 0.5em 1.2em;
       border-radius: 8px;
-      color: #5e35b1;
-      background-color: #ede7f6;
+      color: white;
+      background-color: var(--primary-color);
       transition: all 0.3s ease;
     }
 
     .dashboard-nav a:hover {
-      background-color: #d1c4e9;
+      background-color: var(--accent-color);
       transform: scale(1.08);
-      color: #311b92;
     }
 
-    /* Main container for content */
     .container {
       max-width: 900px;
       margin: 2em auto;
@@ -78,7 +91,7 @@
     }
 
     h2 {
-      color: #d81b60;
+      color: var(--primary-color);
     }
 
     ul {
@@ -97,22 +110,22 @@
       border-radius: 5px;
     }
 
+    .highlight {
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
     .back-link {
       display: inline-block;
       margin-top: 2em;
       text-decoration: none;
-      color: #0288d1;
+      color: var(--primary-color);
       font-weight: bold;
       font-size: 1.1em;
     }
 
     .back-link:hover {
       text-decoration: underline;
-    }
-
-    .highlight {
-      font-weight: bold;
-      color: #2e7d32;
     }
   </style>
 </head>
@@ -168,5 +181,6 @@
 
     <a href="index.html" class="back-link">← Back to Home</a>
   </div>
+
 </body>
 </html>

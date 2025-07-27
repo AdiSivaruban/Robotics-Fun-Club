@@ -87,50 +87,15 @@
             </form>
         </div>
 
-        <div class="reviews-container">
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer-avatar">A</div>
-                    <div class="reviewer-info">
-                        <strong>Alex (Age 9)</strong>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-                <p>"The rubber band boat was AWESOME! It actually worked and went super fast across our bathtub. My little sister wants to make one too!"</p>
+        <div class="empty-reviews">
+            <div class="empty-message">
+                <h3>🌟 Be the First to Review!</h3>
+                <p>Share your experience with our projects and help others discover the joy of DIY robotics. Your feedback helps us improve and inspires other young builders!</p>
             </div>
+        </div>
 
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer-avatar">E</div>
-                    <div class="reviewer-info">
-                        <strong>Emma (Age 11)</strong>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-                <p>"The robot arm was challenging but so cool! I can pick up pencils and small toys with it. I decorated it to look like a real robot. Thank you for the clear instructions!"</p>
-            </div>
-
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer-avatar">M</div>
-                    <div class="reviewer-info">
-                        <strong>Maya's Mom</strong>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-                <p>"This website is fantastic! Maya has been building projects all week. It's so nice to see her away from screens and actually creating something with her hands. The safety instructions are very clear too."</p>
-            </div>
-
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="reviewer-avatar">S</div>
-                    <div class="reviewer-info">
-                        <strong>Sam (Age 10)</strong>
-                        <div class="stars">⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-                <p>"The balloon car project was epic! Mine went really far and my dad helped me make it even faster. Can't wait to try the rocket next (with adult supervision of course)!"</p>
-            </div>
+        <div class="reviews-container" style="display: none;">
+            <!-- Real reviews will appear here when submitted -->
         </div>
     </div>
 
@@ -143,8 +108,13 @@
             const rating = document.getElementById('rating').value;
             const reviewText = document.getElementById('review-text').value;
             
-            // Create new review card
+            // Show reviews container and hide empty message
             const reviewsContainer = document.querySelector('.reviews-container');
+            const emptyReviews = document.querySelector('.empty-reviews');
+            reviewsContainer.style.display = 'grid';
+            emptyReviews.style.display = 'none';
+            
+            // Create new review card
             const newReview = document.createElement('div');
             newReview.className = 'review-card';
             

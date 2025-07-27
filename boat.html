@@ -5,37 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddle Boat Project</title>
   <style>
-   :root {
-  --primary: #FF6F61; /* Warm Coral */
-  --accent: #FFD54F;  /* Sunset Yellow */
-  --light-bg: #FFF3E0; /* Light Peach Background */
-  --box: #FFFFFF;
-  --highlight: #FF8A65; /* Soft Orange */
-  --sparkle: rgba(255,111,97,0.05); /* Soft coral sparkle dots */
-}
+    :root {
+      --primary: #748DAE;    /* Muted Blue */
+      --accent: #F5CBCB;     /* Soft Blush */
+      --light-bg: #FFEAEA;   /* Light Pink Background */
+      --box: #FFFFFF;
+      --highlight: #9ECAD6;  /* Aqua Blue */
+      --sparkle: rgba(158, 202, 214, 0.05);
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--light-bg);
+      background-image: url('https://www.transparenttextures.com/patterns/fabric-of-squares.png');
+      background-size: 200px 200px;
+      background-repeat: repeat;
       color: #333;
       position: relative;
     }
 
-    /* Sparkle background */
     body::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-image: radial-gradient(var(--sparkle) 1px, transparent 1px);
-      background-size: 50px 50px;
+      background: linear-gradient(to bottom right, rgba(255, 234, 234, 0.9), rgba(245, 203, 203, 0.8));
       z-index: 0;
       pointer-events: none;
     }
 
     header {
       background-color: white;
-      padding: 1.2em 2em;
+      padding: 1.5em 2em;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
@@ -55,11 +57,11 @@
       font-weight: bold;
       color: var(--primary);
       padding: 0.5em 1em;
-      background: #eef1fd;
+      background: #f5f9ff;
       border-radius: 12px;
       display: inline-block;
+      cursor: pointer;
       transition: transform 0.4s ease;
-      text-decoration: none;
     }
 
     .site-logo:hover {
@@ -91,39 +93,30 @@
     }
 
     nav a:hover {
-      background-color: var(--accent);
+      background-color: var(--highlight);
       transform: scale(1.08);
     }
 
     .container {
       max-width: 900px;
-      margin: 3em auto;
+      margin: 4em auto;
       background-color: var(--box);
-      padding: 2em;
+      padding: 2.5em;
       border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+      box-shadow: 0 20px 60px rgba(116, 141, 174, 0.15);
       position: relative;
       z-index: 1;
     }
-    
-    .wave-footer {
-      width: 100%;
-      height: 100px;
-      background: url('https://svgshare.com/i/13_S.svg') no-repeat bottom center;
-      background-size: cover;
-      margin-top: -60px;
-      z-index: -1;
-    }
 
     h2 {
-      color: var(--highlight);
+      color: var(--primary);
       margin-top: 2em;
     }
 
     .quote-bubble {
       font-style: italic;
-      background: #f0f4ff;
-      border-left: 5px solid var(--primary);
+      background: #f5f9ff;
+      border-left: 5px solid var(--highlight);
       padding: 1em;
       border-radius: 10px;
       margin-bottom: 2em;
@@ -152,8 +145,8 @@
     }
 
     .step {
-      background: #f9fafe;
-      border-left: 5px solid var(--highlight);
+      background: #ffffff;
+      border-left: 5px solid var(--accent);
       padding: 1.2em;
       margin-bottom: 1.2em;
       border-radius: 10px;
@@ -201,7 +194,6 @@
   </header>
 
   <div class="container">
-
     <div class="quote-bubble">💬 “Science floats your boat!”</div>
 
     <h2>🧰 Materials Needed</h2>
@@ -243,8 +235,6 @@
 
     <a href="index.html" class="back-link">← Back to Home</a>
   </div>
-
-  <div class="wave-footer"></div>
 
 </body>
 </html>

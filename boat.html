@@ -4,189 +4,150 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddle Boat Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #748DAE;
-      --accent: #F5CBCB;
-      --light-bg: #FFEAEA;
-      --box: #FFFFFF;
-      --highlight: #9ECAD6;
+      --bg-color: #fef4e8;
+      --primary: #003049;
+      --accent: #d62828;
+      --soft: #f77f00;
+      --cream: #fdf0d5;
     }
 
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      font-family: 'Quicksand', sans-serif;
-      background-color: var(--light-bg);
-      background-image:
-        url('https://www.transparenttextures.com/patterns/fabric-of-squares.png'),
-        url('file:///your-image-path/9a0ff7d2-bc7d-4aab-99dc-c34168b35d57.png');
-      background-repeat: repeat, no-repeat;
-      background-size: 150px 150px, cover;
-      background-position: top left, center center;
-      background-attachment: fixed, fixed;
-      background-blend-mode: soft-light, normal;
-      color: #333;
+      font-family: 'Work Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--primary);
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      background-attachment: fixed;
+      background-size: auto;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 110%;
-      height: 110%;
-      z-index: -2;
-      animation: moveBG 60s linear infinite;
-      transform: scale(1.02);
-      filter: brightness(0.95);
-    }
-
-    @keyframes moveBG {
-      0% { transform: scale(1.02) translateX(0); }
-      50% { transform: scale(1.02) translateX(-10px); }
-      100% { transform: scale(1.02) translateX(0); }
-    }
-
-    /* Header */
-    .main-header {
-      background-color: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    header {
+      background-color: var(--cream);
+      padding: 1em 2em;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: sticky;
       top: 0;
-      width: 100%;
-      z-index: 999;
+      z-index: 1000;
     }
 
-    .header-content {
-  width: 100%;
-  max-width: none;
-  padding: 1em 5vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    .logo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1em;
+      color: var(--accent);
     }
 
-    .site-logo {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #2c3e50;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: transform 0.3s ease;
-    }
-
-    .site-logo:hover {
-      transform: scale(1.05);
-    }
-
-    .nav-links {
+    nav {
       display: flex;
-      gap: 1.6em;
+      gap: 1em;
     }
 
-    .nav-links a {
+    nav a {
       text-decoration: none;
+      color: var(--primary);
       font-weight: 600;
-      font-size: 0.95rem;
-      color: #2c3e50;
-      padding: 0.4em 0.8em;
-      border-radius: 6px;
-      transition: background-color 0.3s, color 0.3s;
+      padding: 0.5em 1em;
+      border: 2px solid transparent;
+      border-radius: 5px;
+      transition: all 0.2s ease;
     }
 
-    .nav-links a:hover {
-      background-color: rgba(44, 62, 80, 0.08);
-      color: #000;
+    nav a:hover {
+      border-color: var(--accent);
+      background-color: var(--soft);
+      color: white;
     }
 
-    /* Content */
     .container {
-     width: 100%;
-  max-width: none;
-  padding: 4em 5vw;
-  background-color: var(--box);
-  border-radius: 0;
-  box-shadow: none;
+      max-width: 1200px;
+      margin: 3em auto;
+      padding: 2em;
+      background-color: var(--cream);
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     }
 
     h2 {
-      color: var(--highlight);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.1em;
+      color: var(--accent);
       margin-top: 2em;
-      font-weight: 700;
-    }
-
-    .section-divider {
-      text-align: center;
-      margin: 3em 0 2em;
-    }
-
-    .section-divider span {
-      background: #fff;
-      padding: 0 1em;
-      color: var(--highlight);
-      font-weight: bold;
-      font-size: 1.2em;
-      position: relative;
     }
 
     ul {
       padding-left: 1.5em;
+      line-height: 1.8;
     }
 
-    li {
-      margin-bottom: 0.5em;
+    .section-divider {
+      margin: 2em 0;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--soft);
     }
 
     .step {
-      background: #f9fafe;
-      border-left: 5px solid var(--highlight);
-      padding: 1.2em;
-      margin-bottom: 1.2em;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
+      background-color: #fffaf3;
+      padding: 1em;
+      border-left: 5px solid var(--accent);
+      margin: 1em 0;
+      border-radius: 8px;
+      transition: transform 0.2s ease;
     }
 
     .step:hover {
       transform: scale(1.01);
     }
 
-    .step span {
-      font-weight: bold;
-      color: var(--primary);
-      display: block;
-      margin-bottom: 0.3em;
-    }
-
     .back-link {
       display: inline-block;
       margin-top: 2em;
-      text-decoration: none;
-      color: var(--highlight);
+      color: var(--accent);
       font-weight: bold;
-      font-size: 1.1em;
+      text-decoration: none;
     }
 
     .back-link:hover {
       text-decoration: underline;
     }
+
+    footer {
+      margin-top: 5em;
+      padding: 2em;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 0.7em;
+      }
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <header class="main-header">
-    <div class="header-content">
-      <a href="index.html" class="site-logo">Robotics Fun Club</a>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="boat.html">Paddle Boat</a>
-        <a href="#">Projects</a>
-        <a href="#">Upload</a>
-        <a href="#">About</a>
-      </nav>
-    </div>
+  <header>
+    <div class="logo">ROBOTICS FUN CLUB</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="boat.html">Paddle Boat</a>
+      <a href="#">Projects</a>
+      <a href="#">Upload</a>
+      <a href="#">About</a>
+    </nav>
   </header>
 
   <div class="container">
@@ -198,37 +159,41 @@
       <li>Tape</li>
     </ul>
 
-    <div class="section-divider"><span>Let’s Build It!</span></div>
+    <div class="section-divider">Let’s Build It!</div>
 
     <h2>Step-by-Step Instructions</h2>
 
     <div class="step">
-      <span>Step 1: Prepare the Bottle Hull</span>
+      <strong>Step 1: Prepare the Bottle Hull</strong><br>
       Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!
     </div>
 
     <div class="step">
-      <span>Step 2: Make the Paddle Axle</span>
+      <strong>Step 2: Make the Paddle Axle</strong><br>
       Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.
     </div>
 
     <div class="step">
-      <span>Step 3: Attach the Rubber Band</span>
+      <strong>Step 3: Attach the Rubber Band</strong><br>
       Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.
     </div>
 
     <div class="step">
-      <span>Step 4: Make and Insert the Paddle</span>
+      <strong>Step 4: Make and Insert the Paddle</strong><br>
       Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.
     </div>
 
     <div class="step">
-      <span>Step 5: Wind It Up and Launch</span>
+      <strong>Step 5: Wind It Up and Launch</strong><br>
       Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!
     </div>
 
     <a href="index.html" class="back-link">← Back to Home</a>
   </div>
+
+  <footer>
+    🚀 Powered by Creativity · Robotics Fun Club · © 2025
+  </footer>
 
 </body>
 </html>

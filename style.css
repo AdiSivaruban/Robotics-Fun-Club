@@ -394,6 +394,22 @@ nav {
     line-height: 1.6;
 }
 
+.project-instructions {
+    margin-top: 15px;
+}
+
+.project-instructions h4 {
+    color: #6c5ce7;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.project-instructions p {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
 .materials-list {
     background: #f8f9fa;
     padding: 15px;

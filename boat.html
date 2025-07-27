@@ -4,44 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paddle Boat Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #fef4e8;
-      --primary: #003049;
-      --accent: #d62828;
-      --soft: #f77f00;
-      --cream: #fdf0d5;
+      --teal: #2d7e86;
+      --yellow: #f9c74f;
+      --pink: #f28482;
+      --hotpink: #ef476f;
+      --darkblue: #073b4c;
+      --white: #ffffff;
+      --light-gray: #f8f8f8;
     }
 
     body {
       margin: 0;
-      font-family: 'Work Sans', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--primary);
-      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-      background-attachment: fixed;
-      background-size: auto;
+      font-family: 'Fredoka', sans-serif;
+      background-color: var(--light-gray);
+      color: var(--darkblue);
+      background-image: url('https://www.transparenttextures.com/patterns/pw-maze-white.png');
     }
 
     header {
-      background-color: var(--cream);
-      padding: 1em 2em;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background-color: var(--teal);
+      color: var(--white);
+      padding: 1.5em 2em;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
     .logo {
-      font-family: 'Baloo 2', cursive; 
-      font-size: 1.8em; 
+      font-size: 2em;
       font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 1px;
+      color: var(--yellow);
+      text-shadow: 1px 1px var(--darkblue);
     }
 
     nav {
@@ -51,74 +51,81 @@
 
     nav a {
       text-decoration: none;
+      color: var(--white);
+      background: var(--hotpink);
+      padding: 0.6em 1em;
+      border-radius: 8px;
       font-weight: 600;
-      color: var(--primary);
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      transition: transform 0.2s ease, color 0.2s ease;
+      transition: all 0.2s ease-in-out;
     }
 
     nav a:hover {
-      transform: scale(1.1);
-      color: var(--accent);
+      background-color: var(--pink);
+      transform: scale(1.05);
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 3em auto;
-      padding: 2em;
-      background-color: var(--cream);
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      background-color: var(--white);
+      padding: 2.5em;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
     }
 
     .page-title {
-      font-family: 'Baloo 2', cursive;
       font-size: 2.5em;
-      text-align: center;
-      color: var(--accent);
-      margin-bottom: 1em;
+      color: var(--hotpink);
+      margin-bottom: 0.5em;
     }
 
     h2 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 1.6em;
-      color: var(--accent);
-      margin-top: 2.5em;
+      font-size: 1.8em;
+      color: var(--teal);
+      margin-top: 2em;
     }
 
     ul {
+      line-height: 2;
       padding-left: 1.5em;
-      line-height: 1.8;
     }
 
     .section-divider {
-      margin: 2em 0;
+      margin: 3em 0 2em;
+      font-weight: 700;
       text-align: center;
-      font-weight: bold;
-      font-size: 1.2em;
-      color: var(--soft);
+      font-size: 1.5em;
+      color: var(--yellow);
+      position: relative;
     }
 
     .step {
-      background-color: #fffaf3;
-      padding: 1em;
-      border-left: 5px solid var(--accent);
-      margin: 1em 0;
-      border-radius: 8px;
-      transition: transform 0.2s ease;
+      background-color: #fff1f1;
+      border-left: 8px dotted var(--pink);
+      margin: 1.5em 0;
+      padding: 1.5em;
+      border-radius: 12px;
+      transition: 0.3s ease;
     }
 
     .step:hover {
       transform: scale(1.01);
     }
 
+    .step strong {
+      color: var(--hotpink);
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
     .back-link {
       display: inline-block;
-      margin-top: 2em;
-      color: var(--accent);
-      font-weight: bold;
+      margin-top: 2.5em;
       text-decoration: none;
+      color: var(--teal);
+      font-weight: bold;
+      font-size: 1em;
     }
 
     .back-link:hover {
@@ -128,20 +135,9 @@
     footer {
       margin-top: 5em;
       padding: 2em;
-      background: var(--primary);
-      color: white;
+      background: var(--teal);
+      color: var(--white);
       text-align: center;
-      font-size: 0.9em;
-    }
-
-    @media (max-width: 768px) {
-      .logo {
-        font-size: 1.2em;
-      }
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
@@ -159,7 +155,7 @@
   </header>
 
   <div class="container">
-    <h1 class="page-title">How to Build Your Paddle Boat</h1>
+    <h1 class="page-title">How to Build a Paddle Boat</h1>
 
     <h2>Materials Needed</h2>
     <ul>
@@ -174,27 +170,27 @@
     <h2>Step-by-Step Instructions</h2>
 
     <div class="step">
-      <strong>Step 1: Prepare the Bottle Hull</strong><br>
+      <strong>Step 1: Prepare the Bottle Hull</strong>
       Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!
     </div>
 
     <div class="step">
-      <strong>Step 2: Make the Paddle Axle</strong><br>
+      <strong>Step 2: Make the Paddle Axle</strong>
       Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.
     </div>
 
     <div class="step">
-      <strong>Step 3: Attach the Rubber Band</strong><br>
+      <strong>Step 3: Attach the Rubber Band</strong>
       Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.
     </div>
 
     <div class="step">
-      <strong>Step 4: Make and Insert the Paddle</strong><br>
+      <strong>Step 4: Make and Insert the Paddle</strong>
       Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.
     </div>
 
     <div class="step">
-      <strong>Step 5: Wind It Up and Launch</strong><br>
+      <strong>Step 5: Wind It Up and Launch</strong>
       Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!
     </div>
 

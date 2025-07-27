@@ -9,7 +9,7 @@
       --primary: #6C63FF;
       --secondary: #A3A1FF;
       --accent: #FF8A65;
-      --light-bg: #f9f9fb;
+      --light-bg: #f8f9fc;
       --box: #ffffff;
       --text: #333;
       --highlight: #5c6bc0;
@@ -20,39 +20,78 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--light-bg);
       color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Floating Background Bubbles */
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(108, 99, 255, 0.08);
+      z-index: 0;
+    }
+
+    body::before {
+      width: 200px;
+      height: 200px;
+      top: 100px;
+      left: -80px;
+    }
+
+    body::after {
+      width: 150px;
+      height: 150px;
+      bottom: 100px;
+      right: -60px;
     }
 
     header {
       background-color: #ffffff;
       padding: 1em 2em;
       box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .dashboard-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .site-logo {
-      font-size: 1.6em;
+      font-size: 1.7em;
       font-weight: bold;
       color: var(--primary);
-      padding: 0.4em 1em;
+      padding: 0.5em 1em;
       background: #eef1fd;
-      border-radius: 10px;
+      border-radius: 12px;
       transition: 0.3s ease all;
+      animation: pulse 3s infinite;
+      box-shadow: 0 0 10px rgba(108, 99, 255, 0.1);
     }
 
     .site-logo:hover {
-      background: var(--secondary);
+      transform: scale(1.05) rotate(-2deg);
+      background-color: var(--secondary);
       color: white;
-      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
     }
 
     nav {
       display: flex;
       gap: 1em;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -67,110 +106,35 @@
 
     nav a:hover {
       background-color: var(--accent);
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .container {
       max-width: 900px;
-      margin: 2em auto;
+      margin: 3em auto;
       background-color: var(--box);
       padding: 2em;
       border-radius: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 1;
     }
 
     h2 {
       color: var(--highlight);
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.3em;
       margin-top: 2em;
     }
 
-    ul {
-      padding-left: 1.5em;
-      margin-bottom: 1.5em;
+    .section-divider {
+      text-align: center;
+      margin: 3em 0 2em;
+      position: relative;
     }
 
-    li {
-      margin-bottom: 0.5em;
-    }
-
-    .step {
-      background: #f5f7ff;
-      border-left: 5px solid var(--primary);
-      padding: 1em;
-      margin-bottom: 1em;
-      border-radius: 6px;
-    }
-
-    .step span {
-      font-weight: bold;
-      color: var(--primary);
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-top: 2em;
-      text-decoration: none;
-      color: var(--highlight);
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="site-logo">🤖 Robotics Fun Club</div>
-    <nav>
-      <a href="index.html">🏠 Home</a>
-      <a href="boat.html">🛶 Paddle Boat</a>
-      <a href="#">🧪 Projects</a>
-      <a href="#">📸 Upload</a>
-      <a href="#">📘 About</a>
-    </nav>
-  </header>
-
-  <div class="container">
-    <h2>🧰 Materials Needed</h2>
-    <ul>
-      <li>1 empty plastic water bottle (with cap)</li>
-      <li>3 popsicle sticks</li>
-      <li>1 strong rubber band</li>
-      <li>Tape</li>
-    </ul>
-
-    <h2>🛠 Step-by-Step Instructions</h2>
-
-    <div class="step">
-      <p><span>Step 1: Prepare the Bottle Hull</span><br>
-      Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!</p>
-    </div>
-
-    <div class="step">
-      <p><span>Step 2: Make the Paddle Axle</span><br>
-      Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.</p>
-    </div>
-
-    <div class="step">
-      <p><span>Step 3: Attach the Rubber Band</span><br>
-      Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.</p>
-    </div>
-
-    <div class="step">
-      <p><span>Step 4: Make and Insert the Paddle</span><br>
-      Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.</p>
-    </div>
-
-    <div class="step">
-      <p><span>Step 5: Wind It Up and Launch</span><br>
-      Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!</p>
-    </div>
-
-    <a href="index.html" class="back-link">← Back to Home</a>
-  </div>
-</body>
-</html>
+    .section-divider::before {
+      content: '';
+      height: 2px;
+      background: #ddd;
+      width: 100%;
+      position: absolute;
+      top: 50%;

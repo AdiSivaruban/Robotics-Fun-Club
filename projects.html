@@ -49,107 +49,195 @@
 
     <div class="container">
         <h1 class="section-title">🔧 DIY Projects</h1>
-        <p class="projects-intro">Choose your adventure! Each project includes step-by-step instructions and uses common household items.</p>
+        
+        <!-- Filter Section -->
+        <div class="project-filters">
+            <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+            <button class="filter-btn" onclick="filterProjects('easy')">Easy</button>
+            <button class="filter-btn" onclick="filterProjects('medium')">Medium</button>
+            <button class="filter-btn" onclick="filterProjects('hard')">Advanced</button>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-section">
+            <h3>🏆 Your Building Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text">Complete projects to unlock achievements!</p>
+        </div>
         
         <div class="projects-grid">
-            <div class="project-card">
+            <!-- Rubber Band Boat -->
+            <div class="project-card interactive-card" data-difficulty="easy" data-project="boat">
+                <div class="project-status" id="boat-status">🔒</div>
                 <div class="project-header">
-                    <div class="project-emoji">🚤</div>
+                    <div class="project-emoji bouncing">🚤</div>
                     <div class="project-meta">
                         <h3>Rubber Band Boat</h3>
-                        <div class="difficulty-badge easy">Easy</div>
-                        <div class="time-badge">⏱️ 20 min</div>
+                        <div class="badges">
+                            <div class="difficulty-badge easy">Easy</div>
+                            <div class="time-badge">⏱️ 20 min</div>
+                        </div>
                     </div>
                 </div>
+                
                 <p class="project-description">Build a self-propelled boat using a plastic bottle and rubber band!</p>
                 
                 <div class="materials-preview">
-                    <strong>Materials:</strong> Plastic bottle, popsicle sticks, rubber band, tape
+                    <div class="materials-toggle" onclick="toggleMaterials('boat')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="boat-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="boat-materials" style="display: none;">
+                        <div class="material-item">✓ 1 empty plastic water bottle</div>
+                        <div class="material-item">✓ 3 popsicle sticks</div>
+                        <div class="material-item">✓ 1 strong rubber band</div>
+                        <div class="material-item">✓ Tape</div>
+                    </div>
                 </div>
                 
-                <details class="project-details">
-                    <summary>View Instructions</summary>
-                    <div class="instructions-content">
-                        <div class="step">
-                            <h4>Step 1: Prepare the Hull</h4>
-                            <p>Use the plastic bottle as your boat body. Make sure it's sealed and floats.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 2: Create Paddle Support</h4>
-                            <p>Tape two popsicle sticks parallel to each other near the back of the bottle with a small gap between them.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 3: Add Rubber Band</h4>
-                            <p>Stretch the rubber band between the two popsicle sticks.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 4: Make the Paddle</h4>
-                            <p>Cut a popsicle stick in half and slide it through the rubber band. Tape it together.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 5: Launch!</h4>
-                            <p>Wind the paddle backward, place in water, and release!</p>
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('boat')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('boat')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="boat-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare the Hull</h4>
+                        <p>Use the plastic bottle as your boat body. Make sure it's sealed and floats. Decorate it however you want!</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('boat', 2)">Next Step →</button>
                         </div>
                     </div>
-                </details>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-emoji">🦾</div>
-                    <div class="project-meta">
-                        <h3>Robot Arm Grabber</h3>
-                        <div class="difficulty-badge medium">Medium</div>
-                        <div class="time-badge">⏱️ 45 min</div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Create Paddle Support</h4>
+                        <p>Tape two popsicle sticks parallel to each other near the back of the bottle with a small gap between them.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 1)">← Previous</button>
+                            <button onclick="nextStep('boat', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Add Rubber Band</h4>
+                        <p>Stretch the rubber band between the two popsicle sticks. Make sure it's tight but not about to snap.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 2)">← Previous</button>
+                            <button onclick="nextStep('boat', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Make the Paddle</h4>
+                        <p>Cut a popsicle stick in half and slide it through the rubber band. Tape it together.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 3)">← Previous</button>
+                            <button onclick="nextStep('boat', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Launch!</h4>
+                        <p>Wind the paddle backward, place in water, and release! Watch your boat zoom across the water!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 4)">← Previous</button>
+                            <button onclick="completeProject('boat')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Robot Arm Grabber -->
+            <div class="project-card interactive-card" data-difficulty="medium" data-project="robot">
+                <div class="project-status" id="robot-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🦾</div>
+                    <div class="project-meta">
+                        <h3>Robot Arm Grabber</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge medium">Medium</div>
+                            <div class="time-badge">⏱️ 45 min</div>
+                        </div>
+                    </div>
+                </div>
+                
                 <p class="project-description">Create a mechanical grabber that works like a real robot arm!</p>
                 
                 <div class="materials-preview">
-                    <strong>Materials:</strong> Wooden ruler, cardboard, paper fasteners, rubber band, string
+                    <div class="materials-toggle" onclick="toggleMaterials('robot')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="robot-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="robot-materials" style="display: none;">
+                        <div class="material-item">✓ 1 wooden ruler</div>
+                        <div class="material-item">✓ Cardboard strips</div>
+                        <div class="material-item">✓ 4 paper fasteners</div>
+                        <div class="material-item">✓ Tape & scissors</div>
+                        <div class="material-item">✓ Rubber band & string</div>
+                    </div>
                 </div>
                 
-                <details class="project-details">
-                    <summary>View Instructions</summary>
-                    <div class="instructions-content">
-                        <div class="step">
-                            <h4>Step 1: Prepare Cardboard</h4>
-                            <p>Cut three long strips and two short strips. Punch holes near each end.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 2: Build Scissor Mechanism</h4>
-                            <p>Cross two long strips into an "X" and connect with a paper fastener at the center.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 3: Attach to Base</h4>
-                            <p>Connect the third strip to the ruler and attach the short strips to create linkages.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 4: Add Spring Mechanism</h4>
-                            <p>Hook rubber band between pivot points to create automatic closing action.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 5: Add Control String</h4>
-                            <p>Tie string to rubber band. Pull to open, release to close!</p>
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('robot')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('robot')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="robot-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare Cardboard</h4>
+                        <p>Cut three long strips and two short strips. Punch holes near each end for connections.</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('robot', 2)">Next Step →</button>
                         </div>
                     </div>
-                </details>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Build Scissor Mechanism</h4>
+                        <p>Cross two long strips into an "X" and connect with a paper fastener at the center.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 1)">← Previous</button>
+                            <button onclick="nextStep('robot', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Attach to Base</h4>
+                        <p>Connect the third strip to the ruler and attach short strips for linkages.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 2)">← Previous</button>
+                            <button onclick="nextStep('robot', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Add Spring System</h4>
+                        <p>Hook rubber band between pivot points for automatic closing action.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 3)">← Previous</button>
+                            <button onclick="nextStep('robot', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Add Control String</h4>
+                        <p>Tie string to rubber band. Pull to open, release to close!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 4)">← Previous</button>
+                            <button onclick="completeProject('robot')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="project-card">
+            <!-- Bottle Rocket -->
+            <div class="project-card interactive-card" data-difficulty="hard" data-project="rocket">
+                <div class="project-status" id="rocket-status">🔒</div>
                 <div class="project-header">
-                    <div class="project-emoji">🚀</div>
+                    <div class="project-emoji bouncing">🚀</div>
                     <div class="project-meta">
                         <h3>Bottle Rocket</h3>
-                        <div class="difficulty-badge hard">Advanced</div>
-                        <div class="time-badge">⏱️ 30 min</div>
+                        <div class="badges">
+                            <div class="difficulty-badge hard">Advanced</div>
+                            <div class="time-badge">⏱️ 30 min</div>
+                        </div>
                     </div>
                 </div>
-                <p class="project-description">Launch a rocket using air pressure! <strong>Adult supervision required.</strong></p>
                 
-                <div class="materials-preview">
-                    <strong>Materials:</strong> Plastic bottle, pencils, hairspray, BBQ lighter, tape
-                </div>
+                <p class="project-description">Launch a rocket using air pressure! <strong>Adult supervision required.</strong></p>
                 
                 <div class="safety-warning">
                     <h4>⚠️ Safety First</h4>
@@ -157,75 +245,288 @@
                         <li>Always do this <strong>outdoors</strong></li>
                         <li>Adult supervision required</li>
                         <li>Never point at people or property</li>
-                        <li>Keep flammable materials away</li>
                     </ul>
                 </div>
                 
-                <details class="project-details">
-                    <summary>View Instructions</summary>
-                    <div class="instructions-content">
-                        <div class="step">
-                            <h4>Step 1: Prepare Rocket</h4>
-                            <p>Puncture a small hole in the bottle cap. Decorate your rocket body.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 2: Build Launch Base</h4>
-                            <p>Attach three pencils around the bottle to form a tripod base.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 3: Add Fuel</h4>
-                            <p>Spray a short burst of hairspray inside and seal with cap.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 4: Launch</h4>
-                            <p>Hold lighter near (not touching) the hole. The vapor will ignite and launch the rocket!</p>
-                        </div>
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('rocket')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="rocket-arrow">▼</span>
                     </div>
-                </details>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-emoji">🏎️</div>
-                    <div class="project-meta">
-                        <h3>Balloon Car</h3>
-                        <div class="difficulty-badge easy">Easy</div>
-                        <div class="time-badge">⏱️ 25 min</div>
+                    <div class="materials-list" id="rocket-materials" style="display: none;">
+                        <div class="material-item">✓ 1 empty plastic bottle with lid</div>
+                        <div class="material-item">✓ 3 pencils</div>
+                        <div class="material-item">✓ Hairspray or spray deodorant</div>
+                        <div class="material-item">✓ BBQ lighter</div>
+                        <div class="material-item">✓ Tape</div>
                     </div>
                 </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('rocket')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('rocket')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="rocket-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare Rocket Body</h4>
+                        <p>Puncture a small hole in the bottle cap. Decorate your rocket however you like!</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('rocket', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Build Launch Base</h4>
+                        <p>Attach three pencils around the bottle to form a stable tripod base.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('rocket', 1)">← Previous</button>
+                            <button onclick="nextStep('rocket', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Add Fuel</h4>
+                        <p>Spray a short burst of hairspray inside and seal with cap. Shake for 5-10 seconds.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('rocket', 2)">← Previous</button>
+                            <button onclick="nextStep('rocket', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Launch Sequence</h4>
+                        <p>Hold lighter near (not touching) the hole. The vapor will ignite and launch!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('rocket', 3)">← Previous</button>
+                            <button onclick="completeProject('rocket')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balloon Car -->
+            <div class="project-card interactive-card" data-difficulty="easy" data-project="car">
+                <div class="project-status" id="car-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🏎️</div>
+                    <div class="project-meta">
+                        <h3>Balloon Car</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge easy">Easy</div>
+                            <div class="time-badge">⏱️ 25 min</div>
+                        </div>
+                    </div>
+                </div>
+                
                 <p class="project-description">Build a car powered by escaping air from a balloon!</p>
                 
                 <div class="materials-preview">
-                    <strong>Materials:</strong> Plastic bottle, bottle caps, skewers, straw, balloon, tape
+                    <div class="materials-toggle" onclick="toggleMaterials('car')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="car-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="car-materials" style="display: none;">
+                        <div class="material-item">✓ Plastic bottle</div>
+                        <div class="material-item">✓ 4 bottle caps</div>
+                        <div class="material-item">✓ Skewers</div>
+                        <div class="material-item">✓ Straw & balloon</div>
+                        <div class="material-item">✓ Tape</div>
+                    </div>
                 </div>
                 
-                <details class="project-details">
-                    <summary>View Instructions</summary>
-                    <div class="instructions-content">
-                        <div class="step">
-                            <h4>Step 1: Make Wheels</h4>
-                            <p>Push skewers through bottle caps to create two axles with wheels.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 2: Attach Axles</h4>
-                            <p>Poke holes in bottle and secure axles so wheels spin freely.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 3: Prepare Balloon</h4>
-                            <p>Insert straw into balloon opening and tape securely.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 4: Mount Balloon</h4>
-                            <p>Tape balloon assembly to car with straw pointing backward.</p>
-                        </div>
-                        <div class="step">
-                            <h4>Step 5: Race!</h4>
-                            <p>Inflate balloon, pinch straw, place car down, and release!</p>
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('car')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('car')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="car-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Make Wheels</h4>
+                        <p>Push skewers through bottle caps to create two axles with wheels.</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('car', 2)">Next Step →</button>
                         </div>
                     </div>
-                </details>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Attach Axles</h4>
+                        <p>Poke holes in bottle and secure axles so wheels spin freely.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 1)">← Previous</button>
+                            <button onclick="nextStep('car', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Prepare Balloon System</h4>
+                        <p>Insert straw into balloon opening and tape securely.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 2)">← Previous</button>
+                            <button onclick="nextStep('car', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Mount and Race!</h4>
+                        <p>Tape balloon to car with straw pointing backward. Inflate, release, and race!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 3)">← Previous</button>
+                            <button onclick="completeProject('car')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Section -->
+        <div class="achievements-section" id="achievements" style="display: none;">
+            <h2>🏆 Achievements Unlocked!</h2>
+            <div class="achievement-grid" id="achievement-list">
+                <!-- Achievements will be populated by JavaScript -->
             </div>
         </div>
     </div>
+
+    <script>
+        let completedProjects = JSON.parse(localStorage.getItem('completedProjects') || '[]');
+        let currentSteps = {};
+
+        function updateProgress() {
+            const totalProjects = 4;
+            const completed = completedProjects.length;
+            const percentage = (completed / totalProjects) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            
+            if (completed === 0) {
+                document.querySelector('.progress-text').textContent = 'Complete projects to unlock achievements!';
+            } else if (completed === totalProjects) {
+                document.querySelector('.progress-text').textContent = '🎉 Master Builder! All projects completed!';
+                showAchievements();
+            } else {
+                document.querySelector('.progress-text').textContent = `${completed}/${totalProjects} projects completed - Keep building!`;
+            }
+        }
+
+        function updateProjectStatus() {
+            completedProjects.forEach(project => {
+                const statusEl = document.getElementById(project + '-status');
+                if (statusEl) statusEl.textContent = '✅';
+                
+                const card = document.querySelector(`[data-project="${project}"]`);
+                if (card) card.classList.add('completed');
+            });
+        }
+
+        function filterProjects(difficulty) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (difficulty === 'all' || card.dataset.difficulty === difficulty) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        function toggleMaterials(project) {
+            const materials = document.getElementById(project + '-materials');
+            const arrow = document.getElementById(project + '-arrow');
+            
+            if (materials.style.display === 'none') {
+                materials.style.display = 'block';
+                arrow.textContent = '▲';
+            } else {
+                materials.style.display = 'none';
+                arrow.textContent = '▼';
+            }
+        }
+
+        function startProject(project) {
+            const instructions = document.getElementById(project + '-instructions');
+            const startBtn = document.querySelector(`[data-project="${project}"] .start-btn`);
+            const completeBtn = document.querySelector(`[data-project="${project}"] .complete-btn`);
+            
+            instructions.style.display = 'block';
+            startBtn.style.display = 'none';
+            completeBtn.style.display = 'inline-block';
+            
+            currentSteps[project] = 1;
+        }
+
+        function nextStep(project, stepNum) {
+            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
+            const nextStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
+            
+            currentStep.classList.remove('active');
+            nextStep.classList.add('active');
+            currentSteps[project] = stepNum;
+        }
+
+        function prevStep(project, stepNum) {
+            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
+            const prevStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
+            
+            currentStep.classList.remove('active');
+            prevStep.classList.add('active');
+            currentSteps[project] = stepNum;
+        }
+
+        function completeProject(project) {
+            if (!completedProjects.includes(project)) {
+                completedProjects.push(project);
+                localStorage.setItem('completedProjects', JSON.stringify(completedProjects));
+                
+                const statusEl = document.getElementById(project + '-status');
+                statusEl.textContent = '✅';
+                
+                const card = document.querySelector(`[data-project="${project}"]`);
+                card.classList.add('completed');
+                
+                // Hide instructions and show completion message
+                const instructions = document.getElementById(project + '-instructions');
+                instructions.style.display = 'none';
+                
+                alert(`🎉 Congratulations! You've completed the ${project} project!`);
+                
+                updateProgress();
+            }
+        }
+
+        function showAchievements() {
+            const achievementsSection = document.getElementById('achievements');
+            const achievementList = document.getElementById('achievement-list');
+            
+            const achievements = [
+                { icon: '🚢', title: 'Naval Engineer', desc: 'Built your first boat!' },
+                { icon: '🤖', title: 'Robotics Expert', desc: 'Created a mechanical grabber!' },
+                { icon: '🚀', title: 'Rocket Scientist', desc: 'Launched into the sky!' },
+                { icon: '🏎️', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
+                { icon: '👑', title: 'Master Builder', desc: 'Completed all projects!' }
+            ];
+            
+            achievementList.innerHTML = achievements.map(achievement => `
+                <div class="achievement-card">
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <h4>${achievement.title}</h4>
+                    <p>${achievement.desc}</p>
+                </div>
+            `).join('');
+            
+            achievementsSection.style.display = 'block';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            updateProjectStatus();
+            
+            if (completedProjects.length === 4) {
+                showAchievements();
+            }
+        });
+    </script>
 </body>
 </html>

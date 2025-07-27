@@ -3,137 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Robotics Fun Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Paddle Boat Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #fffdf6;
-      --grid-line: #e0e0e0;
-      --primary: #333;
-      --accent: #ff6b6b;
-      --blue: #60c3d2;
-      --green: #90be6d;
-      --pink: #fcb0b3;
-      --yellow: #ffd166;
-    }
-
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
-      background-color: var(--bg);
-      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
-                        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 40px 40px;
-      color: var(--primary);
+      background-image: url('https://www.transparenttextures.com/patterns/graph-paper.png');
+      background-color: #fefefe;
+      color: #333;
+      padding: 1em;
     }
 
     header {
+      background-color: #fdf3f3;
+      border-bottom: 3px dashed #ff9aa2;
+      padding: 1em 2em;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1.5em 2em;
-      background-color: white;
-      border-bottom: 3px dashed var(--accent);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      justify-content: space-between;
     }
 
     .logo {
-      font-size: 1.8em;
-      font-weight: 700;
-      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.6em;
+      color: #ff6363;
     }
 
     nav a {
+      margin-left: 1em;
       text-decoration: none;
-      margin: 0 1em;
-      color: var(--primary);
       font-weight: bold;
-      padding: 0.4em 0.8em;
-      border-radius: 8px;
-      transition: background 0.2s, transform 0.2s;
+      color: #3d3d3d;
+      padding: 0.3em 0.6em;
+      border-radius: 5px;
+      transition: 0.2s;
     }
 
     nav a:hover {
-      background-color: var(--yellow);
-      transform: scale(1.1);
+      background-color: #ffe2e2;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 3em auto;
-      background-color: #ffffffcc;
-      border-radius: 20px;
+      max-width: 900px;
+      margin: 2em auto;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 4px 4px 0 #ffd6d6;
       padding: 2em;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 2px dashed #ffc0cb;
     }
 
-    h1 {
+    h1, h2 {
       text-align: center;
-      font-size: 2.5em;
-      color: var(--accent);
-      margin-bottom: 0.3em;
+      color: #ff4c60;
     }
 
-    p.description {
-      text-align: center;
-      font-size: 1.2em;
-      color: var(--primary);
-      margin-bottom: 2em;
+    h2 {
+      font-size: 1.3em;
+      margin-top: 1.5em;
     }
 
-    .grid-icons {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 2em;
+    ul {
+      line-height: 1.8;
     }
 
-    .icon {
-      background-color: var(--pink);
+    .step {
+      background-color: #fff9f9;
+      border-left: 6px solid #ffd166;
+      margin: 1.2em 0;
       padding: 1em;
-      border-radius: 20px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+      border-radius: 8px;
     }
 
-    .icon:hover {
-      transform: translateY(-5px);
-    }
-
-    .icon img {
-      width: 80px;
-      margin-bottom: 0.5em;
-    }
-
-    .icon h3 {
-      font-size: 1.2em;
-      margin: 0.3em 0;
+    .step:hover {
+      background-color: #fff0f0;
     }
 
     footer {
+      margin-top: 4em;
       text-align: center;
-      padding: 2em;
+      padding: 1em;
+      background-color: #ffe9ec;
+      border-top: 3px dashed #ffb5c1;
       font-size: 0.9em;
-      color: #777;
-    }
-
-    @media (max-width: 600px) {
-      .grid-icons {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">Robotics Fun Club</div>
     <nav>
-      <a href="#">Home</a>
+      <a href="index.html">Home</a>
+      <a href="boat.html">Paddle Boat</a>
       <a href="#">Projects</a>
       <a href="#">Upload</a>
       <a href="#">About</a>
@@ -141,29 +104,47 @@
   </header>
 
   <div class="container">
-    <h1>Welcome to the Club!</h1>
-    <p class="description">Explore fun STEAM projects made just for young creators.</p>
-    <div class="grid-icons">
-      <div class="icon" style="background-color: var(--yellow)">
-        <img src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f1f8-1f1e6.png" alt="Boat">
-        <h3>Paddle Boat</h3>
-        <p>Make a boat using bottles & rubber bands!</p>
-      </div>
-      <div class="icon" style="background-color: var(--blue)">
-        <img src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f52c.png" alt="Science">
-        <h3>Mini Lab</h3>
-        <p>Try safe science experiments at home.</p>
-      </div>
-      <div class="icon" style="background-color: var(--green)">
-        <img src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f9ee.png" alt="Engineering">
-        <h3>Build Bots</h3>
-        <p>Design cool creations with circuits and code!</p>
-      </div>
+    <h1>How to Build a Paddle Boat</h1>
+    
+    <h2>Materials Needed</h2>
+    <ul>
+      <li>1 empty plastic water bottle (with cap)</li>
+      <li>3 popsicle sticks</li>
+      <li>1 strong rubber band</li>
+      <li>Tape</li>
+    </ul>
+
+    <h2>Step-by-Step Instructions</h2>
+
+    <div class="step">
+      <strong>Step 1: Prepare the Bottle Hull</strong><br>
+      Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!
+    </div>
+
+    <div class="step">
+      <strong>Step 2: Make the Paddle Axle</strong><br>
+      Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.
+    </div>
+
+    <div class="step">
+      <strong>Step 3: Attach the Rubber Band</strong><br>
+      Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.
+    </div>
+
+    <div class="step">
+      <strong>Step 4: Make and Insert the Paddle</strong><br>
+      Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place. This will act as your boat's paddle.
+    </div>
+
+    <div class="step">
+      <strong>Step 5: Wind It Up and Launch</strong><br>
+      Twist the paddle backward to wind up the rubber band. Gently place the boat in water and release — your paddle will spin and push the boat forward!
     </div>
   </div>
 
   <footer>
-    🚀 Robotics Fun Club · Powered by Creativity · © 2025
+    🚀 Powered by Creativity · Robotics Fun Club · © 2025
   </footer>
+
 </body>
 </html>

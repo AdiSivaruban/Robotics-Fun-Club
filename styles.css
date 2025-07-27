@@ -1,98 +1,4 @@
-/* INTERACTIVE PROJECTS STYLES */
-.project-filters {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid transparent;
-    border-radius: 25px;
-    padding: 12px 25px;
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #666;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-    background: #6c5ce7;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
-}
-
-.progress-section {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 30px;
-    margin-bottom: 40px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.progress-section h3 {
-    color: #6c5ce7;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.progress-bar {
-    background: #e9ecef;
-    height: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 15px;
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-.progress-fill {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    height: 100%;
-    width: 0%;
-    transition: width 1s ease-in-out;
-    border-radius: 10px;
-    position: relative;
-}
-
-.progress-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(200%); }
-}
-
-.progress-text {
-    color: #666;
-    font-weight: 500;
-    margin: 0;
-}
-
-.interactive-card {
-    position: relative;
-    overflow: visible;
-}
-
-.project-status {
-    position: absolute;
-    top: -10px;
-    right: -10@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -675,6 +581,22 @@ nav {
     flex-shrink: 0;
 }
 
+.bouncing {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
 .project-meta {
     flex-grow: 1;
 }
@@ -685,13 +607,18 @@ nav {
     font-size: 1.4rem;
 }
 
+.badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 .difficulty-badge, .time-badge {
     display: inline-block;
     padding: 4px 12px;
     border-radius: 15px;
     font-size: 0.85rem;
     font-weight: 600;
-    margin-right: 8px;
     margin-bottom: 5px;
 }
 
@@ -710,69 +637,248 @@ nav {
     line-height: 1.5;
 }
 
-.materials-preview {
-    background: #f8f9fa;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 0.9rem;
+/* INTERACTIVE PROJECTS STYLES */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
     color: #666;
-    margin-bottom: 15px;
-    line-height: 1.4;
 }
 
-.materials-preview strong {
-    color: #333;
-}
-
-.project-details {
-    margin-top: 15px;
-}
-
-.project-details summary {
+.filter-btn.active,
+.filter-btn:hover {
     background: #6c5ce7;
     color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
-    outline: none;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
 }
 
-.project-details summary:hover {
+.progress-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.progress-section h3 {
+    color: #6c5ce7;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.progress-bar {
+    background: #e9ecef;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    height: 100%;
+    width: 0%;
+    transition: width 1s ease-in-out;
+    border-radius: 10px;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+.progress-text {
+    color: #666;
+    font-weight: 500;
+    margin: 0;
+}
+
+.interactive-card {
+    position: relative;
+    overflow: visible;
+}
+
+.project-status {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #6c5ce7;
+}
+
+.materials-preview {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.materials-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #6c5ce7;
+    font-weight: 600;
+    user-select: none;
+}
+
+.materials-toggle:hover {
+    opacity: 0.8;
+}
+
+.toggle-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.materials-list {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+.material-item {
+    color: #666;
+    margin-bottom: 8px;
+    padding-left: 5px;
+    font-size: 0.95rem;
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.start-btn, .complete-btn, .complete-step-btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    flex: 1;
+}
+
+.start-btn:hover, .complete-btn:hover, .complete-step-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.complete-btn {
+    background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+.project-instructions {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.instruction-step {
+    display: none;
+}
+
+.instruction-step.active {
+    display: block;
+}
+
+.instruction-step h4 {
+    color: #6c5ce7;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.instruction-step p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.step-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.step-nav button {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.step-nav button:hover {
     background: #5a4fcf;
     transform: translateY(-2px);
 }
 
-.instructions-content {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 15px;
+.project-card.completed {
+    border: 3px solid #28a745;
+    background: rgba(40, 167, 69, 0.05);
 }
 
-.step {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.step:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.step h4 {
-    color: #6c5ce7;
-    margin-bottom: 8px;
-    font-size: 1rem;
-}
-
-.step p {
-    color: #555;
-    line-height: 1.5;
-    margin: 0;
+.project-card.completed .project-status {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
 }
 
 .safety-warning {
@@ -797,6 +903,59 @@ nav {
 
 .safety-warning li {
     margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.achievements-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 50px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.achievements-section h2 {
+    color: #6c5ce7;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.achievement-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ffd700;
+    transition: transform 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+}
+
+.achievement-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.achievement-card h4 {
+    color: #6c5ce7;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.achievement-card p {
+    color: #666;
+    font-size: 0.9rem;
     line-height: 1.4;
 }
 
@@ -842,5 +1001,22 @@ nav {
     
     .project-emoji {
         align-self: center;
+    }
+    
+    .project-filters {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .step-nav {
+        flex-direction: column;
+    }
+    
+    .achievement-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }

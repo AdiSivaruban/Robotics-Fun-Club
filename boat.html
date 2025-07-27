@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Robotics Fun Club</title>
+  <title>Paddle Boat Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -19,7 +19,6 @@
       font-family: 'Fredoka', sans-serif;
       background-color: var(--bg);
       background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
-      background-size: auto;
       color: var(--primary);
     }
 
@@ -69,15 +68,33 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
-    h1 {
-      font-size: 2.2em;
+    h1, h2 {
       color: var(--accent);
     }
 
-    .intro {
-      margin-top: 1em;
-      font-size: 1.2em;
+    .step {
+      border-left: 4px dotted var(--accent);
+      background: #fffaf5;
+      padding: 1em 1.5em;
+      margin: 1.5em 0;
+      border-radius: 10px;
+    }
+
+    ul {
+      margin-left: 1.5em;
       line-height: 1.6;
+    }
+
+    .back-link {
+      margin-top: 2em;
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
     }
 
     footer {
@@ -102,14 +119,43 @@
   </header>
 
   <div class="container">
-    <h1>Welcome to the Robotics Fun Club!</h1>
-    <p class="intro">
-      We make STEM fun by turning everyday objects into creative, moving machines! Dive into our latest paddle boat project and explore more hands-on builds.
-    </p>
+    <h1>How to Build a Paddle Boat</h1>
+
+    <h2>Materials Needed</h2>
+    <ul>
+      <li>1 empty plastic water bottle (with cap)</li>
+      <li>3 popsicle sticks</li>
+      <li>1 strong rubber band</li>
+      <li>Tape</li>
+    </ul>
+
+    <h2>Instructions</h2>
+
+    <div class="step">
+      <strong>Step 1:</strong> Use the plastic bottle as the boat body. Make sure it floats and is sealed tightly. Decorate it to make it uniquely yours!
+    </div>
+
+    <div class="step">
+      <strong>Step 2:</strong> Tape or glue two popsicle sticks parallel to each other on the sides near the back of the bottle. Leave a gap between them for your paddle to spin.
+    </div>
+
+    <div class="step">
+      <strong>Step 3:</strong> Stretch the rubber band between the two popsicle sticks so it hangs across the gap. Make sure it’s snug but not too tight.
+    </div>
+
+    <div class="step">
+      <strong>Step 4:</strong> Cut one popsicle stick in half. Insert it through the middle of the rubber band and tape it in place.
+    </div>
+
+    <div class="step">
+      <strong>Step 5:</strong> Wind the paddle backward to tighten the rubber band. Release and watch your boat go!
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Home</a>
   </div>
 
   <footer>
-    🚀 Powered by Curiosity · Robotics Fun Club · © 2025
+    🌊 Science in Motion · Robotics Fun Club · © 2025
   </footer>
 </body>
 </html>

@@ -16,7 +16,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .upload-area:hover {

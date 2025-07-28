@@ -1,653 +1,532 @@
-/* PROJECTS PAGE SPECIFIC STYLES */
-.projects-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.projects-intro {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.25rem;
-    margin-top: -2rem;
-    margin-bottom: 3rem;
-    font-weight: 400;
-}
-
-.project-filters {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
-    padding: 0.75rem 2rem;
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: white;
-}
-
-.filter-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-.filter-btn.active {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    border-color: transparent;
-    color: white;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-}
-
-.progress-section {
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 20px;
-    padding: 2.5rem;
-    margin-bottom: 3rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-}
-
-.progress-section h3 {
-    color: var(--dark);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.progress-bar {
-    background: #e2e3e5;
-    height: 24px;
-    border-radius: 50px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    position: relative;
-}
-
-.progress-fill {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    height: 100%;
-    width: 0%;
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 50px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 1rem;
-}
-
-.progress-fill::after {
-    content: attr(data-progress);
-    color: white;
-    font-weight: 700;
-    font-size: 0.875rem;
-}
-
-.progress-text {
-    color: var(--gray);
-    font-weight: 500;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.project-card {
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-    transform-origin: left;
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.project-card:hover::before {
-    transform: scaleX(1);
-}
-
-.project-status {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: white;
-    border-radius: 12px;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 2px solid #f3f4f6;
-    transition: all 0.3s ease;
-}
-
-.project-card.completed .project-status {
-    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-    color: white;
-    border-color: transparent;
-    animation: statusPop 0.5s ease;
-}
-
-@keyframes statusPop {
-    0% { transform: scale(0); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-.project-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.project-emoji {
-    font-size: 3.5rem;
-    line-height: 1;
-    animation: bounce 2s infinite;
-}
-
-.project-meta h3 {
-    color: var(--dark);
-    margin-bottom: 0.75rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.badges {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.difficulty-badge, .time-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.375rem 0.875rem;
-    border-radius: 50px;
-    font-size: 0.875rem;
-    font-weight: 600;
-}
-
-.difficulty-badge.easy {
-    background: #d1fae5;
-    color: #065f46;
-}
-
-.difficulty-badge.medium {
-    background: #fed7aa;
-    color: #92400e;
-}
-
-.difficulty-badge.hard {
-    background: #fecaca;
-    color: #991b1b;
-}
-
-.time-badge {
-    background: #e0e7ff;
-    color: #3730a3;
-}
-
-.project-description {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    font-size: 1rem;
-}
-
-.materials-preview {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid #e5e7eb;
-    transition: all 0.3s ease;
-}
-
-.materials-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    padding: 0.5rem;
-}
-
-.materials-toggle strong {
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.toggle-arrow {
-    color: var(--primary);
-    font-size: 1.25rem;
-    transition: transform 0.3s ease;
-}
-
-.materials-list {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e5e7eb;
-    display: grid;
-    gap: 0.5rem;
-}
-
-.material-item {
-    color: var(--dark);
-    padding: 0.5rem;
-    background: white;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.material-item::before {
-    content: '✓';
-    color: var(--success);
-    font-weight: 700;
-}
-
-.project-actions {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.start-btn, .complete-btn {
-    flex: 1;
-    padding: 0.875rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.start-btn {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-}
-
-.start-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
-}
-
-.complete-btn {
-    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-}
-
-.complete-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-}
-
-.project-instructions {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-top: 1.5rem;
-    border: 1px solid #e5e7eb;
-}
-
-.instruction-step {
-    display: none;
-    animation: fadeInStep 0.5s ease;
-}
-
-@keyframes fadeInStep {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.instruction-step.active {
-    display: block;
-}
-
-.instruction-step h4 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-.instruction-step p {
-    color: var(--dark);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-.step-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.step-nav button,
-.complete-step-btn {
-    background: white;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    padding: 0.75rem 1.5rem;
-    font-family: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.step-nav button:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-}
-
-.complete-step-btn {
-    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-    color: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-}
-
-.complete-step-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-}
-
-.safety-warning {
-    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-    color: #92400e;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    border: 1px solid #fbbf24;
-    position: relative;
-    overflow: hidden;
-}
-
-.safety-warning::before {
-    content: '⚠️';
-    position: absolute;
-    font-size: 4rem;
-    opacity: 0.1;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.safety-warning h4 {
-    margin-bottom: 0.75rem;
-    color: #92400e;
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
-.safety-warning ul {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-.safety-warning li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-}
-
-.achievements-section {
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 20px;
-    padding: 3rem;
-    margin-top: 4rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.achievements-section::before {
-    content: '🏆';
-    position: absolute;
-    font-size: 10rem;
-    opacity: 0.05;
-    right: -2rem;
-    top: -2rem;
-    transform: rotate(-15deg);
-}
-
-.achievements-section h2 {
-    color: var(--dark);
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    font-weight: 800;
-}
-
-.achievement-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-}
-
-.achievement-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.achievement-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.achievement-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    border-color: var(--primary);
-}
-
-.achievement-card:hover::before {
-    opacity: 0.05;
-}
-
-.achievement-card * {
-    position: relative;
-    z-index: 1;
-}
-
-.achievement-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: inline-block;
-    animation: achievementFloat 3s ease-in-out infinite;
-}
-
-@keyframes achievementFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.achievement-card h4 {
-    color: var(--dark);
-    margin-bottom: 0.5rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
-.achievement-card p {
-    color: var(--gray);
-    font-size: 0.875rem;
-    line-height: 1.5;
-}
-
-/* Project completed state */
-.project-card.completed {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
-    border: 2px solid var(--success);
-}
-
-.project-card.completed::before {
-    background: linear-gradient(90deg, var(--success) 0%, #059669 100%);
-    transform: scaleX(1);
-}
-
-/* Step progress indicator */
-.step-progress {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-}
-
-.step-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #e5e7eb;
-    transition: all 0.3s ease;
-}
-
-.step-dot.active {
-    background: var(--primary);
-    transform: scale(1.2);
-}
-
-.step-dot.completed {
-    background: var(--success);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .project-card {
-        padding: 1.5rem;
-    }
-    
-    .project-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .project-emoji {
-        margin: 0 auto;
-    }
-    
-    .project-status {
-        top: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
-        font-size: 1.25rem;
-    }
-    
-    .project-filters {
-        gap: 0.5rem;
-    }
-    
-    .filter-btn {
-        padding: 0.5rem 1.5rem;
-        font-size: 0.875rem;
-    }
-    
-    .step-nav {
-        flex-direction: column;
-    }
-    
-    .achievement-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-    }
-    
-    .achievement-card {
-        padding: 1rem;
-    }
-    
-    .achievement-icon {
-        font-size: 2.5rem;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Robotics Fun Club</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+            <div class="gear">⚙️</div>
+        </div>
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="robot-icon"></div>
+                Robotics Fun Club
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">🔧 DIY Projects</h1>
+        
+        <!-- Filter Section -->
+        <div class="project-filters">
+            <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+            <button class="filter-btn" onclick="filterProjects('easy')">Easy</button>
+            <button class="filter-btn" onclick="filterProjects('medium')">Medium</button>
+            <button class="filter-btn" onclick="filterProjects('hard')">Advanced</button>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-section">
+            <h3>🏆 Your Building Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text">Complete projects to unlock achievements!</p>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Rubber Band Boat -->
+            <div class="project-card interactive-card" data-difficulty="easy" data-project="boat">
+                <div class="project-status" id="boat-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🚤</div>
+                    <div class="project-meta">
+                        <h3>Rubber Band Boat</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge easy">Easy</div>
+                            <div class="time-badge">⏱️ 20 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Build a self-propelled boat using a plastic bottle and rubber band!</p>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('boat')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="boat-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="boat-materials" style="display: none;">
+                        <div class="material-item">✓ 1 empty plastic water bottle</div>
+                        <div class="material-item">✓ 3 popsicle sticks</div>
+                        <div class="material-item">✓ 1 strong rubber band</div>
+                        <div class="material-item">✓ Tape</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('boat')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('boat')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="boat-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare the Hull</h4>
+                        <p>Use the plastic bottle as your boat body. Make sure it's sealed and floats. Decorate it however you want!</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('boat', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Create Paddle Support</h4>
+                        <p>Tape two popsicle sticks parallel to each other near the back of the bottle with a small gap between them.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 1)">← Previous</button>
+                            <button onclick="nextStep('boat', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Add Rubber Band</h4>
+                        <p>Stretch the rubber band between the two popsicle sticks. Make sure it's tight but not about to snap.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 2)">← Previous</button>
+                            <button onclick="nextStep('boat', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Make the Paddle</h4>
+                        <p>Cut a popsicle stick in half and slide it through the rubber band. Tape it together.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 3)">← Previous</button>
+                            <button onclick="nextStep('boat', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Launch!</h4>
+                        <p>Wind the paddle backward, place in water, and release! Watch your boat zoom across the water!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 4)">← Previous</button>
+                            <button onclick="completeProject('boat')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robot Arm Grabber -->
+            <div class="project-card interactive-card" data-difficulty="medium" data-project="robot">
+                <div class="project-status" id="robot-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🦾</div>
+                    <div class="project-meta">
+                        <h3>Robot Arm Grabber</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge medium">Medium</div>
+                            <div class="time-badge">⏱️ 45 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Create a mechanical grabber that works like a real robot arm!</p>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('robot')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="robot-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="robot-materials" style="display: none;">
+                        <div class="material-item">✓ 1 wooden ruler</div>
+                        <div class="material-item">✓ Cardboard strips</div>
+                        <div class="material-item">✓ 4 paper fasteners</div>
+                        <div class="material-item">✓ Tape & scissors</div>
+                        <div class="material-item">✓ Rubber band & string</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('robot')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('robot')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="robot-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare Cardboard</h4>
+                        <p>Cut three long strips and two short strips. Punch holes near each end for connections.</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('robot', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Build Scissor Mechanism</h4>
+                        <p>Cross two long strips into an "X" and connect with a paper fastener at the center.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 1)">← Previous</button>
+                            <button onclick="nextStep('robot', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Attach to Base</h4>
+                        <p>Connect the third strip to the ruler and attach short strips for linkages.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 2)">← Previous</button>
+                            <button onclick="nextStep('robot', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Add Spring System</h4>
+                        <p>Hook rubber band between pivot points for automatic closing action.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 3)">← Previous</button>
+                            <button onclick="nextStep('robot', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Add Control String</h4>
+                        <p>Tie string to rubber band. Pull to open, release to close!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 4)">← Previous</button>
+                            <button onclick="completeProject('robot')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottle Rocket -->
+            <div class="project-card interactive-card" data-difficulty="hard" data-project="rocket">
+                <div class="project-status" id="rocket-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🚀</div>
+                    <div class="project-meta">
+                        <h3>Bottle Rocket</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge hard">Advanced</div>
+                            <div class="time-badge">⏱️ 30 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Launch a rocket using air pressure! <strong>Adult supervision required.</strong></p>
+                
+                <div class="safety-warning">
+                    <h4>⚠️ Safety First</h4>
+                    <ul>
+                        <li>Always do this <strong>outdoors</strong></li>
+                        <li>Adult supervision required</li>
+                        <li>Never point at people or property</li>
+                    </ul>
+                </div>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('rocket')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="rocket-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="rocket-materials" style="display: none;">
+                        <div class="material-item">✓ 1 empty plastic bottle with lid</div>
+                        <div class="material-item">✓ 3 pencils</div>
+                        <div class="material-item">✓ Hairspray or spray deodorant</div>
+                        <div class="material-item">✓ BBQ lighter</div>
+                        <div class="material-item">✓ Tape</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('rocket')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('rocket')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="rocket-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare Rocket Body</h4>
+                        <p>Puncture a small hole in the bottle cap. Decorate your rocket however you like!</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('rocket', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Build Launch Base</h4>
+                        <p>Attach three pencils around the bottle to form a stable tripod base.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('rocket', 1)">← Previous</button>
+                            <button onclick="nextStep('rocket', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Add Fuel</h4>
+                        <p>Spray a short burst of hairspray inside and seal with cap. Shake for 5-10 seconds.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('rocket', 2)">← Previous</button>
+                            <button onclick="nextStep('rocket', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Launch Sequence</h4>
+                        <p>Hold lighter near (not touching) the hole. The vapor will ignite and launch!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('rocket', 3)">← Previous</button>
+                            <button onclick="completeProject('rocket')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balloon Car -->
+            <div class="project-card interactive-card" data-difficulty="easy" data-project="car">
+                <div class="project-status" id="car-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🏎️</div>
+                    <div class="project-meta">
+                        <h3>Balloon Car</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge easy">Easy</div>
+                            <div class="time-badge">⏱️ 25 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Build a car powered by escaping air from a balloon!</p>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('car')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="car-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="car-materials" style="display: none;">
+                        <div class="material-item">✓ Plastic bottle</div>
+                        <div class="material-item">✓ 4 bottle caps</div>
+                        <div class="material-item">✓ Skewers</div>
+                        <div class="material-item">✓ Straw & balloon</div>
+                        <div class="material-item">✓ Tape</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" onclick="startProject('car')">🚀 Start Building</button>
+                    <button class="complete-btn" onclick="completeProject('car')" style="display: none;">✅ Mark Complete</button>
+                </div>
+
+                <div class="project-instructions" id="car-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Make Wheels</h4>
+                        <p>Push skewers through bottle caps to create two axles with wheels.</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('car', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Attach Axles</h4>
+                        <p>Poke holes in bottle and secure axles so wheels spin freely.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 1)">← Previous</button>
+                            <button onclick="nextStep('car', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Prepare Balloon System</h4>
+                        <p>Insert straw into balloon opening and tape securely.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 2)">← Previous</button>
+                            <button onclick="nextStep('car', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Mount and Race!</h4>
+                        <p>Tape balloon to car with straw pointing backward. Inflate, release, and race!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 3)">← Previous</button>
+                            <button onclick="completeProject('car')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Section -->
+        <div class="achievements-section" id="achievements" style="display: none;">
+            <h2>🏆 Achievements Unlocked!</h2>
+            <div class="achievement-grid" id="achievement-list">
+                <!-- Achievements will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let completedProjects = JSON.parse(localStorage.getItem('completedProjects') || '[]');
+        let currentSteps = {};
+
+        function updateProgress() {
+            const totalProjects = 4;
+            const completed = completedProjects.length;
+            const percentage = (completed / totalProjects) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            
+            if (completed === 0) {
+                document.querySelector('.progress-text').textContent = 'Complete projects to unlock achievements!';
+            } else if (completed === totalProjects) {
+                document.querySelector('.progress-text').textContent = '🎉 Master Builder! All projects completed!';
+                showAchievements();
+            } else {
+                document.querySelector('.progress-text').textContent = `${completed}/${totalProjects} projects completed - Keep building!`;
+            }
+        }
+
+        function updateProjectStatus() {
+            completedProjects.forEach(project => {
+                const statusEl = document.getElementById(project + '-status');
+                if (statusEl) statusEl.textContent = '✅';
+                
+                const card = document.querySelector(`[data-project="${project}"]`);
+                if (card) card.classList.add('completed');
+            });
+        }
+
+        function filterProjects(difficulty) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (difficulty === 'all' || card.dataset.difficulty === difficulty) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        function toggleMaterials(project) {
+            const materials = document.getElementById(project + '-materials');
+            const arrow = document.getElementById(project + '-arrow');
+            
+            if (materials.style.display === 'none') {
+                materials.style.display = 'block';
+                arrow.textContent = '▲';
+            } else {
+                materials.style.display = 'none';
+                arrow.textContent = '▼';
+            }
+        }
+
+        function startProject(project) {
+            const instructions = document.getElementById(project + '-instructions');
+            const startBtn = document.querySelector(`[data-project="${project}"] .start-btn`);
+            const completeBtn = document.querySelector(`[data-project="${project}"] .complete-btn`);
+            
+            instructions.style.display = 'block';
+            startBtn.style.display = 'none';
+            completeBtn.style.display = 'inline-block';
+            
+            currentSteps[project] = 1;
+        }
+
+        function nextStep(project, stepNum) {
+            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
+            const nextStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
+            
+            currentStep.classList.remove('active');
+            nextStep.classList.add('active');
+            currentSteps[project] = stepNum;
+        }
+
+        function prevStep(project, stepNum) {
+            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
+            const prevStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
+            
+            currentStep.classList.remove('active');
+            prevStep.classList.add('active');
+            currentSteps[project] = stepNum;
+        }
+
+        function completeProject(project) {
+            if (!completedProjects.includes(project)) {
+                completedProjects.push(project);
+                localStorage.setItem('completedProjects', JSON.stringify(completedProjects));
+                
+                const statusEl = document.getElementById(project + '-status');
+                statusEl.textContent = '✅';
+                
+                const card = document.querySelector(`[data-project="${project}"]`);
+                card.classList.add('completed');
+                
+                // Hide instructions and show completion message
+                const instructions = document.getElementById(project + '-instructions');
+                instructions.style.display = 'none';
+                
+                alert(`🎉 Congratulations! You've completed the ${project} project!`);
+                
+                updateProgress();
+            }
+        }
+
+        function showAchievements() {
+            const achievementsSection = document.getElementById('achievements');
+            const achievementList = document.getElementById('achievement-list');
+            
+            const achievements = [
+                { icon: '🚢', title: 'Naval Engineer', desc: 'Built your first boat!' },
+                { icon: '🤖', title: 'Robotics Expert', desc: 'Created a mechanical grabber!' },
+                { icon: '🚀', title: 'Rocket Scientist', desc: 'Launched into the sky!' },
+                { icon: '🏎️', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
+                { icon: '👑', title: 'Master Builder', desc: 'Completed all projects!' }
+            ];
+            
+            achievementList.innerHTML = achievements.map(achievement => `
+                <div class="achievement-card">
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <h4>${achievement.title}</h4>
+                    <p>${achievement.desc}</p>
+                </div>
+            `).join('');
+            
+            achievementsSection.style.display = 'block';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            updateProjectStatus();
+            
+            if (completedProjects.length === 4) {
+                showAchievements();
+            }
+        });
+    </script>
+</body>
+</html>

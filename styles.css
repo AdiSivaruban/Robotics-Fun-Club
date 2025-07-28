@@ -986,7 +986,7 @@ nav {
     content: '⚠️';
     position: absolute;
     font-size: 4rem;
-    opacity: 0.1;
+    opacity: 1;
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);

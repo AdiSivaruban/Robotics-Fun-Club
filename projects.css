@@ -154,8 +154,385 @@
     flex-shrink: 0;
 }
 
+.bouncing {
+    animation: bounce 2s infinite;
+}
+
 .project-meta {
     flex-grow: 1;
 }
 
-.project
+.project-meta h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.difficulty-badge, .time-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.easy { background: #d4edda; color: #155724; }
+.medium { background: #fff3cd; color: #856404; }
+.hard { background: #f8d7da; color: #721c24; }
+
+.time-badge {
+    background: #e2e3e5;
+    color: #495057;
+}
+
+.project-description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Materials Section */
+.materials-preview {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.materials-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #6c5ce7;
+    font-weight: 600;
+    user-select: none;
+}
+
+.materials-toggle:hover {
+    opacity: 0.8;
+}
+
+.toggle-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.materials-list {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+}
+
+.material-item {
+    color: #666;
+    margin-bottom: 8px;
+    padding-left: 5px;
+    font-size: 0.95rem;
+}
+
+/* Action Buttons */
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.start-btn, .complete-btn, .undo-btn, .close-btn, .complete-step-btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    flex: 1;
+    min-width: 120px;
+}
+
+.start-btn {
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.complete-btn {
+    background: linear-gradient(45deg, #10b981, #059669);
+}
+
+.complete-btn:hover, .complete-step-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.undo-btn {
+    background: linear-gradient(45deg, #6b7280, #4b5563);
+}
+
+.undo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+}
+
+.close-btn {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+.close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Instructions Section */
+.project-instructions {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.instruction-step {
+    display: none;
+}
+
+.instruction-step.active {
+    display: block;
+}
+
+.instruction-step h4 {
+    color: #6c5ce7;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.instruction-step p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.step-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.step-nav button {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.step-nav button:hover {
+    background: #5a4fcf;
+    transform: translateY(-2px);
+}
+
+.complete-step-btn {
+    background: linear-gradient(45deg, #10b981, #059669);
+    color: white;
+    border: none;
+}
+
+/* Completed Card Style */
+.project-card.completed {
+    border: 3px solid #28a745;
+    background: rgba(40, 167, 69, 0.05);
+}
+
+/* Safety Warning */
+.safety-warning {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #dc3545;
+}
+
+.safety-warning h4 {
+    margin-bottom: 10px;
+    color: #721c24;
+    font-size: 1.1rem;
+}
+
+.safety-warning ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.safety-warning li {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+/* Achievements Section */
+.achievements-section {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
+    border-radius: 24px;
+    padding: 3rem;
+    margin-top: 4rem;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.achievements-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+    animation: rotate 30s linear infinite;
+}
+
+.achievements-section::after {
+    content: '🏆';
+    position: absolute;
+    font-size: 10rem;
+    opacity: 0.03;
+    right: 2rem;
+    bottom: -2rem;
+    transform: rotate(-15deg);
+}
+
+.achievements-section h2 {
+    color: #6c5ce7;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.achievement-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #ffd700;
+}
+
+.achievement-card:hover::before {
+    transform: scaleX(1);
+}
+
+.achievement-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.achievement-card h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.achievement-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .project-emoji {
+        align-self: center;
+    }
+    
+    .project-filters {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .step-nav {
+        flex-direction: column;
+    }
+    
+    .achievement-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .project-actions {
+        flex-direction: column;
+    }
+    
+    .project-actions button {
+        width: 100%;
+    }
+}

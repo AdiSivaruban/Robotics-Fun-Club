@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Robotics Fun Club</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="projects.css">
 </head>
 <body>
     <div class="animated-bg">
@@ -553,7 +552,7 @@
             if (completed === 0) {
                 document.querySelector('.progress-text').textContent = 'Complete projects to unlock achievements!';
             } else if (completed === totalProjects) {
-                document.querySelector('.progress-text').textContent = '🎉 Master Engineer! All projects completed!';
+                document.querySelector('.progress-text').textContent = '🎉 Master Builder! All projects completed!';
                 showAchievements();
             } else {
                 document.querySelector('.progress-text').textContent = `${completed}/${totalProjects} projects completed - Keep building!`;
@@ -701,9 +700,13 @@
                 // Update buttons
                 const completeBtn = document.getElementById(project + '-complete');
                 const undoBtn = document.getElementById(project + '-undo');
+                const closeBtn = document.getElementById(project + '-close');
+                const startBtn = document.getElementById(project + '-start');
                 
                 completeBtn.style.display = 'none';
                 undoBtn.style.display = 'inline-block';
+                closeBtn.style.display = 'none';
+                startBtn.style.display = 'none';
                 
                 // Hide instructions
                 const instructions = document.getElementById(project + '-instructions');
@@ -760,7 +763,7 @@
             // Check if all projects completed
             if (completedProjects.length === 4) {
                 setTimeout(() => {
-                    celebrationText.textContent = "🏆 You're a Master Engineer! All projects completed!";
+                    celebrationText.textContent = "🏆 You're a Master Builder! All projects completed!";
                 }, 2000);
             }
         }
@@ -779,7 +782,7 @@
                 { icon: '🤖', title: 'Robotics Expert', desc: 'Created a mechanical grabber!' },
                 { icon: '🚀', title: 'Rocket Scientist', desc: 'Launched into the sky!' },
                 { icon: '🏎️', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
-                { icon: '👑', title: 'Master Engineer', desc: 'Completed all projects!' }
+                { icon: '👑', title: 'Master Builder', desc: 'Completed all projects!' }
             ];
             
             achievementList.innerHTML = achievements.map(achievement => `

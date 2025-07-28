@@ -1,195 +1,161 @@
-/* ABOUT PAGE SPECIFIC STYLES */
+/* PROJECTS PAGE SPECIFIC STYLES */
 
-.about-hero {
+.projects-intro {
     text-align: center;
-    margin-bottom: 50px;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
 }
 
-.hero-text {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+/* Project Filters */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
 }
 
-.hero-text h2 {
-    color: #6c5ce7;
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.hero-text p {
+.filter-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
     color: #666;
-    font-size: 1.3rem;
-    font-weight: 500;
 }
 
-.about-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
+.filter-btn.active,
+.filter-btn:hover {
+    background: #6c5ce7;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
 }
 
-.about-card {
+/* Progress Section */
+.progress-section {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     padding: 30px;
+    margin-bottom: 40px;
     text-align: center;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
 }
 
-.about-card:hover {
-    transform: translateY(-10px);
-}
-
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.about-card h3 {
+.progress-section h3 {
     color: #6c5ce7;
+    margin-bottom: 20px;
     font-size: 1.5rem;
-    margin-bottom: 15px;
 }
 
-.about-card p {
-    color: #666;
-    line-height: 1.6;
-}
-
-.features-section {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    margin-bottom: 50px;
-}
-
-.features-section h2 {
-    color: #6c5ce7;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.feature {
-    text-align: center;
-    padding: 20px;
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    display: block;
-    margin-bottom: 15px;
-}
-
-.feature h4 {
-    color: #333;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-}
-
-.feature p {
-    color: #666;
-    line-height: 1.5;
-}
-
-.learning-section {
-    margin-bottom: 50px;
-}
-
-.learning-content {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.learning-content h2 {
-    color: #6c5ce7;
-    margin-bottom: 20px;
-    font-size: 2rem;
-}
-
-.learning-content p {
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
-
-.learning-outcomes {
-    display: grid;
-    gap: 15px;
-}
-
-.outcome {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #f8f9fa;
+.progress-bar {
+    background: #e9ecef;
+    height: 20px;
     border-radius: 10px;
-    border-left: 4px solid #6c5ce7;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.outcome strong {
-    color: #333;
-    font-weight: 600;
+.progress-fill {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    height: 100%;
+    width: 0%;
+    transition: width 1s ease-in-out;
+    border-radius: 10px;
+    position: relative;
 }
 
-.outcome span {
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    animation: shimmer 2s infinite;
+}
+
+.progress-text {
     color: #666;
-    font-style: italic;
+    font-weight: 500;
+    margin: 0;
 }
 
-.cta-section {
-    text-align: center;
+/* Project Cards */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.project-card {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 40px;
+    padding: 25px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
 }
 
-.cta-section h2 {
-    color: #6c5ce7;
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.interactive-card {
+    position: relative;
+    overflow: visible;
+}
+
+.project-status {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #6c5ce7;
+}
+
+.project-card.completed .project-status {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.project-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
     margin-bottom: 15px;
-    font-size: 2rem;
 }
 
-.cta-section p {
-    color: #666;
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-    line-height: 1.6;
+.project-emoji {
+    font-size: 3rem;
+    flex-shrink: 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .outcome {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
+.project-meta {
+    flex-grow: 1;
 }
+
+.project

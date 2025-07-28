@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robotics Fun Club - DIY STEM Projects for Kids</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="home.css">
 </head>
 <body>
     <div class="animated-bg">
@@ -50,61 +49,274 @@
 
     <main class="hero-container">
         <div class="hero-content">
-            <h1>Robotics Fun Club</h1>
-            <p class="hero-subtitle">Transform everyday items into extraordinary creations</p>
-            <p class="hero-description">Join a community of young innovators building amazing STEM projects with simple household materials</p>
-            <a href="projects.html" class="cta-button">Start Your Journey</a>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">Fun Projects</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label">Minutes Each</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Creativity</div>
-                </div>
-            </div>
+            <h1>🚀 Robotics Fun Club</h1>
+            <p class="hero-subtitle">Discover amazing DIY STEM projects using everyday materials!</p>
+            <p class="hero-description">Build robots, rockets, and cool gadgets with things you already have at home</p>
+            <a href="projects.html" class="cta-button">Start Building!</a>
         </div>
         
-        <!-- Modern Visual Section -->
-        <div class="hero-visual">
-            <div class="card-stack">
-                <div class="project-preview">
-                    <span class="preview-icon">🚤</span>
-                    <h3 class="preview-title">Water Adventures</h3>
-                    <p class="preview-desc">Build boats that zoom across water using rubber band power</p>
-                    <span class="preview-tag">Easy • 20 min</span>
+        <!-- Interactive Robot -->
+        <div class="robot-container">
+            <div class="robot">
+                <div class="robot-head">
+                    <div class="antenna"></div>
+                    <div class="eyes">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                    </div>
+                    <div class="mouth"></div>
                 </div>
-                <div class="project-preview">
-                    <span class="preview-icon">🦾</span>
-                    <h3 class="preview-title">Mechanical Marvels</h3>
-                    <p class="preview-desc">Create robot arms that grab and move objects</p>
-                    <span class="preview-tag">Medium • 45 min</span>
+                <div class="robot-body">
+                    <div class="chest-light"></div>
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
                 </div>
-                <div class="project-preview">
-                    <span class="preview-icon">🚀</span>
-                    <h3 class="preview-title">Sky High</h3>
-                    <p class="preview-desc">Launch rockets using the power of pressure</p>
-                    <span class="preview-tag">Advanced • 30 min</span>
+                <div class="robot-legs">
+                    <div class="leg left"></div>
+                    <div class="leg right"></div>
                 </div>
-            </div>
-            
-            <!-- Floating Elements -->
-            <div class="floating-elements">
-                <div class="orbit">
-                    <div class="orbit-dot"></div>
-                </div>
-                <span class="floating-icon">⚡</span>
-                <span class="floating-icon">🔧</span>
-                <span class="floating-icon">💡</span>
-                <span class="floating-icon">⚙️</span>
             </div>
         </div>
     </main>
+    
+    <style>
+        /* Robot Styles */
+        .robot-container {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        
+        .robot {
+            width: 200px;
+            height: 300px;
+            position: relative;
+            animation: robotFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes robotFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Robot Head */
+        .robot-head {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            margin: 0 auto;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .antenna {
+            width: 4px;
+            height: 30px;
+            background: #333;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .antenna::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: antennaBlink 2s infinite;
+        }
+        
+        @keyframes antennaBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .eyes {
+            display: flex;
+            justify-content: space-around;
+            padding: 25px 20px 0;
+        }
+        
+        .eye {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .eye::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            animation: eyeMove 3s infinite;
+        }
+        
+        @keyframes eyeMove {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-3px, 0); }
+            75% { transform: translate(3px, 0); }
+        }
+        
+        .mouth {
+            width: 40px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 15px auto;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        /* Robot Body */
+        .robot-body {
+            width: 120px;
+            height: 100px;
+            background: linear-gradient(135deg, #96ceb4, #45b7d1);
+            margin: 10px auto;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chest-light {
+            width: 30px;
+            height: 30px;
+            background: #feca57;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: chestGlow 1.5s infinite;
+        }
+        
+        @keyframes chestGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(254, 202, 87, 0.8);
+                transform: translateX(-50%) scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(254, 202, 87, 1);
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+        
+        .arm {
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            position: absolute;
+            top: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .arm.left {
+            left: -35px;
+            transform-origin: top center;
+            animation: leftArmWave 2s infinite;
+        }
+        
+        .arm.right {
+            right: -35px;
+            transform-origin: top center;
+            animation: rightArmWave 2s infinite;
+        }
+        
+        @keyframes leftArmWave {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(-30deg); }
+        }
+        
+        @keyframes rightArmWave {
+            0%, 100% { transform: rotate(10deg); }
+            50% { transform: rotate(30deg); }
+        }
+        
+        /* Robot Legs */
+        .robot-legs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .leg {
+            width: 35px;
+            height: 60px;
+            background: linear-gradient(135deg, #6c5ce7, #a55eea);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Interactive Hover Effects */
+        .robot:hover .eye::before {
+            animation: eyeSpin 0.5s infinite;
+        }
+        
+        @keyframes eyeSpin {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        .robot:hover .arm.left {
+            animation: leftArmWaveFast 0.5s infinite;
+        }
+        
+        .robot:hover .arm.right {
+            animation: rightArmWaveFast 0.5s infinite;
+        }
+        
+        @keyframes leftArmWaveFast {
+            0%, 100% { transform: rotate(-45deg); }
+            50% { transform: rotate(10deg); }
+        }
+        
+        @keyframes rightArmWaveFast {
+            0%, 100% { transform: rotate(45deg); }
+            50% { transform: rotate(-10deg); }
+        }
+        
+        .robot:hover .chest-light {
+            animation: chestGlowFast 0.3s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .robot-container {
+                position: static;
+                transform: none;
+                margin-top: 3rem;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+            }
+            
+            .robot {
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .robot {
+                transform: scale(0.6);
+                height: 200px;
+            }
+        }
+    </style>
 </body>
 </html>

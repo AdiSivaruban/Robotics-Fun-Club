@@ -9,60 +9,71 @@
 </head>
 <body>
     <div class="animated-bg">
+        <div class="gradient-overlay"></div>
         <div class="floating-shapes">
             <div class="shape"></div>
             <div class="shape"></div>
             <div class="shape"></div>
             <div class="shape"></div>
             <div class="shape"></div>
-            <div class="gear">⚙️</div>
-            <div class="gear">⚙️</div>
-            <div class="gear">⚙️</div>
         </div>
-        <div class="particles">
-            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
-            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
-            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
-            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
-            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
-            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
-        </div>
+        <div class="grid-pattern"></div>
     </div>
 
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <div class="robot-icon"></div>
-                Robotics Fun Club
+                <div class="robot-icon">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="antenna"></div>
+                </div>
+                <span>Robotics Fun Club</span>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="reviews.html">Reviews</a></li>
             </ul>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+    </div>
+
     <div class="container">
-        <h1 class="section-title">📸 Project Gallery</h1>
-        <p class="gallery-subtitle">Share your amazing creations with the community!</p>
+        <div class="gallery-header">
+            <h1 class="section-title">Project Gallery</h1>
+            <p class="gallery-subtitle">Share your amazing creations with the community!</p>
+        </div>
         
         <div class="upload-area" onclick="document.getElementById('photo-upload').click()">
-            <input type="file" id="photo-upload" accept="image/*" onchange="uploadPhoto(this)">
-            <h3>📷 Upload Your Project Photo</h3>
-            <p>Click here to select a photo of your completed project</p>
-            <p class="upload-note">Supported formats: JPG, PNG, GIF</p>
+            <input type="file" id="photo-upload" accept="image/*" multiple onchange="uploadPhotos(this)">
+            <div class="upload-icon">📸</div>
+            <h3>Upload Your Project Photos</h3>
+            <p>Click here or drag & drop your images</p>
+            <p class="upload-note">Supports JPG, PNG, GIF • Max 10MB per file</p>
         </div>
 
-        <div class="empty-gallery">
+        <div class="empty-gallery" id="empty-gallery">
             <div class="empty-message">
-                <h3>🎨 Your Gallery Awaits!</h3>
-                <p>Upload photos of your completed projects to share with the community. Be the first to showcase your amazing creations!</p>
+                <div class="empty-icon">🎨</div>
+                <h3>Your Gallery Awaits!</h3>
+                <p>Be the first to showcase your amazing creations. Upload photos of your completed projects to inspire others!</p>
             </div>
         </div>
 
@@ -71,39 +82,199 @@
         </div>
     </div>
 
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeModal()">
+        <img class="modal-image" id="modalImage" src="" alt="">
+        <div class="modal-close">×</div>
+    </div>
+
     <script>
-        function uploadPhoto(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const gallery = document.getElementById('photo-gallery');
-                    const emptyGallery = document.querySelector('.empty-gallery');
+        let uploadedPhotos = [];
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            mobileMenu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        function uploadPhotos(input) {
+            if (input.files && input.files.length > 0) {
+                const gallery = document.getElementById('photo-gallery');
+                const emptyGallery = document.getElementById('empty-gallery');
+                
+                // Show gallery and hide empty message
+                gallery.style.display = 'grid';
+                emptyGallery.style.display = 'none';
+                
+                Array.from(input.files).forEach((file, index) => {
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert(`${file.name} is too large. Maximum file size is 10MB.`);
+                        return;
+                    }
                     
-                    // Show gallery and hide empty message
-                    gallery.style.display = 'grid';
-                    emptyGallery.style.display = 'none';
-                    
-                    const photoItem = document.createElement('div');
-                    photoItem.className = 'photo-item';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.width = '100%';
-                    img.style.height = '100%';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '15px';
-                    
-                    const caption = document.createElement('div');
-                    caption.className = 'photo-caption';
-                    caption.textContent = 'My Project';
-                    
-                    photoItem.appendChild(img);
-                    photoItem.appendChild(caption);
-                    gallery.appendChild(photoItem);
-                };
-                reader.readAsDataURL(input.files[0]);
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const photoId = Date.now() + index;
+                        const photoItem = createPhotoItem(e.target.result, photoId);
+                        gallery.appendChild(photoItem);
+                        
+                        // Add to uploaded photos array
+                        uploadedPhotos.push({
+                            id: photoId,
+                            src: e.target.result,
+                            name: file.name,
+                            date: new Date().toLocaleDateString()
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+                
+                // Reset input
+                input.value = '';
             }
         }
+
+        function createPhotoItem(src, id) {
+            const photoItem = document.createElement('div');
+            photoItem.className = 'photo-item';
+            photoItem.setAttribute('data-id', id);
+            
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Project photo';
+            img.onclick = () => openModal(src);
+            
+            const caption = document.createElement('div');
+            caption.className = 'photo-caption';
+            caption.innerHTML = `
+                <h4>My Amazing Project</h4>
+                <p>Uploaded on ${new Date().toLocaleDateString()}</p>
+                <div class="photo-actions">
+                    <button class="photo-action" onclick="sharePhoto(${id})">Share</button>
+                    <button class="photo-action" onclick="deletePhoto(${id})">Delete</button>
+                </div>
+            `;
+            
+            photoItem.appendChild(img);
+            photoItem.appendChild(caption);
+            
+            // Add fade-in animation
+            photoItem.style.opacity = '0';
+            photoItem.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                photoItem.style.transition = 'all 0.5s ease';
+                photoItem.style.opacity = '1';
+                photoItem.style.transform = 'translateY(0)';
+            }, 100);
+            
+            return photoItem;
+        }
+
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        function sharePhoto(id) {
+            const photo = uploadedPhotos.find(p => p.id === id);
+            if (photo && navigator.share) {
+                navigator.share({
+                    title: 'Check out my Robotics Fun Club project!',
+                    text: 'I built something amazing with household items!',
+                    url: window.location.href
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                alert('Share this page URL to show off your creation!');
+            }
+        }
+
+        function deletePhoto(id) {
+            if (confirm('Are you sure you want to delete this photo?')) {
+                const photoItem = document.querySelector(`[data-id="${id}"]`);
+                if (photoItem) {
+                    photoItem.style.transition = 'all 0.3s ease';
+                    photoItem.style.opacity = '0';
+                    photoItem.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        photoItem.remove();
+                        uploadedPhotos = uploadedPhotos.filter(p => p.id !== id);
+                        
+                        // Check if gallery is empty
+                        const gallery = document.getElementById('photo-gallery');
+                        if (gallery.children.length === 0) {
+                            gallery.style.display = 'none';
+                            document.getElementById('empty-gallery').style.display = 'flex';
+                        }
+                    }, 300);
+                }
+            }
+        }
+
+        // Drag and drop functionality
+        const uploadArea = document.querySelector('.upload-area');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight(e) {
+            uploadArea.style.borderColor = 'var(--primary-dark)';
+            uploadArea.style.background = 'rgba(124, 58, 237, 0.05)';
+        }
+        
+        function unhighlight(e) {
+            uploadArea.style.borderColor = '';
+            uploadArea.style.background = '';
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            document.getElementById('photo-upload').files = files;
+            uploadPhotos(document.getElementById('photo-upload'));
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                toggle.classList.remove('active');
+            }
+        });
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>

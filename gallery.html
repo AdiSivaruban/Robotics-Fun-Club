@@ -81,13 +81,16 @@
                         <input type="file" id="photo-upload" accept="image/*" required onchange="previewPhoto(this)">
                         <div class="upload-icon">📷</div>
                         <h4>Click to Select Photo</h4>
-                        <p class="upload-note">JPG, PNG, or GIF (Max 5MB)</p>
+                        <p class="upload-note">JPG, PNG, or GIF (Max 1MB for database storage)</p>
                         <div id="preview-container" style="display: none;">
                             <img id="photo-preview" alt="Preview">
                             <p class="preview-text">Click to change photo</p>
                         </div>
                     </div>
-                    <button type="submit" class="submit-btn">Upload Photo</button>
+                    <button type="submit" class="submit-btn" id="submit-btn">Upload Photo</button>
+                    <div id="upload-status" style="display: none; text-align: center; margin-top: 1rem;">
+                        <p style="color: #6c5ce7;">Uploading... Please wait</p>
+                    </div>
                 </form>
             </div>
         </div>
@@ -117,57 +120,92 @@
         </div>
     </div>
 
-    <script>
-        // NOTE: In a real application, you would use a backend database or API
-        // For demonstration, this uses localStorage (which won't persist in Claude)
-        // In production, replace these functions with API calls
-        
-        let photos = [];
-        let photoToDelete = null;
-        let selectedFile = null;
+    <!-- Firebase SDK (Database only) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
-        // Initialize gallery on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPhotos();
-            displayPhotos();
+    <script>
+        // Firebase Configuration
+        // IMPORTANT: Replace these with your own Firebase project credentials
+        const firebaseConfig = {
+            apiKey: "AIzaSyB4-5Z59UkXJmvVr9bRIInPV4Y5hM5BKI8",
+            authDomain: "robotics-fun-club.firebaseapp.com",
+            databaseURL: "https://robotics-fun-club-default-rtdb.firebaseio.com",
+            projectId: "robotics-fun-club",
+            storageBucket: "robotics-fun-club.firebasestorage.app",
+            messagingSenderId: "193202531544",
+            appId: "G-EPZVGQ9YCF"
+        };
+
+        // Initialize Firebase (Database only)
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        let selectedFile = null;
+        let photoToDelete = null;
+
+        // Load and display photos when page loads
+        window.addEventListener('load', function() {
+            loadPhotosFromFirebase();
         });
 
-        // Load photos from storage
-        function loadPhotos() {
-            // In a real app, this would be an API call like:
-            // fetch('/api/photos').then(response => response.json()).then(data => photos = data);
+        // Load photos from Firebase
+        function loadPhotosFromFirebase() {
+            const photosRef = database.ref('photos');
             
-            try {
-                const stored = localStorage.getItem('galleryPhotos');
-                if (stored) {
-                    photos = JSON.parse(stored);
+            photosRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const photos = Object.entries(data).map(([id, photo]) => ({
+                        id: id,
+                        ...photo
+                    })).reverse(); // Show newest first
+                    displayPhotos(photos);
+                } else {
+                    displayPhotos([]);
                 }
-            } catch (e) {
-                console.log('Storage not available');
-                // For demo purposes, show some example photos
-                photos = [
-                    {
-                        id: Date.now(),
-                        name: "Alex Smith",
-                        project: "Rubber Band Boat",
-                        description: "My boat went super fast! I added extra rubber bands for more power.",
-                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%2396ceb4'/%3E%3Ctext x='150' y='150' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🚤%3C/text%3E%3C/svg%3E",
-                        date: new Date().toISOString()
-                    }
-                ];
-            }
+            });
         }
 
-        // Save photos to storage
-        function savePhotos() {
-            // In a real app, this would be an API call like:
-            // fetch('/api/photos', { method: 'POST', body: JSON.stringify(photos) });
-            
-            try {
-                localStorage.setItem('galleryPhotos', JSON.stringify(photos));
-            } catch (e) {
-                console.log('Unable to save to storage');
-            }
+        // Compress image
+        function compressImage(file, maxWidth, maxHeight, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        // Calculate new dimensions
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height *= maxWidth / width;
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width *= maxHeight / height;
+                                height = maxHeight;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        canvas.toBlob((blob) => {
+                            reader.readAsDataURL(blob);
+                            reader.onload = () => resolve(reader.result);
+                        }, 'image/jpeg', quality);
+                    };
+                };
+            });
         }
 
         // Preview selected photo
@@ -175,11 +213,8 @@
             if (input.files && input.files[0]) {
                 selectedFile = input.files[0];
                 
-                if (selectedFile.size > 5 * 1024 * 1024) {
-                    alert('File size must be less than 5MB');
-                    input.value = '';
-                    selectedFile = null;
-                    return;
+                if (selectedFile.size > 1 * 1024 * 1024) {
+                    // We'll compress it during upload
                 }
                 
                 const reader = new FileReader();
@@ -195,7 +230,7 @@
         }
 
         // Handle form submission
-        function handleUpload(event) {
+        async function handleUpload(event) {
             event.preventDefault();
             
             if (!selectedFile) {
@@ -203,24 +238,28 @@
                 return;
             }
             
+            // Show loading status
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('upload-status').style.display = 'block';
+            
             const name = document.getElementById('uploader-name').value;
             const project = document.getElementById('project-type').value;
             const description = document.getElementById('photo-description').value;
             
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const newPhoto = {
-                    id: Date.now(),
+            try {
+                // Compress image to reduce size
+                const compressedImage = await compressImage(selectedFile, 800, 600, 0.7);
+                
+                // Save photo data to Firebase Database
+                const newPhotoRef = database.ref('photos').push();
+                await newPhotoRef.set({
                     name: name,
                     project: project,
                     description: description || '',
-                    image: e.target.result,
-                    date: new Date().toISOString()
-                };
-                
-                photos.unshift(newPhoto);
-                savePhotos();
-                displayPhotos();
+                    imageData: compressedImage, // Store as base64
+                    date: new Date().toISOString(),
+                    timestamp: Date.now()
+                });
                 
                 // Reset form
                 document.getElementById('upload-form').reset();
@@ -230,14 +269,18 @@
                 document.querySelector('.upload-area .upload-note').style.display = 'block';
                 selectedFile = null;
                 
-                // Show success message
                 alert('Photo uploaded successfully!');
-            };
-            reader.readAsDataURL(selectedFile);
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('Error uploading photo. Please try again with a smaller image.');
+            } finally {
+                document.getElementById('submit-btn').disabled = false;
+                document.getElementById('upload-status').style.display = 'none';
+            }
         }
 
         // Display all photos
-        function displayPhotos() {
+        function displayPhotos(photos) {
             const gallery = document.getElementById('photo-gallery');
             const emptyGallery = document.getElementById('empty-gallery');
             
@@ -252,14 +295,14 @@
             
             gallery.innerHTML = photos.map(photo => `
                 <div class="photo-item" data-id="${photo.id}">
-                    <img src="${photo.image}" alt="${photo.project}">
+                    <img src="${photo.imageData}" alt="${photo.project}">
                     <div class="photo-caption">
                         <h4>${photo.project}</h4>
                         <p class="photo-author">By ${photo.name}</p>
                         ${photo.description ? `<p class="photo-desc">${photo.description}</p>` : ''}
                         <p class="photo-date">${new Date(photo.date).toLocaleDateString()}</p>
                     </div>
-                    <button class="delete-btn" onclick="deletePhoto(${photo.id})" title="Delete this photo">
+                    <button class="delete-btn" onclick="deletePhoto('${photo.id}')" title="Delete this photo">
                         <span>🗑️</span>
                     </button>
                 </div>
@@ -273,12 +316,15 @@
         }
 
         // Confirm deletion
-        function confirmDelete() {
+        async function confirmDelete() {
             if (photoToDelete) {
-                photos = photos.filter(photo => photo.id !== photoToDelete);
-                savePhotos();
-                displayPhotos();
-                cancelDelete();
+                try {
+                    await database.ref(`photos/${photoToDelete}`).remove();
+                    cancelDelete();
+                } catch (error) {
+                    console.error('Delete error:', error);
+                    alert('Error deleting photo. Please try again.');
+                }
             }
         }
 

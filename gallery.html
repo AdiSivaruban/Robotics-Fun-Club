@@ -53,14 +53,16 @@
         
         <div class="upload-area" onclick="document.getElementById('photo-upload').click()">
             <input type="file" id="photo-upload" accept="image/*" onchange="uploadPhoto(this)">
-            <h3>📷 Upload Your Project Photo</h3>
+            <div class="upload-icon">📷</div>
+            <h3>Upload Your Project Photo</h3>
             <p>Click here to select a photo of your completed project</p>
             <p class="upload-note">Supported formats: JPG, PNG, GIF</p>
         </div>
 
         <div class="empty-gallery">
             <div class="empty-message">
-                <h3>🎨 Your Gallery Awaits!</h3>
+                <div class="empty-icon">🎨</div>
+                <h3>Your Gallery Awaits!</h3>
                 <p>Upload photos of your completed projects to share with the community. Be the first to showcase your amazing creations!</p>
             </div>
         </div>
@@ -87,14 +89,13 @@
                     
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.style.width = '100%';
-                    img.style.height = '100%';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '15px';
                     
                     const caption = document.createElement('div');
                     caption.className = 'photo-caption';
-                    caption.textContent = 'My Project';
+                    caption.innerHTML = `
+                        <h4>My Project</h4>
+                        <p>Uploaded on ${new Date().toLocaleDateString()}</p>
+                    `;
                     
                     photoItem.appendChild(img);
                     photoItem.appendChild(caption);
@@ -107,5 +108,6 @@
             }
         }
     </script>
+    <script src="navigation.js"></script>
 </body>
 </html>

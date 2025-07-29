@@ -5,14 +5,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 80px); /* Account for nav height */
     text-align: center;
     color: white;
-    padding: 100px 20px 20px;
+    padding: 20px;
+    position: relative;
 }
 
 .hero-content {
     max-width: 800px;
+    z-index: 10;
+    position: relative;
 }
 
 .hero-content h1 {
@@ -39,6 +42,7 @@
 }
 
 .hero-container .cta-button {
+    animation: slideInUp 1s ease-out 0.6s both;
 }
 
 /* Robot Styles */
@@ -265,6 +269,7 @@
     
     .hero-container {
         flex-direction: column;
+        padding-top: 40px;
     }
     
     .robot {
@@ -288,5 +293,9 @@
     .robot {
         transform: scale(0.6);
         height: 200px;
+    }
+    
+    .hero-container {
+        padding-top: 20px;
     }
 }

@@ -120,6 +120,26 @@
         </div>
     </div>
 
+    <!-- Photo Viewer Modal for Mobile -->
+    <div class="photo-viewer-modal" id="photo-viewer-modal" style="display: none;">
+        <div class="viewer-header">
+            <button onclick="closePhotoViewer()" class="close-viewer-btn">✕</button>
+        </div>
+        <div class="viewer-content">
+            <img id="viewer-image" alt="Full size photo">
+            <div class="viewer-details">
+                <h3 id="viewer-title"></h3>
+                <p id="viewer-author"></p>
+                <p id="viewer-description"></p>
+            </div>
+            <div class="viewer-actions">
+                <button onclick="downloadPhoto()" class="download-btn">
+                    <span>💾</span> Save Photo
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Firebase SDK (Database only) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -128,13 +148,13 @@
         // Firebase Configuration
         // IMPORTANT: Replace these with your own Firebase project credentials
         const firebaseConfig = {
-            apiKey: "AIzaSyB4-5Z59UkXJmvVr9bRIInPV4Y5hM5BKI8",
-            authDomain: "robotics-fun-club.firebaseapp.com",
-            databaseURL: "https://robotics-fun-club-default-rtdb.firebaseio.com",
-            projectId: "robotics-fun-club",
-            storageBucket: "robotics-fun-club.firebasestorage.app",
-            messagingSenderId: "193202531544",
-            appId: "G-EPZVGQ9YCF"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
         // Initialize Firebase (Database only)
@@ -143,6 +163,17 @@
 
         let selectedFile = null;
         let photoToDelete = null;
+        let currentViewerPhoto = null;
+
+        // Get or create unique user ID
+        function getUserId() {
+            let userId = localStorage.getItem('roboticsUserId');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('roboticsUserId', userId);
+            }
+            return userId;
+        }
 
         // Load and display photos when page loads
         window.addEventListener('load', function() {
@@ -213,10 +244,6 @@
             if (input.files && input.files[0]) {
                 selectedFile = input.files[0];
                 
-                if (selectedFile.size > 1 * 1024 * 1024) {
-                    // We'll compress it during upload
-                }
-                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('photo-preview').src = e.target.result;
@@ -245,6 +272,7 @@
             const name = document.getElementById('uploader-name').value;
             const project = document.getElementById('project-type').value;
             const description = document.getElementById('photo-description').value;
+            const userId = getUserId();
             
             try {
                 // Compress image to reduce size
@@ -258,7 +286,8 @@
                     description: description || '',
                     imageData: compressedImage, // Store as base64
                     date: new Date().toISOString(),
-                    timestamp: Date.now()
+                    timestamp: Date.now(),
+                    userId: userId // Store user ID with photo
                 });
                 
                 // Reset form
@@ -283,6 +312,7 @@
         function displayPhotos(photos) {
             const gallery = document.getElementById('photo-gallery');
             const emptyGallery = document.getElementById('empty-gallery');
+            const currentUserId = getUserId();
             
             if (photos.length === 0) {
                 gallery.style.display = 'none';
@@ -293,20 +323,59 @@
             gallery.style.display = 'grid';
             emptyGallery.style.display = 'none';
             
-            gallery.innerHTML = photos.map(photo => `
-                <div class="photo-item" data-id="${photo.id}">
-                    <img src="${photo.imageData}" alt="${photo.project}">
-                    <div class="photo-caption">
-                        <h4>${photo.project}</h4>
-                        <p class="photo-author">By ${photo.name}</p>
-                        ${photo.description ? `<p class="photo-desc">${photo.description}</p>` : ''}
-                        <p class="photo-date">${new Date(photo.date).toLocaleDateString()}</p>
+            gallery.innerHTML = photos.map(photo => {
+                const canDelete = photo.userId === currentUserId;
+                return `
+                    <div class="photo-item" data-id="${photo.id}" onclick="openPhotoViewer('${photo.id}')">
+                        <img src="${photo.imageData}" alt="${photo.project}">
+                        <div class="photo-caption">
+                            <h4>${photo.project}</h4>
+                            <p class="photo-author">By ${photo.name}</p>
+                            ${photo.description ? `<p class="photo-desc">${photo.description}</p>` : ''}
+                            <p class="photo-date">${new Date(photo.date).toLocaleDateString()}</p>
+                        </div>
+                        ${canDelete ? `
+                            <button class="delete-btn" onclick="event.stopPropagation(); deletePhoto('${photo.id}')" title="Delete this photo">
+                                <span>🗑️</span>
+                            </button>
+                        ` : ''}
                     </div>
-                    <button class="delete-btn" onclick="deletePhoto('${photo.id}')" title="Delete this photo">
-                        <span>🗑️</span>
-                    </button>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        // Open photo viewer (especially useful for mobile)
+        function openPhotoViewer(photoId) {
+            const photosRef = database.ref(`photos/${photoId}`);
+            photosRef.once('value', (snapshot) => {
+                const photo = snapshot.val();
+                if (photo) {
+                    currentViewerPhoto = photo;
+                    document.getElementById('viewer-image').src = photo.imageData;
+                    document.getElementById('viewer-title').textContent = photo.project;
+                    document.getElementById('viewer-author').textContent = `By ${photo.name}`;
+                    document.getElementById('viewer-description').textContent = photo.description || '';
+                    document.getElementById('photo-viewer-modal').style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                }
+            });
+        }
+
+        // Close photo viewer
+        function closePhotoViewer() {
+            document.getElementById('photo-viewer-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentViewerPhoto = null;
+        }
+
+        // Download photo
+        function downloadPhoto() {
+            if (!currentViewerPhoto) return;
+            
+            const link = document.createElement('a');
+            link.href = currentViewerPhoto.imageData;
+            link.download = `${currentViewerPhoto.project.replace(/\s+/g, '_')}_${currentViewerPhoto.name.replace(/\s+/g, '_')}.jpg`;
+            link.click();
         }
 
         // Delete photo
@@ -334,12 +403,40 @@
             document.getElementById('delete-modal').style.display = 'none';
         }
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         document.getElementById('delete-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 cancelDelete();
             }
         });
+
+        document.getElementById('photo-viewer-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePhotoViewer();
+            }
+        });
+
+        // Add swipe gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.getElementById('viewer-image').addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('viewer-image').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // Swiped left - could navigate to next photo
+            }
+            if (touchEndX > touchStartX + 50) {
+                // Swiped right - could navigate to previous photo
+            }
+        }
     </script>
     <script src="navigation.js"></script>
 </body>

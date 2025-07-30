@@ -53,7 +53,7 @@
         
         <div class="feedback-form">
             <h3>Share Your Experience!</h3>
-            <form onsubmit="submitReview(event)">
+            <form id="review-form" onsubmit="submitReview(event)">
                 <div class="form-group">
                     <label for="reviewer-name">Your Name:</label>
                     <input type="text" id="reviewer-name" required>
@@ -62,10 +62,10 @@
                     <label for="project-completed">Which project did you complete?</label>
                     <select id="project-completed" required>
                         <option value="">Select a project...</option>
-                        <option value="boat">Rubber Band Boat</option>
-                        <option value="robot">Robot Arm Grabber</option>
-                        <option value="rocket">Bottle Rocket</option>
-                        <option value="car">Balloon Car</option>
+                        <option value="Rubber Band Boat">Rubber Band Boat</option>
+                        <option value="Robot Arm Grabber">Robot Arm Grabber</option>
+                        <option value="Bottle Rocket">Bottle Rocket</option>
+                        <option value="Balloon Car">Balloon Car</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -83,71 +83,206 @@
                     <label for="review-text">Your Review:</label>
                     <textarea id="review-text" rows="4" placeholder="Tell us about your experience building this project!" required></textarea>
                 </div>
-                <button type="submit" class="cta-button">Submit Review</button>
+                <button type="submit" class="cta-button" id="submit-btn">Submit Review</button>
+                <div id="submit-status" style="display: none; text-align: center; margin-top: 1rem;">
+                    <p style="color: #6c5ce7;">Submitting review...</p>
+                </div>
             </form>
         </div>
 
-        <div class="empty-reviews">
+        <div class="empty-reviews" id="empty-reviews">
             <div class="empty-message">
                 <h3>🌟 Be the First to Review!</h3>
                 <p>Share your experience with our projects and help others discover the joy of DIY robotics. Your feedback helps us improve and inspires other young builders!</p>
             </div>
         </div>
 
-        <div class="reviews-container" style="display: none;">
-            <!-- Real reviews will appear here when submitted -->
+        <div class="reviews-container" id="reviews-container" style="display: none;">
+            <!-- Reviews will appear here -->
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div class="delete-modal" id="delete-modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Delete Review?</h3>
+            <p>Are you sure you want to delete this review? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button onclick="confirmDeleteReview()" class="delete-confirm-btn">Yes, Delete</button>
+                <button onclick="cancelDeleteReview()" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Database only) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <script>
-        function submitReview(event) {
+        // Firebase Configuration - Same as gallery
+        const firebaseConfig = {
+            apiKey: "AIzaSyDHCyQH3p8095T1cFYZAf3fW0Lg7w0S4hA",
+            authDomain: "robotics-fun-club.firebaseapp.com",
+            databaseURL: "https://robotics-fun-club-default-rtdb.firebaseio.com",
+            projectId: "robotics-fun-club",
+            storageBucket: "robotics-fun-club.appspot.com",
+            messagingSenderId: "141368327976",
+            appId: "1:141368327976:web:ba47feecd87e87b56db93b"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        let reviewToDelete = null;
+
+        // Get or create unique user ID (same as gallery)
+        function getUserId() {
+            let userId = localStorage.getItem('roboticsUserId');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('roboticsUserId', userId);
+            }
+            return userId;
+        }
+
+        // Load reviews when page loads
+        window.addEventListener('load', function() {
+            loadReviewsFromFirebase();
+        });
+
+        // Load reviews from Firebase
+        function loadReviewsFromFirebase() {
+            const reviewsRef = database.ref('reviews');
+            
+            reviewsRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const reviews = Object.entries(data).map(([id, review]) => ({
+                        id: id,
+                        ...review
+                    })).reverse(); // Show newest first
+                    displayReviews(reviews);
+                } else {
+                    displayReviews([]);
+                }
+            });
+        }
+
+        // Submit review
+        async function submitReview(event) {
             event.preventDefault();
+            
+            // Show loading
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('submit-status').style.display = 'block';
             
             const name = document.getElementById('reviewer-name').value;
             const project = document.getElementById('project-completed').value;
             const rating = document.getElementById('rating').value;
             const reviewText = document.getElementById('review-text').value;
+            const userId = getUserId();
             
-            // Show reviews container and hide empty message
-            const reviewsContainer = document.querySelector('.reviews-container');
-            const emptyReviews = document.querySelector('.empty-reviews');
-            reviewsContainer.style.display = 'grid';
-            emptyReviews.style.display = 'none';
-            
-            // Create new review card
-            const newReview = document.createElement('div');
-            newReview.className = 'review-card';
-            
-            const stars = '⭐'.repeat(parseInt(rating));
-            const projectNames = {
-                'boat': 'Rubber Band Boat',
-                'robot': 'Robot Arm Grabber', 
-                'rocket': 'Bottle Rocket',
-                'car': 'Balloon Car'
-            };
-            
-            newReview.innerHTML = `
-                <div class="review-header">
-                    <div class="reviewer-avatar">${name.charAt(0).toUpperCase()}</div>
-                    <div class="reviewer-info">
-                        <strong>${name}</strong>
-                        <div class="stars">${stars}</div>
-                        <div class="project-tag">${projectNames[project]}</div>
-                    </div>
-                </div>
-                <p>"${reviewText}"</p>
-            `;
-            
-            // Add to top of reviews
-            reviewsContainer.insertBefore(newReview, reviewsContainer.firstChild);
-            
-            // Reset form
-            event.target.reset();
-            
-            // Show success message
-            alert('Thank you for your review! It has been added to the gallery.');
+            try {
+                // Save review to Firebase
+                const newReviewRef = database.ref('reviews').push();
+                await newReviewRef.set({
+                    name: name,
+                    project: project,
+                    rating: parseInt(rating),
+                    reviewText: reviewText,
+                    date: new Date().toISOString(),
+                    timestamp: Date.now(),
+                    userId: userId
+                });
+                
+                // Reset form
+                document.getElementById('review-form').reset();
+                alert('Thank you for your review!');
+                
+            } catch (error) {
+                console.error('Submit error:', error);
+                alert('Error submitting review. Please try again.');
+            } finally {
+                document.getElementById('submit-btn').disabled = false;
+                document.getElementById('submit-status').style.display = 'none';
+            }
         }
+
+        // Display reviews
+        function displayReviews(reviews) {
+            const container = document.getElementById('reviews-container');
+            const emptyMessage = document.getElementById('empty-reviews');
+            const currentUserId = getUserId();
+            
+            if (reviews.length === 0) {
+                container.style.display = 'none';
+                emptyMessage.style.display = 'flex';
+                return;
+            }
+            
+            container.style.display = 'grid';
+            emptyMessage.style.display = 'none';
+            
+            container.innerHTML = reviews.map(review => {
+                const stars = '⭐'.repeat(review.rating);
+                const canDelete = review.userId === currentUserId;
+                
+                return `
+                    <div class="review-card" data-id="${review.id}">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">${review.name.charAt(0).toUpperCase()}</div>
+                            <div class="reviewer-info">
+                                <strong>${review.name}</strong>
+                                <div class="stars">${stars}</div>
+                                <div class="project-tag">${review.project}</div>
+                            </div>
+                            ${canDelete ? `
+                                <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="Delete this review">
+                                    🗑️
+                                </button>
+                            ` : ''}
+                        </div>
+                        <p>"${review.reviewText}"</p>
+                        <div class="review-date">${new Date(review.date).toLocaleDateString()}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Delete review
+        function deleteReview(id) {
+            reviewToDelete = id;
+            document.getElementById('delete-modal').style.display = 'flex';
+        }
+
+        // Confirm deletion
+        async function confirmDeleteReview() {
+            if (reviewToDelete) {
+                try {
+                    await database.ref(`reviews/${reviewToDelete}`).remove();
+                    cancelDeleteReview();
+                    alert('Review deleted successfully');
+                } catch (error) {
+                    console.error('Delete error:', error);
+                    alert('Error deleting review. Please try again.');
+                }
+            }
+        }
+
+        // Cancel deletion
+        function cancelDeleteReview() {
+            reviewToDelete = null;
+            document.getElementById('delete-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('delete-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cancelDeleteReview();
+            }
+        });
     </script>
-<script src="navigation.js"></script>
+    <script src="navigation.js"></script>
 </body>
 </html>

@@ -81,7 +81,7 @@
                         <input type="file" id="photo-upload" accept="image/*" required onchange="previewPhoto(this)">
                         <div class="upload-icon">📷</div>
                         <h4>Click to Select Photo</h4>
-                        <p class="upload-note">JPG, PNG, or GIF (Max 1MB for database storage)</p>
+                        <p class="upload-note">JPG, PNG, or GIF (Max 1MB)</p>
                         <div id="preview-container" style="display: none;">
                             <img id="photo-preview" alt="Preview">
                             <p class="preview-text">Click to change photo</p>
@@ -140,24 +140,23 @@
         </div>
     </div>
 
-    <!-- Firebase SDK (Database only) -->
+    <!-- Firebase SDK (Database only - NO STORAGE) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
     <script>
         // Firebase Configuration
-        // IMPORTANT: Replace these with your own Firebase project credentials
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDHCyQH3p8095T1cFYZAf3fW0Lg7w0S4hA",
+            authDomain: "robotics-fun-club.firebaseapp.com",
+            databaseURL: "https://robotics-fun-club-default-rtdb.firebaseio.com",
+            projectId: "robotics-fun-club",
+            storageBucket: "robotics-fun-club.appspot.com",
+            messagingSenderId: "141368327976",
+            appId: "1:141368327976:web:ba47feecd87e87b56db93b"
         };
 
-        // Initialize Firebase (Database only)
+        // Initialize Firebase (Database only - NO STORAGE)
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
@@ -198,7 +197,7 @@
             });
         }
 
-        // Compress image
+        // Compress image to base64
         function compressImage(file, maxWidth, maxHeight, quality) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -230,10 +229,9 @@
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
 
-                        canvas.toBlob((blob) => {
-                            reader.readAsDataURL(blob);
-                            reader.onload = () => resolve(reader.result);
-                        }, 'image/jpeg', quality);
+                        // Convert to base64
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedBase64);
                     };
                 };
             });
@@ -275,8 +273,8 @@
             const userId = getUserId();
             
             try {
-                // Compress image to reduce size
-                const compressedImage = await compressImage(selectedFile, 800, 600, 0.7);
+                // Compress image to reduce size (smaller dimensions and quality for database storage)
+                const compressedImage = await compressImage(selectedFile, 600, 450, 0.6);
                 
                 // Save photo data to Firebase Database
                 const newPhotoRef = database.ref('photos').push();
@@ -415,28 +413,6 @@
                 closePhotoViewer();
             }
         });
-
-        // Add swipe gestures for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.getElementById('viewer-image').addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.getElementById('viewer-image').addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                // Swiped left - could navigate to next photo
-            }
-            if (touchEndX > touchStartX + 50) {
-                // Swiped right - could navigate to previous photo
-            }
-        }
     </script>
     <script src="navigation.js"></script>
 </body>

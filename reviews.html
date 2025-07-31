@@ -114,6 +114,144 @@
         </div>
     </div>
 
+    <!-- Success Notification -->
+    <div class="success-notification" id="success-notification">
+        <div class="notification-content">
+            <div class="notification-icon">✅</div>
+            <div class="notification-text">
+                <h4>Success!</h4>
+                <p>Your review has been submitted</p>
+            </div>
+        </div>
+        <div class="notification-progress"></div>
+    </div>
+
+    <style>
+        /* Success Notification Styles */
+        .success-notification {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 3000;
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            min-width: 320px;
+        }
+
+        .success-notification.show {
+            right: 20px;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: checkmarkPop 0.6s ease;
+        }
+
+        @keyframes checkmarkPop {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .notification-text h4 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.1rem;
+        }
+
+        .notification-text p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            animation: progressBar 3s linear forwards;
+        }
+
+        @keyframes progressBar {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
+
+        /* Star celebration */
+        .star-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2999;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 20px;
+            animation: starFloat 2s ease-out forwards;
+        }
+
+        @keyframes starFloat {
+            0% {
+                transform: translateY(0) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                transform: translateY(-20px) scale(1.2) rotate(72deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-150px) scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .success-notification {
+                top: auto;
+                bottom: 20px;
+                right: -400px;
+                left: 20px;
+                min-width: auto;
+            }
+
+            .success-notification.show {
+                right: 20px;
+            }
+        }
+    </style>
+
     <!-- Firebase SDK (Database only) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -198,11 +336,14 @@
                 
                 // Reset form
                 document.getElementById('review-form').reset();
-                alert('Thank you for your review!');
+                
+                // Show success notification with star burst
+                showSuccessNotification();
+                createStarBurst();
                 
             } catch (error) {
                 console.error('Submit error:', error);
-                alert('Error submitting review. Please try again.');
+                showErrorNotification('Error submitting review. Please try again.');
             } finally {
                 document.getElementById('submit-btn').disabled = false;
                 document.getElementById('submit-status').style.display = 'none';
@@ -262,10 +403,10 @@
                 try {
                     await database.ref(`reviews/${reviewToDelete}`).remove();
                     cancelDeleteReview();
-                    alert('Review deleted successfully');
+                    showDeleteNotification();
                 } catch (error) {
                     console.error('Delete error:', error);
-                    alert('Error deleting review. Please try again.');
+                    showErrorNotification('Error deleting review. Please try again.');
                 }
             }
         }
@@ -282,6 +423,103 @@
                 cancelDeleteReview();
             }
         });
+        // Show success notification
+        function showSuccessNotification() {
+            const notification = document.getElementById('success-notification');
+            const icon = notification.querySelector('.notification-icon');
+            const title = notification.querySelector('.notification-text h4');
+            const message = notification.querySelector('.notification-text p');
+            
+            // Set to success style
+            icon.textContent = '⭐';
+            icon.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+            title.textContent = 'Thank You!';
+            message.textContent = 'Your review has been submitted';
+            
+            notification.classList.add('show');
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Create star burst effect
+        function createStarBurst() {
+            const mouseX = window.innerWidth / 2;
+            const mouseY = window.innerHeight / 2;
+            
+            const burst = document.createElement('div');
+            burst.className = 'star-burst';
+            burst.style.left = mouseX + 'px';
+            burst.style.top = mouseY + 'px';
+            document.body.appendChild(burst);
+            
+            const stars = ['⭐', '✨', '🌟', '💫', '⭐'];
+            const starCount = 8;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = stars[Math.floor(Math.random() * stars.length)];
+                
+                const angle = (i / starCount) * Math.PI * 2;
+                const distance = 50 + Math.random() * 50;
+                
+                star.style.left = Math.cos(angle) * distance + 'px';
+                star.style.top = Math.sin(angle) * distance + 'px';
+                star.style.animationDelay = Math.random() * 0.3 + 's';
+                
+                burst.appendChild(star);
+            }
+            
+            // Clean up after animation
+            setTimeout(() => {
+                burst.remove();
+            }, 2500);
+        }
+
+        // Show delete notification
+        function showDeleteNotification() {
+            const notification = document.getElementById('success-notification');
+            const icon = notification.querySelector('.notification-icon');
+            const title = notification.querySelector('.notification-text h4');
+            const message = notification.querySelector('.notification-text p');
+            
+            // Change to delete style
+            icon.textContent = '🗑️';
+            icon.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            title.textContent = 'Deleted!';
+            message.textContent = 'Your review has been removed';
+            
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show error notification
+        function showErrorNotification(errorMessage) {
+            const notification = document.getElementById('success-notification');
+            const icon = notification.querySelector('.notification-icon');
+            const title = notification.querySelector('.notification-text h4');
+            const messageEl = notification.querySelector('.notification-text p');
+            
+            // Change to error style
+            icon.textContent = '❌';
+            icon.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            title.textContent = 'Error!';
+            messageEl.textContent = errorMessage;
+            
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
     </script>
     <script src="navigation.js"></script>
 </body>

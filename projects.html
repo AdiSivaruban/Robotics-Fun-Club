@@ -148,182 +148,100 @@
                 </div>
             </div>
 
-            <!-- Robot Arm Grabber -->
-            <div class="project-card interactive-card" data-difficulty="medium" data-project="robot">
-                <div class="project-status" id="robot-status">🔒</div>
+            <!-- String Phone -->
+            <div class="project-card interactive-card" data-difficulty="easy" data-project="phone">
+                <div class="project-status" id="phone-status">🔒</div>
                 <div class="project-header">
-                    <div class="project-emoji bouncing">🦾</div>
+                    <div class="project-emoji bouncing">☎️</div>
                     <div class="project-meta">
-                        <h3>Robot Arm Grabber</h3>
+                        <h3>String Phone</h3>
                         <div class="badges">
-                            <div class="difficulty-badge medium">Medium</div>
-                            <div class="time-badge">⏱️ 45 min</div>
+                            <div class="difficulty-badge easy">Easy</div>
+                            <div class="time-badge">⏱️ 15 min</div>
                         </div>
                     </div>
                 </div>
                 
-                <p class="project-description">Create a mechanical grabber that works like a real robot arm!</p>
+                <p class="project-description">Create a classic telephone using paper cups and string to learn about sound waves!</p>
                 
                 <div class="materials-preview">
-                    <div class="materials-toggle" onclick="toggleMaterials('robot')">
+                    <div class="materials-toggle" onclick="toggleMaterials('phone')">
                         <strong>📦 Materials</strong>
-                        <span class="toggle-arrow" id="robot-arrow">▼</span>
+                        <span class="toggle-arrow" id="phone-arrow">▼</span>
                     </div>
-                    <div class="materials-list" id="robot-materials" style="display: none;">
-                        <div class="material-item">✓ 1 wooden ruler</div>
-                        <div class="material-item">✓ Cardboard strips</div>
-                        <div class="material-item">✓ 4 paper fasteners</div>
-                        <div class="material-item">✓ Tape & scissors</div>
-                        <div class="material-item">✓ Rubber band & string</div>
+                    <div class="materials-list" id="phone-materials" style="display: none;">
+                        <div class="material-item">✓ 2 paper cups</div>
+                        <div class="material-item">✓ String (10-30 feet)</div>
+                        <div class="material-item">✓ Sharp pencil or nail</div>
+                        <div class="material-item">✓ 2 paper clips (optional)</div>
                     </div>
                 </div>
                 
                 <div class="project-actions">
-                    <button class="start-btn" id="robot-start" onclick="startProject('robot')">🚀 Start Building</button>
-                    <button class="complete-btn" id="robot-complete" onclick="toggleComplete('robot')" style="display: none;">✅ Mark Complete</button>
-                    <button class="undo-btn" id="robot-undo" onclick="undoComplete('robot')" style="display: none;">↩️ Undo Complete</button>
-                    <button class="close-btn" id="robot-close" onclick="closeInstructions('robot')" style="display: none;">❌ Close Instructions</button>
+                    <button class="start-btn" id="phone-start" onclick="startProject('phone')">🚀 Start Building</button>
+                    <button class="complete-btn" id="phone-complete" onclick="toggleComplete('phone')" style="display: none;">✅ Mark Complete</button>
+                    <button class="undo-btn" id="phone-undo" onclick="undoComplete('phone')" style="display: none;">↩️ Undo Complete</button>
+                    <button class="close-btn" id="phone-close" onclick="closeInstructions('phone')" style="display: none;">❌ Close Instructions</button>
                 </div>
 
-                <div class="project-instructions" id="robot-instructions" style="display: none;">
+                <div class="project-instructions" id="phone-instructions" style="display: none;">
                     <div class="instruction-step active" data-step="1">
-                        <h4>Step 1: Prepare Cardboard</h4>
-                        <p>Cut three long strips and two short strips. Punch holes near each end for connections.</p>
+                        <h4>Step 1: Prepare the Cups</h4>
+                        <p>Use a sharp pencil or nail to poke a small hole in the bottom center of each paper cup. Be careful!</p>
                         <div class="step-nav">
-                            <button onclick="nextStep('robot', 2)">Next Step →</button>
+                            <button onclick="nextStep('phone', 2)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="2">
-                        <h4>Step 2: Build Scissor Mechanism</h4>
-                        <p>Cross two long strips into an "X" and connect with a paper fastener at the center.</p>
+                        <h4>Step 2: Thread the String</h4>
+                        <p>Push one end of the string through the hole in the first cup from the outside to the inside.</p>
                         <div class="step-nav">
-                            <button onclick="prevStep('robot', 1)">← Previous</button>
-                            <button onclick="nextStep('robot', 3)">Next Step →</button>
+                            <button onclick="prevStep('phone', 1)">← Previous</button>
+                            <button onclick="nextStep('phone', 3)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="3">
-                        <h4>Step 3: Attach to Base</h4>
-                        <p>Connect the third strip to the ruler and attach short strips for linkages.</p>
+                        <h4>Step 3: Secure the String</h4>
+                        <p>Tie a knot at the end of the string inside the cup, or attach a paper clip to prevent it from pulling through.</p>
                         <div class="step-nav">
-                            <button onclick="prevStep('robot', 2)">← Previous</button>
-                            <button onclick="nextStep('robot', 4)">Next Step →</button>
+                            <button onclick="prevStep('phone', 2)">← Previous</button>
+                            <button onclick="nextStep('phone', 4)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="4">
-                        <h4>Step 4: Add Spring System</h4>
-                        <p>Hook rubber band between pivot points for automatic closing action.</p>
+                        <h4>Step 4: Attach Second Cup</h4>
+                        <p>Thread the other end of the string through the second cup and secure it the same way.</p>
                         <div class="step-nav">
-                            <button onclick="prevStep('robot', 3)">← Previous</button>
-                            <button onclick="nextStep('robot', 5)">Next Step →</button>
+                            <button onclick="prevStep('phone', 3)">← Previous</button>
+                            <button onclick="nextStep('phone', 5)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="5">
-                        <h4>Step 5: Add Control String</h4>
-                        <p>Tie string to rubber band. Pull to open, release to close!</p>
+                        <h4>Step 5: Test Your Phone!</h4>
+                        <p>Pull the string tight between two people. One talks into their cup while the other listens. The vibrations travel through the string!</p>
                         <div class="step-nav">
-                            <button onclick="prevStep('robot', 4)">← Previous</button>
-                            <button onclick="completeProject('robot')" class="complete-step-btn">🎉 Complete Project!</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottle Rocket -->
-            <div class="project-card interactive-card" data-difficulty="hard" data-project="rocket">
-                <div class="project-status" id="rocket-status">🔒</div>
-                <div class="project-header">
-                    <div class="project-emoji bouncing">🚀</div>
-                    <div class="project-meta">
-                        <h3>Bottle Rocket</h3>
-                        <div class="badges">
-                            <div class="difficulty-badge hard">Advanced</div>
-                            <div class="time-badge">⏱️ 30 min</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <p class="project-description">Launch a rocket using air pressure! <strong>Adult supervision required.</strong></p>
-                
-                <div class="safety-warning">
-                    <h4>⚠️ Safety First</h4>
-                    <ul>
-                        <li>Always do this <strong>outdoors</strong></li>
-                        <li>Adult supervision required</li>
-                        <li>Never point at people or property</li>
-                    </ul>
-                </div>
-                
-                <div class="materials-preview">
-                    <div class="materials-toggle" onclick="toggleMaterials('rocket')">
-                        <strong>📦 Materials</strong>
-                        <span class="toggle-arrow" id="rocket-arrow">▼</span>
-                    </div>
-                    <div class="materials-list" id="rocket-materials" style="display: none;">
-                        <div class="material-item">✓ 1 empty plastic bottle with lid</div>
-                        <div class="material-item">✓ 3 pencils</div>
-                        <div class="material-item">✓ Hairspray or spray deodorant</div>
-                        <div class="material-item">✓ BBQ lighter</div>
-                        <div class="material-item">✓ Tape</div>
-                    </div>
-                </div>
-                
-                <div class="project-actions">
-                    <button class="start-btn" id="rocket-start" onclick="startProject('rocket')">🚀 Start Building</button>
-                    <button class="complete-btn" id="rocket-complete" onclick="toggleComplete('rocket')" style="display: none;">✅ Mark Complete</button>
-                    <button class="undo-btn" id="rocket-undo" onclick="undoComplete('rocket')" style="display: none;">↩️ Undo Complete</button>
-                    <button class="close-btn" id="rocket-close" onclick="closeInstructions('rocket')" style="display: none;">❌ Close Instructions</button>
-                </div>
-
-                <div class="project-instructions" id="rocket-instructions" style="display: none;">
-                    <div class="instruction-step active" data-step="1">
-                        <h4>Step 1: Prepare Rocket Body</h4>
-                        <p>Puncture a small hole in the bottle cap. Decorate your rocket however you like!</p>
-                        <div class="step-nav">
-                            <button onclick="nextStep('rocket', 2)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="2">
-                        <h4>Step 2: Build Launch Base</h4>
-                        <p>Attach three pencils around the bottle to form a stable tripod base.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('rocket', 1)">← Previous</button>
-                            <button onclick="nextStep('rocket', 3)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="3">
-                        <h4>Step 3: Add Fuel</h4>
-                        <p>Spray a short burst of hairspray inside and seal with cap. Shake for 5-10 seconds.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('rocket', 2)">← Previous</button>
-                            <button onclick="nextStep('rocket', 4)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="4">
-                        <h4>Step 4: Launch Sequence</h4>
-                        <p>Hold lighter near (not touching) the hole. The vapor will ignite and launch!</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('rocket', 3)">← Previous</button>
-                            <button onclick="completeProject('rocket')" class="complete-step-btn">🎉 Complete Project!</button>
+                            <button onclick="prevStep('phone', 4)">← Previous</button>
+                            <button onclick="completeProject('phone')" class="complete-step-btn">🎉 Complete Project!</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Balloon Car -->
-            <div class="project-card interactive-card" data-difficulty="easy" data-project="car">
+            <div class="project-card interactive-card" data-difficulty="medium" data-project="car">
                 <div class="project-status" id="car-status">🔒</div>
                 <div class="project-header">
                     <div class="project-emoji bouncing">🏎️</div>
                     <div class="project-meta">
                         <h3>Balloon Car</h3>
                         <div class="badges">
-                            <div class="difficulty-badge easy">Easy</div>
-                            <div class="time-badge">⏱️ 25 min</div>
+                            <div class="difficulty-badge medium">Medium</div>
+                            <div class="time-badge">⏱️ 35 min</div>
                         </div>
                     </div>
                 </div>
                 
-                <p class="project-description">Build a car powered by escaping air from a balloon!</p>
+                <p class="project-description">Build a car powered by escaping air from a balloon - learn about Newton's laws!</p>
                 
                 <div class="materials-preview">
                     <div class="materials-toggle" onclick="toggleMaterials('car')">
@@ -331,11 +249,11 @@
                         <span class="toggle-arrow" id="car-arrow">▼</span>
                     </div>
                     <div class="materials-list" id="car-materials" style="display: none;">
-                        <div class="material-item">✓ Plastic bottle</div>
+                        <div class="material-item">✓ Plastic bottle or cardboard</div>
                         <div class="material-item">✓ 4 bottle caps</div>
-                        <div class="material-item">✓ Skewers</div>
-                        <div class="material-item">✓ Straw & balloon</div>
-                        <div class="material-item">✓ Tape</div>
+                        <div class="material-item">✓ 2 wooden skewers</div>
+                        <div class="material-item">✓ 1 straw & 1 balloon</div>
+                        <div class="material-item">✓ Tape & scissors</div>
                     </div>
                 </div>
                 
@@ -349,14 +267,14 @@
                 <div class="project-instructions" id="car-instructions" style="display: none;">
                     <div class="instruction-step active" data-step="1">
                         <h4>Step 1: Make Wheels</h4>
-                        <p>Push skewers through bottle caps to create two axles with wheels.</p>
+                        <p>Carefully poke holes through the center of 4 bottle caps. Push skewers through to create two axles with wheels.</p>
                         <div class="step-nav">
                             <button onclick="nextStep('car', 2)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="2">
-                        <h4>Step 2: Attach Axles</h4>
-                        <p>Poke holes in bottle and secure axles so wheels spin freely.</p>
+                        <h4>Step 2: Build Car Body</h4>
+                        <p>Cut the bottle in half lengthwise or use cardboard. Poke holes for axles and ensure wheels spin freely.</p>
                         <div class="step-nav">
                             <button onclick="prevStep('car', 1)">← Previous</button>
                             <button onclick="nextStep('car', 3)">Next Step →</button>
@@ -364,18 +282,114 @@
                     </div>
                     <div class="instruction-step" data-step="3">
                         <h4>Step 3: Prepare Balloon System</h4>
-                        <p>Insert straw into balloon opening and tape securely.</p>
+                        <p>Insert straw into balloon opening and tape it very securely - no air should escape!</p>
                         <div class="step-nav">
                             <button onclick="prevStep('car', 2)">← Previous</button>
                             <button onclick="nextStep('car', 4)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="4">
-                        <h4>Step 4: Mount and Race!</h4>
-                        <p>Tape balloon to car with straw pointing backward. Inflate, release, and race!</p>
+                        <h4>Step 4: Attach Propulsion</h4>
+                        <p>Tape balloon to car body with straw pointing backward. Make sure it's centered for straight driving.</p>
                         <div class="step-nav">
                             <button onclick="prevStep('car', 3)">← Previous</button>
+                            <button onclick="nextStep('car', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Race Time!</h4>
+                        <p>Blow up balloon through straw, pinch to hold air, place on smooth floor, and release! Measure how far it goes!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 4)">← Previous</button>
                             <button onclick="completeProject('car')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robot Arm Grabber -->
+            <div class="project-card interactive-card" data-difficulty="hard" data-project="robot">
+                <div class="project-status" id="robot-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🦾</div>
+                    <div class="project-meta">
+                        <h3>Robot Arm Grabber</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge hard">Advanced</div>
+                            <div class="time-badge">⏱️ 60 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Create a mechanical grabber that works like a real robot arm using engineering principles!</p>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('robot')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="robot-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="robot-materials" style="display: none;">
+                        <div class="material-item">✓ 1 wooden ruler or stick</div>
+                        <div class="material-item">✓ Cardboard strips (multiple)</div>
+                        <div class="material-item">✓ 6-8 paper fasteners</div>
+                        <div class="material-item">✓ Tape & scissors</div>
+                        <div class="material-item">✓ Rubber bands & string</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" id="robot-start" onclick="startProject('robot')">🚀 Start Building</button>
+                    <button class="complete-btn" id="robot-complete" onclick="toggleComplete('robot')" style="display: none;">✅ Mark Complete</button>
+                    <button class="undo-btn" id="robot-undo" onclick="undoComplete('robot')" style="display: none;">↩️ Undo Complete</button>
+                    <button class="close-btn" id="robot-close" onclick="closeInstructions('robot')" style="display: none;">❌ Close Instructions</button>
+                </div>
+
+                <div class="project-instructions" id="robot-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Cut Cardboard Strips</h4>
+                        <p>Cut 6 cardboard strips: 4 long (8 inches) and 2 short (4 inches). Punch holes at both ends of each strip.</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('robot', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Build Scissor Mechanism</h4>
+                        <p>Cross two long strips into an "X" and connect at center with paper fastener. Repeat for second pair.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 1)">← Previous</button>
+                            <button onclick="nextStep('robot', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Connect the Linkages</h4>
+                        <p>Use short strips to connect the X-shapes at top and bottom, creating a diamond pattern that expands/contracts.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 2)">← Previous</button>
+                            <button onclick="nextStep('robot', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Attach to Handle</h4>
+                        <p>Secure the mechanism to the ruler handle. Add grippers (folded cardboard) to the end for grabbing.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 3)">← Previous</button>
+                            <button onclick="nextStep('robot', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Add Control System</h4>
+                        <p>Attach string to control opening/closing. Add rubber band for automatic closing action. Test and adjust!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 4)">← Previous</button>
+                            <button onclick="nextStep('robot', 6)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="6">
+                        <h4>Step 6: Master Your Grabber!</h4>
+                        <p>Practice picking up lightweight objects. Challenge: Can you pick up a cotton ball without crushing it?</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('robot', 5)">← Previous</button>
+                            <button onclick="completeProject('robot')" class="complete-step-btn">🎉 Complete Project!</button>
                         </div>
                     </div>
                 </div>
@@ -724,7 +738,7 @@
             const projectNames = {
                 'boat': 'Rubber Band Boat',
                 'robot': 'Robot Arm Grabber',
-                'rocket': 'Bottle Rocket',
+                'phone': 'String Phone',
                 'car': 'Balloon Car'
             };
             
@@ -739,7 +753,7 @@
             const icons = {
                 'boat': '🚤',
                 'robot': '🦾',
-                'rocket': '🚀',
+                'phone': '☎️',
                 'car': '🏎️'
             };
             celebrationIcon.textContent = icons[project];
@@ -780,9 +794,9 @@
             
             const achievements = [
                 { icon: '🚢', title: 'Naval Engineer', desc: 'Built your first boat!' },
-                { icon: '🤖', title: 'Robotics Expert', desc: 'Created a mechanical grabber!' },
-                { icon: '🚀', title: 'Rocket Scientist', desc: 'Launched into the sky!' },
-                { icon: '🏎️', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
+                { icon: '📞', title: 'Communication Expert', desc: 'Created a string telephone!' },
+                { icon: '🏁', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
+                { icon: '🤖', title: 'Robotics Master', desc: 'Created a mechanical grabber!' },
                 { icon: '👑', title: 'Master Engineer', desc: 'Completed all projects!' }
             ];
             
@@ -814,6 +828,6 @@
             }
         });
     </script>
-<script src="navigation.js"></script>
+    <script src="navigation.js"></script>
 </body>
 </html>

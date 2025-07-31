@@ -67,7 +67,7 @@
                                 <option value="">Select a project...</option>
                                 <option value="Rubber Band Boat">Rubber Band Boat</option>
                                 <option value="Robot Arm Grabber">Robot Arm Grabber</option>
-                                <option value="String Phone">String Phone</option>
+                                <option value="Bottle Rocket">Bottle Rocket</option>
                                 <option value="Balloon Car">Balloon Car</option>
                                 <option value="Other">Other Project</option>
                             </select>
@@ -143,6 +143,147 @@
     <!-- Firebase SDK (Database only - NO STORAGE) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+    <!-- Success Notification -->
+    <div class="success-notification" id="success-notification">
+        <div class="notification-content">
+            <div class="notification-icon">✅</div>
+            <div class="notification-text">
+                <h4>Success!</h4>
+                <p>Your photo has been uploaded to the gallery</p>
+            </div>
+        </div>
+        <div class="notification-progress"></div>
+    </div>
+
+    <style>
+        /* Success Notification Styles */
+        .success-notification {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 3000;
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            min-width: 320px;
+        }
+
+        .success-notification.show {
+            right: 20px;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: checkmarkPop 0.6s ease;
+        }
+
+        @keyframes checkmarkPop {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .notification-text h4 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.1rem;
+        }
+
+        .notification-text p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            animation: progressBar 3s linear forwards;
+        }
+
+        @keyframes progressBar {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
+
+        /* Celebration particles */
+        .celebration-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2999;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        @keyframes particleFall {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px) translateX(var(--x-drift)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .success-notification {
+                top: auto;
+                bottom: 20px;
+                right: -400px;
+                left: 20px;
+                min-width: auto;
+            }
+
+            .success-notification.show {
+                right: 20px;
+            }
+        }
+    </style>
 
     <script>
         // Firebase Configuration
@@ -259,7 +400,7 @@
             event.preventDefault();
             
             if (!selectedFile) {
-                alert('Please select a photo');
+                showErrorNotification('Please select a photo');
                 return;
             }
             
@@ -296,10 +437,12 @@
                 document.querySelector('.upload-area .upload-note').style.display = 'block';
                 selectedFile = null;
                 
-                alert('Photo uploaded successfully!');
+                // Show success notification with celebration
+                showSuccessNotification();
+                createCelebrationParticles();
             } catch (error) {
                 console.error('Upload error:', error);
-                alert('Error uploading photo. Please try again with a smaller image.');
+                showErrorNotification('Error uploading photo. Please try again with a smaller image.');
             } finally {
                 document.getElementById('submit-btn').disabled = false;
                 document.getElementById('upload-status').style.display = 'none';
@@ -395,7 +538,7 @@
                     if (!photo.userId) {
                         const password = prompt('This is an old photo. Enter admin password to delete:');
                         if (password !== 'admin123') { // Change this password!
-                            alert('Incorrect password');
+                            showErrorNotification('Incorrect password');
                             cancelDelete();
                             return;
                         }
@@ -403,10 +546,10 @@
                     
                     await database.ref(`photos/${photoToDelete}`).remove();
                     cancelDelete();
-                    alert('Photo deleted successfully');
+                    showDeleteNotification();
                 } catch (error) {
                     console.error('Delete error:', error);
-                    alert('Error deleting photo. Please try again.');
+                    showErrorNotification('Error deleting photo. Please try again.');
                 }
             }
         }
@@ -415,6 +558,73 @@
         function cancelDelete() {
             photoToDelete = null;
             document.getElementById('delete-modal').style.display = 'none';
+        }
+
+        // Show success notification
+        function showSuccessNotification() {
+            const notification = document.getElementById('success-notification');
+            notification.classList.add('show');
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Create celebration particles
+        function createCelebrationParticles() {
+            const container = document.createElement('div');
+            container.className = 'celebration-particles';
+            document.body.appendChild(container);
+            
+            const colors = ['#10b981', '#3b82f6', '#8b5cf6', '#ef4444', '#f59e0b', '#ec4899'];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * window.innerWidth + 'px';
+                    particle.style.top = Math.random() * 200 + 'px';
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.setProperty('--x-drift', (Math.random() - 0.5) * 100 + 'px');
+                    particle.style.animation = `particleFall ${1 + Math.random() * 2}s ease-out forwards`;
+                    container.appendChild(particle);
+                }, i * 30);
+            }
+            
+            // Clean up particles after animation
+            setTimeout(() => {
+                container.remove();
+            }, 4000);
+        }
+
+        // Show error notification
+        function showErrorNotification(message) {
+            const notification = document.getElementById('success-notification');
+            const icon = notification.querySelector('.notification-icon');
+            const title = notification.querySelector('.notification-text h4');
+            const messageEl = notification.querySelector('.notification-text p');
+            
+            // Change to error style
+            icon.textContent = '❌';
+            icon.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            title.textContent = 'Error!';
+            messageEl.textContent = message;
+            
+            notification.classList.add('show');
+            
+            // Reset and hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                // Reset to success style after hiding
+                setTimeout(() => {
+                    icon.textContent = '✅';
+                    icon.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                    title.textContent = 'Success!';
+                    messageEl.textContent = 'Your photo has been uploaded to the gallery';
+                }, 500);
+            }, 3000);
         }
 
         // Close modals when clicking outside

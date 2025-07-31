@@ -67,7 +67,7 @@
                                 <option value="">Select a project...</option>
                                 <option value="Rubber Band Boat">Rubber Band Boat</option>
                                 <option value="Robot Arm Grabber">Robot Arm Grabber</option>
-                                <option value="Bottle Rocket">Bottle Rocket</option>
+                                <option value="String Phone">String Phone</option>
                                 <option value="Balloon Car">Balloon Car</option>
                                 <option value="Other">Other Project</option>
                             </select>
@@ -81,7 +81,7 @@
                         <input type="file" id="photo-upload" accept="image/*" required onchange="previewPhoto(this)">
                         <div class="upload-icon">📷</div>
                         <h4>Click to Select Photo</h4>
-                        <p class="upload-note">JPG, PNG, or GIF (Max 1MB)</p>
+                        <p class="upload-note">JPG, PNG, or GIF (Max 5MB)</p>
                         <div id="preview-container" style="display: none;">
                             <img id="photo-preview" alt="Preview">
                             <p class="preview-text">Click to change photo</p>
@@ -120,59 +120,32 @@
         </div>
     </div>
 
-    <!-- Photo Viewer Modal for Mobile -->
-    <div class="photo-viewer-modal" id="photo-viewer-modal" style="display: none;">
-        <div class="viewer-header">
-            <button onclick="closePhotoViewer()" class="close-viewer-btn">✕</button>
-        </div>
-        <div class="viewer-content">
-            <img id="viewer-image" alt="Full size photo">
-            <div class="viewer-details">
-                <h3 id="viewer-title"></h3>
-                <p id="viewer-author"></p>
-                <p id="viewer-description"></p>
-            </div>
-            <div class="viewer-actions">
-                <button onclick="downloadPhoto()" class="download-btn">
-                    <span>💾</span> Save Photo
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase SDK (Database only - NO STORAGE) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 
     <script>
         // Firebase Configuration
+        // IMPORTANT: Replace these with your own Firebase project credentials
+        // Get them from: https://console.firebase.google.com/project/YOUR_PROJECT/settings/general/
         const firebaseConfig = {
-            apiKey: "AIzaSyDHCyQH3p8095T1cFYZAf3fW0Lg7w0S4hA",
-            authDomain: "robotics-fun-club.firebaseapp.com",
-            databaseURL: "https://robotics-fun-club-default-rtdb.firebaseio.com",
-            projectId: "robotics-fun-club",
-            storageBucket: "robotics-fun-club.appspot.com",
-            messagingSenderId: "141368327976",
-            appId: "1:141368327976:web:ba47feecd87e87b56db93b"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
-        // Initialize Firebase (Database only - NO STORAGE)
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
+        const storage = firebase.storage();
 
         let selectedFile = null;
         let photoToDelete = null;
-        let currentViewerPhoto = null;
-
-        // Get or create unique user ID
-        function getUserId() {
-            let userId = localStorage.getItem('roboticsUserId');
-            if (!userId) {
-                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('roboticsUserId', userId);
-            }
-            return userId;
-        }
 
         // Load and display photos when page loads
         window.addEventListener('load', function() {
@@ -197,50 +170,17 @@
             });
         }
 
-        // Compress image to base64
-        function compressImage(file, maxWidth, maxHeight, quality) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function(e) {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-
-                        // Calculate new dimensions
-                        if (width > height) {
-                            if (width > maxWidth) {
-                                height *= maxWidth / width;
-                                width = maxWidth;
-                            }
-                        } else {
-                            if (height > maxHeight) {
-                                width *= maxHeight / height;
-                                height = maxHeight;
-                            }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        // Convert to base64
-                        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
-                        resolve(compressedBase64);
-                    };
-                };
-            });
-        }
-
         // Preview selected photo
         function previewPhoto(input) {
             if (input.files && input.files[0]) {
                 selectedFile = input.files[0];
+                
+                if (selectedFile.size > 5 * 1024 * 1024) {
+                    alert('File size must be less than 5MB');
+                    input.value = '';
+                    selectedFile = null;
+                    return;
+                }
                 
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -270,11 +210,14 @@
             const name = document.getElementById('uploader-name').value;
             const project = document.getElementById('project-type').value;
             const description = document.getElementById('photo-description').value;
-            const userId = getUserId();
             
             try {
-                // Compress image to reduce size (smaller dimensions and quality for database storage)
-                const compressedImage = await compressImage(selectedFile, 600, 450, 0.6);
+                // Upload image to Firebase Storage
+                const timestamp = Date.now();
+                const fileName = `photos/${timestamp}_${selectedFile.name}`;
+                const storageRef = storage.ref(fileName);
+                const uploadTask = await storageRef.put(selectedFile);
+                const downloadURL = await uploadTask.ref.getDownloadURL();
                 
                 // Save photo data to Firebase Database
                 const newPhotoRef = database.ref('photos').push();
@@ -282,10 +225,9 @@
                     name: name,
                     project: project,
                     description: description || '',
-                    imageData: compressedImage, // Store as base64
+                    imageUrl: downloadURL,
                     date: new Date().toISOString(),
-                    timestamp: Date.now(),
-                    userId: userId // Store user ID with photo
+                    timestamp: timestamp
                 });
                 
                 // Reset form
@@ -299,7 +241,7 @@
                 alert('Photo uploaded successfully!');
             } catch (error) {
                 console.error('Upload error:', error);
-                alert('Error uploading photo. Please try again with a smaller image.');
+                alert('Error uploading photo. Please try again.');
             } finally {
                 document.getElementById('submit-btn').disabled = false;
                 document.getElementById('upload-status').style.display = 'none';
@@ -310,7 +252,6 @@
         function displayPhotos(photos) {
             const gallery = document.getElementById('photo-gallery');
             const emptyGallery = document.getElementById('empty-gallery');
-            const currentUserId = getUserId();
             
             if (photos.length === 0) {
                 gallery.style.display = 'none';
@@ -321,59 +262,20 @@
             gallery.style.display = 'grid';
             emptyGallery.style.display = 'none';
             
-            gallery.innerHTML = photos.map(photo => {
-                const canDelete = photo.userId === currentUserId;
-                return `
-                    <div class="photo-item" data-id="${photo.id}" onclick="openPhotoViewer('${photo.id}')">
-                        <img src="${photo.imageData}" alt="${photo.project}">
-                        <div class="photo-caption">
-                            <h4>${photo.project}</h4>
-                            <p class="photo-author">By ${photo.name}</p>
-                            ${photo.description ? `<p class="photo-desc">${photo.description}</p>` : ''}
-                            <p class="photo-date">${new Date(photo.date).toLocaleDateString()}</p>
-                        </div>
-                        ${canDelete ? `
-                            <button class="delete-btn" onclick="event.stopPropagation(); deletePhoto('${photo.id}')" title="Delete this photo">
-                                <span>🗑️</span>
-                            </button>
-                        ` : ''}
+            gallery.innerHTML = photos.map(photo => `
+                <div class="photo-item" data-id="${photo.id}">
+                    <img src="${photo.imageUrl}" alt="${photo.project}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22%3E%3Crect width=%22300%22 height=%22250%22 fill=%22%23ddd%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EImage Loading...%3C/text%3E%3C/svg%3E'">
+                    <div class="photo-caption">
+                        <h4>${photo.project}</h4>
+                        <p class="photo-author">By ${photo.name}</p>
+                        ${photo.description ? `<p class="photo-desc">${photo.description}</p>` : ''}
+                        <p class="photo-date">${new Date(photo.date).toLocaleDateString()}</p>
                     </div>
-                `;
-            }).join('');
-        }
-
-        // Open photo viewer (especially useful for mobile)
-        function openPhotoViewer(photoId) {
-            const photosRef = database.ref(`photos/${photoId}`);
-            photosRef.once('value', (snapshot) => {
-                const photo = snapshot.val();
-                if (photo) {
-                    currentViewerPhoto = photo;
-                    document.getElementById('viewer-image').src = photo.imageData;
-                    document.getElementById('viewer-title').textContent = photo.project;
-                    document.getElementById('viewer-author').textContent = `By ${photo.name}`;
-                    document.getElementById('viewer-description').textContent = photo.description || '';
-                    document.getElementById('photo-viewer-modal').style.display = 'flex';
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                }
-            });
-        }
-
-        // Close photo viewer
-        function closePhotoViewer() {
-            document.getElementById('photo-viewer-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            currentViewerPhoto = null;
-        }
-
-        // Download photo
-        function downloadPhoto() {
-            if (!currentViewerPhoto) return;
-            
-            const link = document.createElement('a');
-            link.href = currentViewerPhoto.imageData;
-            link.download = `${currentViewerPhoto.project.replace(/\s+/g, '_')}_${currentViewerPhoto.name.replace(/\s+/g, '_')}.jpg`;
-            link.click();
+                    <button class="delete-btn" onclick="deletePhoto('${photo.id}')" title="Delete this photo">
+                        <span>🗑️</span>
+                    </button>
+                </div>
+            `).join('');
         }
 
         // Delete photo
@@ -386,7 +288,12 @@
         async function confirmDelete() {
             if (photoToDelete) {
                 try {
+                    // Delete from Firebase Database
                     await database.ref(`photos/${photoToDelete}`).remove();
+                    
+                    // Note: In a production app, you'd also delete the image from Storage
+                    // This requires knowing the storage path, which you'd save with the photo data
+                    
                     cancelDelete();
                 } catch (error) {
                     console.error('Delete error:', error);
@@ -401,16 +308,10 @@
             document.getElementById('delete-modal').style.display = 'none';
         }
 
-        // Close modals when clicking outside
+        // Close modal when clicking outside
         document.getElementById('delete-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 cancelDelete();
-            }
-        });
-
-        document.getElementById('photo-viewer-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePhotoViewer();
             }
         });
     </script>

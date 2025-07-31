@@ -563,6 +563,16 @@
         // Show success notification
         function showSuccessNotification() {
             const notification = document.getElementById('success-notification');
+            const icon = notification.querySelector('.notification-icon');
+            const title = notification.querySelector('.notification-text h4');
+            const message = notification.querySelector('.notification-text p');
+            
+            // Set to success style
+            icon.textContent = '✅';
+            icon.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            title.textContent = 'Success!';
+            message.textContent = 'Your photo has been uploaded to the gallery';
+            
             notification.classList.add('show');
             
             // Auto-hide after 3 seconds
@@ -599,8 +609,29 @@
             }, 4000);
         }
 
+        // Show delete notification
+        function showDeleteNotification() {
+            const notification = document.getElementById('success-notification');
+            const icon = notification.querySelector('.notification-icon');
+            const title = notification.querySelector('.notification-text h4');
+            const message = notification.querySelector('.notification-text p');
+            
+            // Change to delete style
+            icon.textContent = '🗑️';
+            icon.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            title.textContent = 'Deleted!';
+            message.textContent = 'Photo has been removed from the gallery';
+            
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
         // Show error notification
-        function showErrorNotification(message) {
+        function showErrorNotification(errorMessage) {
             const notification = document.getElementById('success-notification');
             const icon = notification.querySelector('.notification-icon');
             const title = notification.querySelector('.notification-text h4');
@@ -610,20 +641,13 @@
             icon.textContent = '❌';
             icon.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
             title.textContent = 'Error!';
-            messageEl.textContent = message;
+            messageEl.textContent = errorMessage;
             
             notification.classList.add('show');
             
-            // Reset and hide after 3 seconds
+            // Hide after 3 seconds
             setTimeout(() => {
                 notification.classList.remove('show');
-                // Reset to success style after hiding
-                setTimeout(() => {
-                    icon.textContent = '✅';
-                    icon.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                    title.textContent = 'Success!';
-                    messageEl.textContent = 'Your photo has been uploaded to the gallery';
-                }, 500);
             }, 3000);
         }
 

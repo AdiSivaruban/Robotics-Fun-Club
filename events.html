@@ -39,7 +39,7 @@
                 Robotics Fun Club
             </div>
             <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="about.html">About</a></li>
@@ -143,7 +143,10 @@
             <div class="poster-section">
                 <h3>📌 Event Poster</h3>
                 <div class="poster-container">
-                    <img src="nature-walk-poster.jpg" alt="WeAreBrampton Nature Walk Poster" class="event-poster">
+                    <img src="nature-walk-poster.jpg" alt="WeAreBrampton Nature Walk Poster" class="event-poster" onerror="this.style.display='none'; document.getElementById('poster-placeholder').style.display='flex';">
+                    <div id="poster-placeholder" class="event-poster" style="display: none;">
+                        <span>Event Poster<br>Coming Soon</span>
+                    </div>
                     <p class="poster-caption">Click to view full size</p>
                 </div>
             </div>
@@ -153,7 +156,7 @@
                 <h3>🎯 Get Involved!</h3>
                 <p>To learn more about the Nature Walk, check out our event poster, sign up using our registration form, and don't forget to share your thoughts after the event through our feedback form—we'd love to hear from you!</p>
                 <div class="action-buttons">
-                    <a href="#" class="action-btn register-btn" onclick="alert('Registration form link will be added here')">
+                    <a href="https://forms.gle/YOUR_REGISTRATION_LINK" target="_blank" class="action-btn register-btn">
                         <span class="btn-icon">📝</span>
                         Register Now
                     </a>

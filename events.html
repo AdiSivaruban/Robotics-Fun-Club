@@ -142,11 +142,8 @@
             <!-- Event Poster -->
             <div class="poster-section">
                 <h3>📌 Event Poster</h3>
-                <div class="poster-container">
-                    <img src="nature-walk-poster.jpg" alt="WeAreBrampton Nature Walk Poster" class="event-poster" onerror="this.style.display='none'; document.getElementById('poster-placeholder').style.display='flex';">
-                    <div id="poster-placeholder" class="event-poster" style="display: none;">
-                        <span>Event Poster<br>Coming Soon</span>
-                    </div>
+                <div class="poster-container" onclick="viewFullPoster()">
+                    <img src="nature-walk-poster.jpg" alt="WeAreBrampton Nature Walk Poster" class="event-poster" id="event-poster-img">
                     <p class="poster-caption">Click to view full size</p>
                 </div>
             </div>
@@ -197,17 +194,44 @@
     </div>
 
     <script>
-        // Make poster clickable for full view
-        document.querySelector('.poster-container').addEventListener('click', function() {
-            const img = this.querySelector('img');
-            if (img.requestFullscreen) {
-                img.requestFullscreen();
-            } else if (img.webkitRequestFullscreen) {
-                img.webkitRequestFullscreen();
-            } else if (img.msRequestFullscreen) {
-                img.msRequestFullscreen();
-            }
-        });
+        // View poster in full quality
+        function viewFullPoster() {
+            const img = document.getElementById('event-poster-img');
+            
+            // Create a modal to show full-size image
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                cursor: pointer;
+                padding: 20px;
+            `;
+            
+            const fullImg = document.createElement('img');
+            fullImg.src = img.src;
+            fullImg.style.cssText = `
+                max-width: 90%;
+                max-height: 90vh;
+                object-fit: contain;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            `;
+            
+            modal.appendChild(fullImg);
+            document.body.appendChild(modal);
+            
+            // Close on click
+            modal.onclick = function() {
+                document.body.removeChild(modal);
+            };
+        }
     </script>
     <script src="navigation.js"></script>
 </body>

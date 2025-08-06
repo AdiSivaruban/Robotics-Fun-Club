@@ -128,129 +128,120 @@
     </div>
 
     <style>
-        /* Success Notification Styles */
-        .success-notification {
-            position: fixed;
-            top: 100px;
-            right: -400px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            z-index: 3000;
-            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            overflow: hidden;
-            min-width: 320px;
-        }
+  /* Success Notification Styles - FIXED VERSION */
+.success-notification {
+    position: fixed;
+    top: 100px;
+    right: -400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 3000;
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: hidden;
+    min-width: 320px;
+    /* Add these properties to ensure proper cleanup */
+    opacity: 1;
+    visibility: visible;
+}
 
-        .success-notification.show {
-            right: 20px;
-        }
+.success-notification.show {
+    right: 20px;
+}
 
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+/* Add hide class for proper cleanup */
+.success-notification.hide {
+    right: -400px;
+    opacity: 0;
+    visibility: hidden;
+}
 
-        .notification-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            animation: checkmarkPop 0.6s ease;
-        }
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        @keyframes checkmarkPop {
-            0% {
-                transform: scale(0) rotate(-45deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.2) rotate(10deg);
-            }
-            100% {
-                transform: scale(1) rotate(0);
-                opacity: 1;
-            }
-        }
+.notification-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    animation: checkmarkPop 0.6s ease;
+}
 
-        .notification-text h4 {
-            margin: 0;
-            color: #1f2937;
-            font-size: 1.1rem;
-        }
+@keyframes checkmarkPop {
+    0% {
+        transform: scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
 
-        .notification-text p {
-            margin: 0;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
+.notification-text h4 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.1rem;
+}
 
-        .notification-progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-            animation: progressBar 3s linear forwards;
-        }
+.notification-text p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
 
-        @keyframes progressBar {
-            from {
-                width: 100%;
-            }
-            to {
-                width: 0%;
-            }
-        }
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    /* Reduced animation time for better sync */
+    animation: progressBar 2.5s linear forwards;
+}
 
-        /* Star celebration */
-        .star-burst {
-            position: fixed;
-            pointer-events: none;
-            z-index: 2999;
-        }
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
 
-        .star {
-            position: absolute;
-            font-size: 20px;
-            animation: starFloat 2s ease-out forwards;
-        }
+/* Mobile responsive - FIXED */
+@media (max-width: 768px) {
+    .success-notification {
+        top: auto;
+        bottom: 20px;
+        right: -100vw; /* Use viewport width for better mobile handling */
+        left: auto;
+        width: calc(100vw - 40px);
+        min-width: auto;
+        margin: 0 20px;
+    }
 
-        @keyframes starFloat {
-            0% {
-                transform: translateY(0) scale(0) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                transform: translateY(-20px) scale(1.2) rotate(72deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-150px) scale(0) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    .success-notification.show {
+        right: 0;
+    }
 
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .success-notification {
-                top: auto;
-                bottom: 20px;
-                right: -400px;
-                left: 20px;
-                min-width: auto;
-            }
-
-            .success-notification.show {
-                right: 20px;
-            }
-        }
+    .success-notification.hide {
+        right: -100vw;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
     </style>
 
     <!-- Firebase SDK (Database only) -->

@@ -128,120 +128,148 @@
     </div>
 
     <style>
-  /* Success Notification Styles - FIXED VERSION */
-.success-notification {
-    position: fixed;
-    top: 100px;
-    right: -400px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    z-index: 3000;
-    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    overflow: hidden;
-    min-width: 320px;
-    /* Add these properties to ensure proper cleanup */
-    opacity: 1;
-    visibility: visible;
-}
+        /* Success Notification Styles - FIXED VERSION */
+        .success-notification {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 3000;
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            min-width: 320px;
+            /* Add these properties to ensure proper cleanup */
+            opacity: 1;
+            visibility: visible;
+        }
 
-.success-notification.show {
-    right: 20px;
-}
+        .success-notification.show {
+            right: 20px;
+        }
 
-/* Add hide class for proper cleanup */
-.success-notification.hide {
-    right: -400px;
-    opacity: 0;
-    visibility: hidden;
-}
+        /* Add hide class for proper cleanup */
+        .success-notification.hide {
+            right: -400px;
+            opacity: 0;
+            visibility: hidden;
+        }
 
-.notification-content {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-.notification-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    animation: checkmarkPop 0.6s ease;
-}
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: checkmarkPop 0.6s ease;
+        }
 
-@keyframes checkmarkPop {
-    0% {
-        transform: scale(0) rotate(-45deg);
-        opacity: 0;
-    }
-    50% {
-        transform: scale(1.2) rotate(10deg);
-    }
-    100% {
-        transform: scale(1) rotate(0);
-        opacity: 1;
-    }
-}
+        @keyframes checkmarkPop {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
 
-.notification-text h4 {
-    margin: 0;
-    color: #1f2937;
-    font-size: 1.1rem;
-}
+        .notification-text h4 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.1rem;
+        }
 
-.notification-text p {
-    margin: 0;
-    color: #6b7280;
-    font-size: 0.9rem;
-}
+        .notification-text p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
 
-.notification-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-    /* Reduced animation time for better sync */
-    animation: progressBar 2.5s linear forwards;
-}
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            /* Reduced animation time for better sync */
+            animation: progressBar 2.5s linear forwards;
+        }
 
-@keyframes progressBar {
-    from {
-        width: 100%;
-    }
-    to {
-        width: 0%;
-    }
-}
+        @keyframes progressBar {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
 
-/* Mobile responsive - FIXED */
-@media (max-width: 768px) {
-    .success-notification {
-        top: auto;
-        bottom: 20px;
-        right: -100vw; /* Use viewport width for better mobile handling */
-        left: auto;
-        width: calc(100vw - 40px);
-        min-width: auto;
-        margin: 0 20px;
-    }
+        /* Star celebration */
+        .star-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2999;
+        }
 
-    .success-notification.show {
-        right: 0;
-    }
+        .star {
+            position: absolute;
+            font-size: 20px;
+            animation: starFloat 2s ease-out forwards;
+        }
 
-    .success-notification.hide {
-        right: -100vw;
-        opacity: 0;
-        visibility: hidden;
-    }
-}
+        @keyframes starFloat {
+            0% {
+                transform: translateY(0) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                transform: translateY(-20px) scale(1.2) rotate(72deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-150px) scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsive - FIXED */
+        @media (max-width: 768px) {
+            .success-notification {
+                top: auto;
+                bottom: 20px;
+                right: -100vw; /* Use viewport width for better mobile handling */
+                left: auto;
+                width: calc(100vw - 40px);
+                min-width: auto;
+                margin: 0 20px;
+            }
+
+            .success-notification.show {
+                right: 0;
+            }
+
+            .success-notification.hide {
+                right: -100vw;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
     </style>
 
     <!-- Firebase SDK (Database only) -->
@@ -276,8 +304,14 @@
             return userId;
         }
 
-        // Load reviews when page loads
+        // Load reviews when page loads - UPDATED
         window.addEventListener('load', function() {
+            // Clear any stuck notifications when page loads
+            const notification = document.getElementById('success-notification');
+            if (notification) {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+            }
             loadReviewsFromFirebase();
         });
 
@@ -415,12 +449,23 @@
                 cancelDeleteReview();
             }
         });
-        // Show success notification
+
+        // Show success notification - FIXED VERSION
         function showSuccessNotification() {
             const notification = document.getElementById('success-notification');
             const icon = notification.querySelector('.notification-icon');
             const title = notification.querySelector('.notification-text h4');
             const message = notification.querySelector('.notification-text p');
+            
+            // Clear any existing timeouts
+            if (window.notificationTimeout) {
+                clearTimeout(window.notificationTimeout);
+            }
+            
+            // Reset notification state
+            notification.classList.remove('hide');
+            notification.style.opacity = '1';
+            notification.style.visibility = 'visible';
             
             // Set to success style
             icon.textContent = '⭐';
@@ -428,12 +473,13 @@
             title.textContent = 'Thank You!';
             message.textContent = 'Your review has been submitted';
             
+            // Show notification
             notification.classList.add('show');
             
-            // Auto-hide after 3 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            // Auto-hide after 2.5 seconds (sync with progress bar)
+            window.notificationTimeout = setTimeout(() => {
+                hideNotification();
+            }, 2500);
         }
 
         // Create star burst effect
@@ -471,12 +517,22 @@
             }, 2500);
         }
 
-        // Show delete notification
+        // Show delete notification - FIXED VERSION
         function showDeleteNotification() {
             const notification = document.getElementById('success-notification');
             const icon = notification.querySelector('.notification-icon');
             const title = notification.querySelector('.notification-text h4');
             const message = notification.querySelector('.notification-text p');
+            
+            // Clear any existing timeouts
+            if (window.notificationTimeout) {
+                clearTimeout(window.notificationTimeout);
+            }
+            
+            // Reset notification state
+            notification.classList.remove('hide');
+            notification.style.opacity = '1';
+            notification.style.visibility = 'visible';
             
             // Change to delete style
             icon.textContent = '🗑️';
@@ -484,20 +540,31 @@
             title.textContent = 'Deleted!';
             message.textContent = 'Your review has been removed';
             
+            // Show notification
             notification.classList.add('show');
             
-            // Hide after 3 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            // Hide after 2.5 seconds
+            window.notificationTimeout = setTimeout(() => {
+                hideNotification();
+            }, 2500);
         }
 
-        // Show error notification
+        // Show error notification - FIXED VERSION
         function showErrorNotification(errorMessage) {
             const notification = document.getElementById('success-notification');
             const icon = notification.querySelector('.notification-icon');
             const title = notification.querySelector('.notification-text h4');
             const messageEl = notification.querySelector('.notification-text p');
+            
+            // Clear any existing timeouts
+            if (window.notificationTimeout) {
+                clearTimeout(window.notificationTimeout);
+            }
+            
+            // Reset notification state
+            notification.classList.remove('hide');
+            notification.style.opacity = '1';
+            notification.style.visibility = 'visible';
             
             // Change to error style
             icon.textContent = '❌';
@@ -505,12 +572,28 @@
             title.textContent = 'Error!';
             messageEl.textContent = errorMessage;
             
+            // Show notification
             notification.classList.add('show');
             
-            // Hide after 3 seconds
+            // Hide after 2.5 seconds
+            window.notificationTimeout = setTimeout(() => {
+                hideNotification();
+            }, 2500);
+        }
+
+        // Proper hide function - NEW
+        function hideNotification() {
+            const notification = document.getElementById('success-notification');
+            
+            // Add hide class and remove show class
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+            
+            // Extra cleanup after animation completes
             setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+                notification.style.opacity = '0';
+                notification.style.visibility = 'hidden';
+            }, 500); // Wait for slide-out animation
         }
     </script>
     <script src="navigation.js"></script>

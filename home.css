@@ -1,794 +1,506 @@
-diff --git a/home.css b/home.css
---- a/home.css
-+++ b/home.css
-@@ -1,370 +1,420 @@
--/* HOMEPAGE SPECIFIC STYLES */
--
--/* HERO SECTION */
--.hero-container {
--    display: flex;
--    align-items: center;
--    justify-content: center;
--    min-height: calc(100vh - 80px); /* Account for nav height */
--    text-align: center;
--    color: white;
--    padding: 20px;
--    position: relative;
--}
--
--.hero-content {
--    max-width: 800px;
--    z-index: 10;
--    position: relative;
--}
--
--.hero-content h1 {
--    font-size: 4rem;
--    margin-bottom: 20px;
--    animation: slideInUp 1s ease-out;
--    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
--}
--
--.hero-subtitle {
--    font-size: 1.5rem;
--    margin-bottom: 15px;
--    opacity: 0.95;
--    animation: slideInUp 1s ease-out 0.2s both;
--    font-weight: 500;
--}
--
--.hero-description {
--    font-size: 1.2rem;
--    margin-bottom: 40px;
--    opacity: 0.9;
--    animation: slideInUp 1s ease-out 0.4s both;
--    font-weight: 400;
--}
--
--.hero-container .cta-button {
--    animation: slideInUp 1s ease-out 0.6s both;
--}
--
--/* Robot Styles */
--.robot-container {
--    position: absolute;
--    right: 10%;
--    top: 50%;
--    transform: translateY(-50%);
--    cursor: pointer;
--}
--
--.robot {
--    width: 200px;
--    height: 300px;
--    position: relative;
--    animation: robotFloat 3s ease-in-out infinite;
--}
--
--@keyframes robotFloat {
--    0%, 100% { transform: translateY(0); }
--    50% { transform: translateY(-20px); }
--}
--
--/* Robot Head */
--.robot-head {
--    width: 100px;
--    height: 100px;
--    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
--    margin: 0 auto;
--    border-radius: 20px;
--    position: relative;
--    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
--}
--
--.antenna {
--    width: 4px;
--    height: 30px;
--    background: #333;
--    position: absolute;
--    top: -25px;
--    left: 50%;
--    transform: translateX(-50%);
--}
--
--.antenna::before {
--    content: '';
--    width: 12px;
--    height: 12px;
--    background: #ff6b6b;
--    border-radius: 50%;
--    position: absolute;
--    top: -8px;
--    left: 50%;
--    transform: translateX(-50%);
--    animation: antennaBlink 2s infinite;
--}
--
--@keyframes antennaBlink {
--    0%, 100% { opacity: 1; }
--    50% { opacity: 0.3; }
--}
--
--.eyes {
--    display: flex;
--    justify-content: space-around;
--    padding: 25px 20px 0;
--}
--
--.eye {
--    width: 20px;
--    height: 20px;
--    background: white;
--    border-radius: 50%;
--    position: relative;
--    overflow: hidden;
--}
--
--.eye::before {
--    content: '';
--    width: 10px;
--    height: 10px;
--    background: #333;
--    border-radius: 50%;
--    position: absolute;
--    top: 5px;
--    left: 5px;
--    animation: eyeMove 3s infinite;
--}
--
--@keyframes eyeMove {
--    0%, 100% { transform: translate(0, 0); }
--    25% { transform: translate(-3px, 0); }
--    75% { transform: translate(3px, 0); }
--}
--
--.mouth {
--    width: 40px;
--    height: 8px;
--    background: rgba(255, 255, 255, 0.8);
--    margin: 15px auto;
--    border-radius: 0 0 20px 20px;
--}
--
--/* Robot Body */
--.robot-body {
--    width: 120px;
--    height: 100px;
--    background: linear-gradient(135deg, #96ceb4, #45b7d1);
--    margin: 10px auto;
--    border-radius: 20px;
--    position: relative;
--    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
--}
--
--.chest-light {
--    width: 30px;
--    height: 30px;
--    background: #feca57;
--    border-radius: 50%;
--    position: absolute;
--    top: 20px;
--    left: 50%;
--    transform: translateX(-50%);
--    animation: chestGlow 1.5s infinite;
--}
--
--@keyframes chestGlow {
--    0%, 100% { 
--        box-shadow: 0 0 20px rgba(254, 202, 87, 0.8);
--        transform: translateX(-50%) scale(1);
--    }
--    50% { 
--        box-shadow: 0 0 40px rgba(254, 202, 87, 1);
--        transform: translateX(-50%) scale(1.1);
--    }
--}
--
--.arm {
--    width: 30px;
--    height: 80px;
--    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
--    position: absolute;
--    top: 10px;
--    border-radius: 15px;
--    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
--}
--
--.arm.left {
--    left: -35px;
--    transform-origin: top center;
--    animation: leftArmWave 2s infinite;
--}
--
--.arm.right {
--    right: -35px;
--    transform-origin: top center;
--    animation: rightArmWave 2s infinite;
--}
--
--@keyframes leftArmWave {
--    0%, 100% { transform: rotate(-10deg); }
--    50% { transform: rotate(-30deg); }
--}
--
--@keyframes rightArmWave {
--    0%, 100% { transform: rotate(10deg); }
--    50% { transform: rotate(30deg); }
--}
--
--/* Robot Legs */
--.robot-legs {
--    display: flex;
--    justify-content: center;
--    gap: 20px;
--}
--
--.leg {
--    width: 35px;
--    height: 60px;
--    background: linear-gradient(135deg, #6c5ce7, #a55eea);
--    border-radius: 0 0 15px 15px;
--    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
--}
--
--/* Interactive Hover Effects */
--.robot:hover .eye::before {
--    animation: eyeSpin 0.5s infinite;
--}
--
--@keyframes eyeSpin {
--    0% { transform: translate(0, 0); }
--    100% { transform: translate(0, 0) rotate(360deg); }
--}
--
--.robot:hover .arm.left {
--    animation: leftArmWaveFast 0.5s infinite;
--}
--
--.robot:hover .arm.right {
--    animation: rightArmWaveFast 0.5s infinite;
--}
--
--@keyframes leftArmWaveFast {
--    0%, 100% { transform: rotate(-45deg); }
--    50% { transform: rotate(10deg); }
--}
--
--@keyframes rightArmWaveFast {
--    0%, 100% { transform: rotate(45deg); }
--    50% { transform: rotate(-10deg); }
--}
--
--.robot:hover .chest-light {
--    animation: chestGlowFast 0.3s infinite;
--}
--
--/* Event Announcement */
--.event-announcement {
--    margin-top: 3rem;
--    background: rgba(255, 255, 255, 0.95);
--    border-radius: 20px;
--    padding: 2rem;
--    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
--    position: relative;
--    overflow: hidden;
--    animation: slideInUp 1s ease-out 0.8s both;
--}
--
--.event-announcement::before {
--    content: '';
--    position: absolute;
--    top: 0;
--    left: 0;
--    right: 0;
--    height: 4px;
--    background: linear-gradient(90deg, #10b981 0%, #059669 50%, #10b981 100%);
--    background-size: 200% 100%;
--    animation: shimmer 3s linear infinite;
--}
--
--@keyframes shimmer {
--    0% { background-position: -200% 0; }
--    100% { background-position: 200% 0; }
--}
--
--.announcement-badge {
--    display: inline-block;
--    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
--    color: white;
--    padding: 0.4rem 1rem;
--    border-radius: 50px;
--    font-size: 0.85rem;
--    font-weight: 600;
--    margin-bottom: 1rem;
--    animation: pulse 2s infinite;
--}
--
--.event-announcement h3 {
--    color: #059669;
--    font-size: 1.5rem;
--    margin-bottom: 0.5rem;
--}
--
--.event-announcement p {
--    color: #64748b;
--    margin-bottom: 1.5rem;
--}
--
--.event-button {
--    display: inline-block;
--    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
--    color: white;
--    padding: 0.75rem 2rem;
--    border-radius: 50px;
--    text-decoration: none;
--    font-weight: 600;
--    transition: all 0.3s ease;
--    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
--}
--
--.event-button:hover {
--    transform: translateY(-2px);
--    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
--}
--
--/* Responsive */
--@media (max-width: 1024px) {
--    .robot-container {
--        position: static;
--        transform: none;
--        margin-top: 3rem;
--    }
--    
--    .hero-container {
--        flex-direction: column;
--        padding-top: 40px;
--    }
--    
--    .robot {
--        transform: scale(0.8);
--    }
--}
--
--@media (max-width: 768px) {
--    .hero-content h1 {
--        font-size: 2.5rem;
--    }
--    
--    .hero-subtitle {
--        font-size: 1.2rem;
--    }
--    
--    .hero-description {
--        font-size: 1rem;
--    }
--    
--    .robot {
--        transform: scale(0.6);
--        height: 200px;
--    }
--    
--    .hero-container {
--        padding-top: 20px;
--    }
--}
-+/* HOMEPAGE SPECIFIC STYLES */
-+
-+/* HERO SECTION */
-+.hero-container {
-+    display: flex;
-+    align-items: center;
-+    justify-content: center;
-+    min-height: calc(100vh - 80px); /* Account for nav height */
-+    text-align: center;
-+    color: white;
-+    padding: 20px;
-+    position: relative;
-+}
-+
-+.hero-content {
-+    max-width: 800px;
-+    z-index: 10;
-+    position: relative;
-+}
-+
-+.hero-content h1 {
-+    font-size: 4rem;
-+    margin-bottom: 20px;
-+    animation: slideInUp 1s ease-out;
-+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-+}
-+
-+.hero-subtitle {
-+    font-size: 1.5rem;
-+    margin-bottom: 15px;
-+    opacity: 0.95;
-+    animation: slideInUp 1s ease-out 0.2s both;
-+    font-weight: 500;
-+}
-+
-+.hero-description {
-+    font-size: 1.2rem;
-+    margin-bottom: 40px;
-+    opacity: 0.9;
-+    animation: slideInUp 1s ease-out 0.4s both;
-+    font-weight: 400;
-+}
-+
-+/* CTA Group */
-+.cta-group {
-+    display: flex;
-+    gap: 20px;
-+    justify-content: center;
-+    align-items: center;
-+    margin-bottom: 40px;
-+    animation: slideInUp 1s ease-out 0.6s both;
-+}
-+
-+.secondary-button {
-+    display: inline-block;
-+    padding: 12px 24px;
-+    background: rgba(255, 255, 255, 0.1);
-+    color: white;
-+    text-decoration: none;
-+    border-radius: 50px;
-+    border: 2px solid rgba(255, 255, 255, 0.3);
-+    font-weight: 600;
-+    transition: all 0.3s ease;
-+    backdrop-filter: blur(10px);
-+}
-+
-+.secondary-button:hover {
-+    background: rgba(255, 255, 255, 0.2);
-+    border-color: rgba(255, 255, 255, 0.5);
-+    transform: translateY(-2px);
-+}
-+
-+.hero-container .cta-button {
-+    animation: none; /* Remove individual animation since it's in cta-group */
-+}
-+
-+/* Loading States */
-+.loading {
-+    opacity: 0.7;
-+    pointer-events: none;
-+}
-+
-+.loading::after {
-+    content: '';
-+    position: absolute;
-+    top: 50%;
-+    left: 50%;
-+    width: 20px;
-+    height: 20px;
-+    margin: -10px 0 0 -10px;
-+    border: 2px solid transparent;
-+    border-top: 2px solid var(--accent);
-+    border-radius: 50%;
-+    animation: spin 1s linear infinite;
-+}
-+
-+/* Robot Styles */
-+.robot-container {
-+    position: absolute;
-+    right: 10%;
-+    top: 50%;
-+    transform: translateY(-50%);
-+    cursor: pointer;
-+}
-+
-+.robot {
-+    width: 200px;
-+    height: 300px;
-+    position: relative;
-+    animation: robotFloat 3s ease-in-out infinite;
-+}
-+
-+@keyframes robotFloat {
-+    0%, 100% { transform: translateY(0); }
-+    50% { transform: translateY(-20px); }
-+}
-+
-+/* Robot Head */
-+.robot-head {
-+    width: 100px;
-+    height: 100px;
-+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-+    margin: 0 auto;
-+    border-radius: 20px;
-+    position: relative;
-+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-+}
-+
-+.antenna {
-+    width: 4px;
-+    height: 30px;
-+    background: #333;
-+    position: absolute;
-+    top: -25px;
-+    left: 50%;
-+    transform: translateX(-50%);
-+}
-+
-+.antenna::before {
-+    content: '';
-+    width: 12px;
-+    height: 12px;
-+    background: #ff6b6b;
-+    border-radius: 50%;
-+    position: absolute;
-+    top: -8px;
-+    left: 50%;
-+    transform: translateX(-50%);
-+    animation: antennaBlink 2s infinite;
-+}
-+
-+@keyframes antennaBlink {
-+    0%, 100% { opacity: 1; }
-+    50% { opacity: 0.3; }
-+}
-+
-+.eyes {
-+    display: flex;
-+    justify-content: space-around;
-+    padding: 25px 20px 0;
-+}
-+
-+.eye {
-+    width: 20px;
-+    height: 20px;
-+    background: white;
-+    border-radius: 50%;
-+    position: relative;
-+    overflow: hidden;
-+}
-+
-+.eye::before {
-+    content: '';
-+    width: 10px;
-+    height: 10px;
-+    background: #333;
-+    border-radius: 50%;
-+    position: absolute;
-+    top: 5px;
-+    left: 5px;
-+    animation: eyeMove 3s infinite;
-+}
-+
-+@keyframes eyeMove {
-+    0%, 100% { transform: translate(0, 0); }
-+    25% { transform: translate(-3px, 0); }
-+    75% { transform: translate(3px, 0); }
-+}
-+
-+.mouth {
-+    width: 40px;
-+    height: 8px;
-+    background: rgba(255, 255, 255, 0.8);
-+    margin: 15px auto;
-+    border-radius: 0 0 20px 20px;
-+}
-+
-+/* Robot Body */
-+.robot-body {
-+    width: 120px;
-+    height: 100px;
-+    background: linear-gradient(135deg, #96ceb4, #45b7d1);
-+    margin: 10px auto;
-+    border-radius: 20px;
-+    position: relative;
-+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-+}
-+
-+.chest-light {
-+    width: 30px;
-+    height: 30px;
-+    background: #feca57;
-+    border-radius: 50%;
-+    position: absolute;
-+    top: 20px;
-+    left: 50%;
-+    transform: translateX(-50%);
-+    animation: chestGlow 1.5s infinite;
-+}
-+
-+@keyframes chestGlow {
-+    0%, 100% { 
-+        box-shadow: 0 0 20px rgba(254, 202, 87, 0.8);
-+        transform: translateX(-50%) scale(1);
-+    }
-+    50% { 
-+        box-shadow: 0 0 40px rgba(254, 202, 87, 1);
-+        transform: translateX(-50%) scale(1.1);
-+    }
-+}
-+
-+.arm {
-+    width: 30px;
-+    height: 80px;
-+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-+    position: absolute;
-+    top: 10px;
-+    border-radius: 15px;
-+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-+}
-+
-+.arm.left {
-+    left: -35px;
-+    transform-origin: top center;
-+    animation: leftArmWave 2s infinite;
-+}
-+
-+.arm.right {
-+    right: -35px;
-+    transform-origin: top center;
-+    animation: rightArmWave 2s infinite;
-+}
-+
-+@keyframes leftArmWave {
-+    0%, 100% { transform: rotate(-10deg); }
-+    50% { transform: rotate(-30deg); }
-+}
-+
-+@keyframes rightArmWave {
-+    0%, 100% { transform: rotate(10deg); }
-+    50% { transform: rotate(30deg); }
-+}
-+
-+/* Robot Legs */
-+.robot-legs {
-+    display: flex;
-+    justify-content: center;
-+    gap: 20px;
-+}
-+
-+.leg {
-+    width: 35px;
-+    height: 60px;
-+    background: linear-gradient(135deg, #6c5ce7, #a55eea);
-+    border-radius: 0 0 15px 15px;
-+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-+}
-+
-+/* Interactive Hover Effects */
-+.robot:hover .eye::before {
-+    animation: eyeSpin 0.5s infinite;
-+}
-+
-+@keyframes eyeSpin {
-+    0% { transform: translate(0, 0); }
-+    100% { transform: translate(0, 0) rotate(360deg); }
-+}
-+
-+.robot:hover .arm.left {
-+    animation: leftArmWaveFast 0.5s infinite;
-+}
-+
-+.robot:hover .arm.right {
-+    animation: rightArmWaveFast 0.5s infinite;
-+}
-+
-+@keyframes leftArmWaveFast {
-+    0%, 100% { transform: rotate(-45deg); }
-+    50% { transform: rotate(10deg); }
-+}
-+
-+@keyframes rightArmWaveFast {
-+    0%, 100% { transform: rotate(45deg); }
-+    50% { transform: rotate(-10deg); }
-+}
-+
-+.robot:hover .chest-light {
-+    animation: chestGlowFast 0.3s infinite;
-+}
-+
-+/* Event Announcement */
-+.event-announcement {
-+    margin-top: 3rem;
-+    background: rgba(255, 255, 255, 0.95);
-+    border-radius: 20px;
-+    padding: 2rem;
-+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-+    position: relative;
-+    overflow: hidden;
-+    animation: slideInUp 1s ease-out 0.8s both;
-+}
-+
-+.event-announcement::before {
-+    content: '';
-+    position: absolute;
-+    top: 0;
-+    left: 0;
-+    right: 0;
-+    height: 4px;
-+    background: linear-gradient(90deg, #10b981 0%, #059669 50%, #10b981 100%);
-+    background-size: 200% 100%;
-+    animation: shimmer 3s linear infinite;
-+}
-+
-+@keyframes shimmer {
-+    0% { background-position: -200% 0; }
-+    100% { background-position: 200% 0; }
-+}
-+
-+.announcement-badge {
-+    display: inline-block;
-+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-+    color: white;
-+    padding: 0.4rem 1rem;
-+    border-radius: 50px;
-+    font-size: 0.85rem;
-+    font-weight: 600;
-+    margin-bottom: 1rem;
-+    animation: pulse 2s infinite;
-+}
-+
-+.event-announcement h3 {
-+    color: #059669;
-+    font-size: 1.5rem;
-+    margin-bottom: 0.5rem;
-+}
-+
-+.event-announcement p {
-+    color: #64748b;
-+    margin-bottom: 1.5rem;
-+}
-+
-+.event-button {
-+    display: inline-block;
-+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-+    color: white;
-+    padding: 0.75rem 2rem;
-+    border-radius: 50px;
-+    text-decoration: none;
-+    font-weight: 600;
-+    transition: all 0.3s ease;
-+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
-+}
-+
-+.event-button:hover {
-+    transform: translateY(-2px);
-+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
-+}
-+
-+/* Responsive */
-+@media (max-width: 1024px) {
-+    .robot-container {
-+        position: static;
-+        transform: none;
-+        margin-top: 3rem;
-+    }
-+    
-+    .hero-container {
-+        flex-direction: column;
-+        padding-top: 40px;
-+    }
-+    
-+    .robot {
-+        transform: scale(0.8);
-+    }
-+}
-+
-+@media (max-width: 768px) {
-+    .hero-content h1 {
-+        font-size: 2.5rem;
-+    }
-+    
-+    .hero-subtitle {
-+        font-size: 1.2rem;
-+    }
-+    
-+    .hero-description {
-+        font-size: 1rem;
-+    }
-+    
-+    .robot {
-+        transform: scale(0.6);
-+        height: 200px;
-+    }
-+    
-+    .hero-container {
-+        padding-top: 20px;
-+    }
-+}
-+
+/* HOMEPAGE SPECIFIC STYLES */
+
+/* HERO SECTION */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    text-align: center;
+    color: var(--white);
+    padding: var(--spacing-lg);
+    position: relative;
+    gap: var(--spacing-2xl);
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 10;
+    position: relative;
+    flex: 1;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--spacing-lg);
+    animation: slideInUp 1s ease-out;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.95;
+    animation: slideInUp 1s ease-out 0.2s both;
+    font-weight: 500;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.9;
+    animation: slideInUp 1s ease-out 0.4s both;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-container .cta-button {
+    animation: slideInUp 1s ease-out 0.6s both;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Robot Styles */
+.robot-container {
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.robot {
+    width: clamp(150px, 20vw, 200px);
+    height: clamp(225px, 30vw, 300px);
+    position: relative;
+    animation: robotFloat 3s ease-in-out infinite;
+    transition: transform var(--transition-normal);
+}
+
+.robot:hover {
+    transform: scale(1.05);
+}
+
+@keyframes robotFloat {
+    0%, 100% { 
+        transform: translateY(0); 
+    }
+    50% { 
+        transform: translateY(-20px); 
+    }
+}
+
+/* Robot Head */
+.robot-head {
+    width: 50%;
+    height: 33.33%;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition-fast);
+}
+
+.robot:hover .robot-head {
+    transform: rotate(5deg);
+}
+
+.antenna {
+    width: 4px;
+    height: 30px;
+    background: #333;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.antenna::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: antennaBlink 2s infinite;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+@keyframes antennaBlink {
+    0%, 100% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1);
+    }
+    50% { 
+        opacity: 0.3; 
+        transform: translateX(-50%) scale(0.8);
+    }
+}
+
+.eyes {
+    display: flex;
+    justify-content: space-around;
+    padding: 25% 20% 0;
+}
+
+.eye {
+    width: 20%;
+    height: 20%;
+    background: var(--white);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.eye::before {
+    content: '';
+    width: 50%;
+    height: 50%;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    animation: eyeMove 3s infinite;
+    transition: all var(--transition-fast);
+}
+
+@keyframes eyeMove {
+    0%, 100% { 
+        transform: translate(0, 0); 
+    }
+    25% { 
+        transform: translate(-20%, 0); 
+    }
+    75% { 
+        transform: translate(20%, 0); 
+    }
+}
+
+.robot:hover .eye::before {
+    animation: eyeSpin 0.5s ease-in-out;
+}
+
+@keyframes eyeSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.mouth {
+    width: 40%;
+    height: 8%;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 15% auto 0;
+    border-radius: 0 0 20px 20px;
+    transition: all var(--transition-fast);
+}
+
+.robot:hover .mouth {
+    transform: scaleX(1.2);
+}
+
+/* Robot Body */
+.robot-body {
+    width: 60%;
+    height: 40%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 5% auto 0;
+    border-radius: var(--radius-lg);
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition-fast);
+}
+
+.robot:hover .robot-body {
+    transform: scale(1.02);
+}
+
+.chest-light {
+    width: 20%;
+    height: 20%;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: chestGlow 2s infinite;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+}
+
+@keyframes chestGlow {
+    0%, 100% { 
+        opacity: 0.8; 
+        transform: translateX(-50%) scale(1);
+    }
+    50% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+.robot:hover .chest-light {
+    animation: chestGlow 0.5s infinite;
+}
+
+.arm {
+    width: 8%;
+    height: 30%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    position: absolute;
+    top: 10%;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.arm.left {
+    left: -10%;
+    transform-origin: top center;
+    animation: leftArmWave 2s ease-in-out infinite;
+}
+
+.arm.right {
+    right: -10%;
+    transform-origin: top center;
+    animation: rightArmWave 2s ease-in-out infinite;
+}
+
+@keyframes leftArmWave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-20deg); }
+}
+
+@keyframes rightArmWave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(20deg); }
+}
+
+.robot:hover .arm.left {
+    animation: leftArmWaveFast 0.3s ease-in-out infinite;
+}
+
+.robot:hover .arm.right {
+    animation: rightArmWaveFast 0.3s ease-in-out infinite;
+}
+
+@keyframes leftArmWaveFast {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes rightArmWaveFast {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(30deg); }
+}
+
+.robot-legs {
+    width: 80%;
+    height: 20%;
+    margin: 5% auto 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 20%;
+}
+
+.leg {
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast);
+}
+
+.robot:hover .leg {
+    transform: scaleY(1.1);
+}
+
+/* Event Announcement */
+.event-announcement {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+    animation: slideInUp 1s ease-out 0.8s both;
+}
+
+.event-announcement::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.announcement-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    animation: bounce 2s infinite;
+}
+
+.event-announcement h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--white);
+}
+
+.event-announcement p {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.9;
+}
+
+.event-button {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all var(--transition-fast);
+    font-weight: 500;
+}
+
+.event-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .robot-container {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+    }
+    
+    .hero-container {
+        flex-direction: column;
+        gap: var(--spacing-xl);
+    }
+    
+    .robot {
+        width: 180px;
+        height: 270px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-base);
+    }
+    
+    .robot {
+        width: 150px;
+        height: 225px;
+    }
+    
+    .hero-container {
+        padding: var(--spacing-md);
+        min-height: calc(100vh - 70px);
+    }
+    
+    .event-announcement {
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-container {
+        padding: var(--spacing-sm);
+    }
+    
+    .robot {
+        width: 120px;
+        height: 180px;
+    }
+    
+    .event-announcement h3 {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .robot {
+        animation: none;
+    }
+    
+    .robot:hover {
+        transform: none;
+    }
+    
+    .antenna::before {
+        animation: none;
+    }
+    
+    .eye::before {
+        animation: none;
+    }
+    
+    .chest-light {
+        animation: none;
+    }
+    
+    .arm.left,
+    .arm.right {
+        animation: none;
+    }
+    
+    .announcement-badge {
+        animation: none;
+    }
+    
+    .event-announcement::before {
+        animation: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .robot-head {
+        background: #000080;
+    }
+    
+    .robot-body {
+        background: #0066cc;
+    }
+    
+    .arm,
+    .leg {
+        background: #0066cc;
+    }
+    
+    .chest-light {
+        background: #cc6600;
+    }
+}

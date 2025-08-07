@@ -58,8 +58,8 @@
     margin-bottom: var(--spacing-xl);
     font-size: 1.2rem;
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
     position: relative;
     overflow: hidden;
 }
@@ -77,7 +77,7 @@
 
 .hero-container .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5);
 }
 
 .hero-container .cta-button:hover::before {

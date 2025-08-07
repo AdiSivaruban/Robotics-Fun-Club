@@ -1,0 +1,68 @@
+{
+  "name": "Robotics Fun Club",
+  "short_name": "Robotics Club",
+  "description": "Discover amazing DIY STEM projects for kids using everyday materials",
+  "start_url": "/home.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["education", "science", "kids"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%237c3aed' rx='20'/><text y='.9em' font-size='60' text-anchor='middle' x='50' fill='white'>🤖</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%237c3aed' rx='40'/><text y='.9em' font-size='120' text-anchor='middle' x='96' fill='white'>🤖</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%237c3aed' rx='100'/><text y='.9em' font-size='300' text-anchor='middle' x='256' fill='white'>🤖</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "nature-walk-poster.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Robotics Fun Club Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View DIY STEM projects",
+      "url": "/projects.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect width='96' height='96' fill='%2306b6d4' rx='20'/><text y='.9em' font-size='50' text-anchor='middle' x='48' fill='white'>🔧</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Gallery",
+      "short_name": "Gallery",
+      "description": "View project gallery",
+      "url": "/gallery.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect width='96' height='96' fill='%23f59e0b' rx='20'/><text y='.9em' font-size='50' text-anchor='middle' x='48' fill='white'>📸</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

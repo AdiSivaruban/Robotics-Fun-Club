@@ -3,23 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover amazing DIY STEM projects for kids using everyday materials. Build robots, rockets, and cool gadgets with Robotics Fun Club!">
+    <meta name="keywords" content="STEM, robotics, DIY projects, kids activities, science experiments, educational toys">
+    <meta name="author" content="Robotics Fun Club">
+    <meta name="theme-color" content="#7c3aed">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roboticsfunclub.com/">
+    <meta property="og:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
+    <meta property="og:description" content="Discover amazing DIY STEM projects for kids using everyday materials!">
+    <meta property="og:image" content="nature-walk-poster.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://roboticsfunclub.com/">
+    <meta property="twitter:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
+    <meta property="twitter:description" content="Discover amazing DIY STEM projects for kids using everyday materials!">
+    <meta property="twitter:image" content="nature-walk-poster.jpg">
+    
     <title>Robotics Fun Club - DIY STEM Projects for Kids</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Robotics Fun Club">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="home.css" as="style">
+    <link rel="preload" href="navigation.js" as="script">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <div class="animated-bg">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <div class="animated-bg" aria-hidden="true">
         <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="gear">⚙️</div>
-            <div class="gear">⚙️</div>
-            <div class="gear">⚙️</div>
+            <div class="shape" role="presentation"></div>
+            <div class="shape" role="presentation"></div>
+            <div class="shape" role="presentation"></div>
+            <div class="shape" role="presentation"></div>
+            <div class="shape" role="presentation"></div>
+            <div class="gear" role="presentation" aria-label="Floating gear">⚙️</div>
+            <div class="gear" role="presentation" aria-label="Floating gear">⚙️</div>
+            <div class="gear" role="presentation" aria-label="Floating gear">⚙️</div>
         </div>
-        <div class="particles">
+        <div class="particles" aria-hidden="true">
             <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
             <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
             <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
@@ -32,63 +69,76 @@
         </div>
     </div>
 
-    <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <div class="robot-icon"></div>
-                Robotics Fun Club
+    <header>
+        <nav class="main-navigation" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="robot-icon" aria-label="Robot logo"></div>
+                    <span>Robotics Fun Club</span>
+                </div>
+                <ul class="nav-links" role="menubar">
+                    <li role="none"><a href="home.html" role="menuitem" aria-current="page">Home</a></li>
+                    <li role="none"><a href="projects.html" role="menuitem">Projects</a></li>
+                    <li role="none"><a href="gallery.html" role="menuitem">Gallery</a></li>
+                    <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                    <li role="none"><a href="events.html" role="menuitem">Events</a></li>
+                    <li role="none"><a href="reviews.html" role="menuitem">Reviews</a></li>
+                </ul>
             </div>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-            </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <main class="hero-container">
+    <main id="main-content" class="hero-container" role="main">
         <div class="hero-content">
             <h1>🚀 Robotics Fun Club</h1>
             <p class="hero-subtitle">Discover amazing DIY STEM projects using everyday materials!</p>
             <p class="hero-description">Build robots, rockets, and cool gadgets with things you already have at home</p>
-            <a href="projects.html" class="cta-button">Start Building!</a>
+            <a href="projects.html" class="cta-button" role="button" aria-label="Start building projects">
+                <span>Start Building!</span>
+            </a>
             
             <!-- Event Announcement -->
-            <div class="event-announcement">
-                <div class="announcement-badge">🌿 New Event!</div>
-                <h3>Join the WeAreBrampton Nature Walk</h3>
+            <section class="event-announcement" aria-labelledby="event-title">
+                <div class="announcement-badge" aria-label="New event badge">🌿 New Event!</div>
+                <h3 id="event-title">Join the WeAreBrampton Nature Walk</h3>
                 <p>A community event for families with STEM activities in nature</p>
-                <a href="events.html" class="event-button">Learn More</a>
-            </div>
+                <a href="events.html" class="event-button" role="button" aria-label="Learn more about the nature walk event">
+                    Learn More
+                </a>
+            </section>
         </div>
         
         <!-- Interactive Robot -->
-        <div class="robot-container">
-            <div class="robot">
+        <div class="robot-container" role="img" aria-label="Interactive robot mascot">
+            <div class="robot" tabindex="0" role="button" aria-label="Click to interact with robot">
                 <div class="robot-head">
                     <div class="antenna"></div>
                     <div class="eyes">
-                        <div class="eye left"></div>
-                        <div class="eye right"></div>
+                        <div class="eye left" aria-label="Robot left eye"></div>
+                        <div class="eye right" aria-label="Robot right eye"></div>
                     </div>
                     <div class="mouth"></div>
                 </div>
                 <div class="robot-body">
-                    <div class="chest-light"></div>
-                    <div class="arm left"></div>
-                    <div class="arm right"></div>
+                    <div class="chest-light" aria-label="Robot chest light"></div>
+                    <div class="arm left" aria-label="Robot left arm"></div>
+                    <div class="arm right" aria-label="Robot right arm"></div>
                 </div>
                 <div class="robot-legs">
-                    <div class="leg left"></div>
-                    <div class="leg right"></div>
+                    <div class="leg left" aria-label="Robot left leg"></div>
+                    <div class="leg right" aria-label="Robot right leg"></div>
                 </div>
             </div>
         </div>
     </main>
 
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2024 Robotics Fun Club. Making STEM fun for everyone!</p>
+        </div>
+    </footer>
+
     <script src="navigation.js"></script>
+    <script src="home.js"></script>
 </body>
 </html>

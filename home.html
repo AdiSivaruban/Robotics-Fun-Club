@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join Robotics Fun Club for exciting DIY STEM projects! Build robots, rockets, and cool gadgets using everyday materials. Perfect for kids who love hands-on learning.">
+    <meta name="keywords" content="robotics, STEM, DIY projects, kids, education, science, technology, engineering, math">
+    <meta name="author" content="Robotics Fun Club">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
+    <meta property="og:description" content="Discover amazing DIY STEM projects using everyday materials! Build robots, rockets, and cool gadgets.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://roboticsfunclub.com/robot-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
+    <meta name="twitter:description" content="Discover amazing DIY STEM projects using everyday materials!">
+    
     <title>Robotics Fun Club - DIY STEM Projects for Kids</title>
+    
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="home.css" as="style">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="home.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
 </head>
 <body>
     <div class="animated-bg">
@@ -32,56 +55,58 @@
         </div>
     </div>
 
-    <nav>
+    <nav role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="logo">
-                <div class="robot-icon"></div>
+                <div class="robot-icon" aria-hidden="true"></div>
                 Robotics Fun Club
             </div>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
+            <ul class="nav-links" id="main-navigation" role="menubar">
+                <li role="none"><a href="home.html" role="menuitem" aria-current="page">Home</a></li>
+                <li role="none"><a href="projects.html" role="menuitem">Projects</a></li>
+                <li role="none"><a href="gallery.html" role="menuitem">Gallery</a></li>
+                <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                <li role="none"><a href="events.html" role="menuitem">Events</a></li>
+                <li role="none"><a href="reviews.html" role="menuitem">Reviews</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="hero-container">
-        <div class="hero-content">
-            <h1>🚀 Robotics Fun Club</h1>
+    <main class="hero-container" role="main">
+        <section class="hero-content" aria-labelledby="main-heading">
+            <h1 id="main-heading">🚀 Robotics Fun Club</h1>
             <p class="hero-subtitle">Discover amazing DIY STEM projects using everyday materials!</p>
             <p class="hero-description">Build robots, rockets, and cool gadgets with things you already have at home</p>
-            <a href="projects.html" class="cta-button">Start Building!</a>
+            <a href="projects.html" class="cta-button" aria-label="Start building robotics projects">
+                <span>Start Building!</span>
+            </a>
             
             <!-- Event Announcement -->
-            <div class="event-announcement">
-                <div class="announcement-badge">🌿 New Event!</div>
-                <h3>Join the WeAreBrampton Nature Walk</h3>
+            <aside class="event-announcement" aria-labelledby="event-heading">
+                <div class="announcement-badge" aria-label="New event announcement">🌿 New Event!</div>
+                <h3 id="event-heading">Join the WeAreBrampton Nature Walk</h3>
                 <p>A community event for families with STEM activities in nature</p>
-                <a href="events.html" class="event-button">Learn More</a>
-            </div>
-        </div>
+                <a href="events.html" class="event-button" aria-label="Learn more about WeAreBrampton Nature Walk event">Learn More</a>
+            </aside>
+        </section>
         
         <!-- Interactive Robot -->
-        <div class="robot-container">
+        <div class="robot-container" role="img" aria-label="Animated robot mascot" tabindex="0">
             <div class="robot">
-                <div class="robot-head">
-                    <div class="antenna"></div>
-                    <div class="eyes">
+                <div class="robot-head" aria-label="Robot head with glowing antenna">
+                    <div class="antenna" aria-hidden="true"></div>
+                    <div class="eyes" aria-hidden="true">
                         <div class="eye left"></div>
                         <div class="eye right"></div>
                     </div>
-                    <div class="mouth"></div>
+                    <div class="mouth" aria-hidden="true"></div>
                 </div>
-                <div class="robot-body">
-                    <div class="chest-light"></div>
-                    <div class="arm left"></div>
-                    <div class="arm right"></div>
+                <div class="robot-body" aria-label="Robot body with glowing chest light">
+                    <div class="chest-light" aria-hidden="true"></div>
+                    <div class="arm left" aria-hidden="true"></div>
+                    <div class="arm right" aria-hidden="true"></div>
                 </div>
-                <div class="robot-legs">
+                <div class="robot-legs" aria-hidden="true">
                     <div class="leg left"></div>
                     <div class="leg right"></div>
                 </div>

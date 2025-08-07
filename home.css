@@ -59,6 +59,8 @@
     height: 300px;
     position: relative;
     animation: robotFloat 3s ease-in-out infinite;
+    will-change: transform; /* Performance optimization */
+    backface-visibility: hidden; /* Prevent flickering */
 }
 
 @keyframes robotFloat {
@@ -328,35 +330,50 @@
     box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
 }
 
-/* Responsive */
+/* Responsive - Improved */
 @media (max-width: 1024px) {
     .robot-container {
         position: static;
         transform: none;
         margin-top: 3rem;
+        order: 2; /* Ensure robot appears after content on mobile */
     }
     
     .hero-container {
         flex-direction: column;
-        padding-top: 40px;
+        padding: 40px 20px 20px;
+        gap: 2rem;
+    }
+    
+    .hero-content {
+        order: 1;
+        max-width: 100%;
     }
     
     .robot {
         transform: scale(0.8);
+    }
+    
+    .event-announcement {
+        margin-top: 2rem;
+        padding: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
     }
     
     .hero-subtitle {
         font-size: 1.2rem;
+        margin-bottom: 1rem;
     }
     
     .hero-description {
         font-size: 1rem;
+        margin-bottom: 2rem;
     }
     
     .robot {
@@ -365,6 +382,56 @@
     }
     
     .hero-container {
-        padding-top: 20px;
+        padding: 20px 15px;
+        min-height: calc(100vh - 60px);
+    }
+    
+    .event-announcement {
+        margin-top: 1.5rem;
+        padding: 1.25rem;
+        border-radius: 15px;
+    }
+    
+    .event-announcement h3 {
+        font-size: 1.25rem;
+    }
+    
+    .cta-button {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .robot {
+        transform: scale(0.5);
+        height: 160px;
+    }
+    
+    .event-announcement {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .event-announcement h3 {
+        font-size: 1.1rem;
+    }
+    
+    .cta-button,
+    .event-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
     }
 }

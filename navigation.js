@@ -1,12 +1,12 @@
 // Mobile Navigation Toggle Script
 document.addEventListener('DOMContentLoaded', function() {
-    // Create mobile navigation button
+    // Create mobile navigation button with improved accessibility
     const mobileNavHTML = `
-        <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">
             <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </div>
         </button>
     `;
@@ -30,9 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Toggle active class on nav links
             navLinks.classList.toggle('active');
             
+            // Update ARIA attributes for accessibility
+            const isExpanded = navLinks.classList.contains('active');
+            this.setAttribute('aria-expanded', isExpanded);
+            this.setAttribute('aria-label', isExpanded ? 'Close navigation' : 'Open navigation');
+            
             // Optional: Close menu when clicking outside
-            if (navLinks.classList.contains('active')) {
+            if (isExpanded) {
                 document.addEventListener('click', outsideClickHandler);
+                // Focus management for accessibility
+                navLinks.querySelector('a').focus();
             } else {
                 document.removeEventListener('click', outsideClickHandler);
             }

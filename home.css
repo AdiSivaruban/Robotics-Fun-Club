@@ -1,265 +1,794 @@
-diff --git a/home.html b/home.html
---- a/home.html
-+++ b/home.html
-@@ -1,94 +1,167 @@
--<!DOCTYPE html>
--<html lang="en">
--<head>
--    <meta charset="UTF-8">
--    <meta name="viewport" content="width=device-width, initial-scale=1.0">
--    <title>Robotics Fun Club - DIY STEM Projects for Kids</title>
--    <link rel="stylesheet" href="styles.css">
--    <link rel="stylesheet" href="home.css">
--</head>
--<body>
--    <div class="animated-bg">
--        <div class="floating-shapes">
--            <div class="shape"></div>
--            <div class="shape"></div>
--            <div class="shape"></div>
--            <div class="shape"></div>
--            <div class="shape"></div>
--            <div class="gear">⚙️</div>
--            <div class="gear">⚙️</div>
--            <div class="gear">⚙️</div>
--        </div>
--        <div class="particles">
--            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
--            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
--            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
--            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
--            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
--            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
--            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
--            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
--            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
--        </div>
--    </div>
+diff --git a/home.css b/home.css
+--- a/home.css
++++ b/home.css
+@@ -1,370 +1,420 @@
+-/* HOMEPAGE SPECIFIC STYLES */
 -
--    <nav>
--        <div class="nav-container">
--            <div class="logo">
--                <div class="robot-icon"></div>
--                Robotics Fun Club
--            </div>
--            <ul class="nav-links">
--                <li><a href="home.html">Home</a></li>
--                <li><a href="projects.html">Projects</a></li>
--                <li><a href="gallery.html">Gallery</a></li>
--                <li><a href="about.html">About</a></li>
--                <li><a href="events.html">Events</a></li>
--                <li><a href="reviews.html">Reviews</a></li>
--            </ul>
--        </div>
--    </nav>
+-/* HERO SECTION */
+-.hero-container {
+-    display: flex;
+-    align-items: center;
+-    justify-content: center;
+-    min-height: calc(100vh - 80px); /* Account for nav height */
+-    text-align: center;
+-    color: white;
+-    padding: 20px;
+-    position: relative;
+-}
 -
--    <main class="hero-container">
--        <div class="hero-content">
--            <h1>🚀 Robotics Fun Club</h1>
--            <p class="hero-subtitle">Discover amazing DIY STEM projects using everyday materials!</p>
--            <p class="hero-description">Build robots, rockets, and cool gadgets with things you already have at home</p>
--            <a href="projects.html" class="cta-button">Start Building!</a>
--            
--            <!-- Event Announcement -->
--            <div class="event-announcement">
--                <div class="announcement-badge">🌿 New Event!</div>
--                <h3>Join the WeAreBrampton Nature Walk</h3>
--                <p>A community event for families with STEM activities in nature</p>
--                <a href="events.html" class="event-button">Learn More</a>
--            </div>
--        </div>
--        
--        <!-- Interactive Robot -->
--        <div class="robot-container">
--            <div class="robot">
--                <div class="robot-head">
--                    <div class="antenna"></div>
--                    <div class="eyes">
--                        <div class="eye left"></div>
--                        <div class="eye right"></div>
--                    </div>
--                    <div class="mouth"></div>
--                </div>
--                <div class="robot-body">
--                    <div class="chest-light"></div>
--                    <div class="arm left"></div>
--                    <div class="arm right"></div>
--                </div>
--                <div class="robot-legs">
--                    <div class="leg left"></div>
--                    <div class="leg right"></div>
--                </div>
--            </div>
--        </div>
--    </main>
+-.hero-content {
+-    max-width: 800px;
+-    z-index: 10;
+-    position: relative;
+-}
 -
--    <script src="navigation.js"></script>
--</body>
--</html>
-+<!DOCTYPE html>
-+<html lang="en">
-+<head>
-+    <meta charset="UTF-8">
-+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-+    <title>Robotics Fun Club - DIY STEM Projects for Kids</title>
-+    
-+    <!-- SEO Meta Tags -->
-+    <meta name="description" content="Discover amazing DIY STEM projects for kids using everyday materials! Build robots, rockets, and cool gadgets with things you already have at home.">
-+    <meta name="keywords" content="STEM projects, robotics for kids, DIY science, educational activities, kids crafts, science experiments">
-+    <meta name="author" content="Robotics Fun Club">
-+    
-+    <!-- Open Graph / Facebook -->
-+    <meta property="og:type" content="website">
-+    <meta property="og:url" content="https://roboticsfunclub.com/">
-+    <meta property="og:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
-+    <meta property="og:description" content="Discover amazing DIY STEM projects for kids using everyday materials!">
-+    <meta property="og:image" content="https://roboticsfunclub.com/images/og-image.jpg">
-+    
-+    <!-- Twitter -->
-+    <meta property="twitter:card" content="summary_large_image">
-+    <meta property="twitter:url" content="https://roboticsfunclub.com/">
-+    <meta property="twitter:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
-+    <meta property="twitter:description" content="Discover amazing DIY STEM projects for kids using everyday materials!">
-+    <meta property="twitter:image" content="https://roboticsfunclub.com/images/og-image.jpg">
-+    
-+    <!-- Favicon -->
-+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-+    
-+    <!-- Preload critical resources -->
-+    <link rel="preload" href="styles.css" as="style">
-+    <link rel="preload" href="home.css" as="style">
-+    
-+    <!-- PWA Manifest -->
-+    <link rel="manifest" href="/manifest.json">
-+    <meta name="theme-color" content="#7c3aed">
-+    
-+    <link rel="stylesheet" href="styles.css">
-+    <link rel="stylesheet" href="home.css">
-+    
-+    <!-- Structured Data -->
-+    <script type="application/ld+json">
-+    {
-+        "@context": "https://schema.org",
-+        "@type": "EducationalOrganization",
-+        "name": "Robotics Fun Club",
-+        "description": "DIY STEM projects for kids using everyday materials",
-+        "url": "https://roboticsfunclub.com",
-+        "logo": "https://roboticsfunclub.com/images/logo.png",
-+        "sameAs": [
-+            "https://facebook.com/roboticsfunclub",
-+            "https://instagram.com/roboticsfunclub"
-+        ]
+-.hero-content h1 {
+-    font-size: 4rem;
+-    margin-bottom: 20px;
+-    animation: slideInUp 1s ease-out;
+-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+-}
+-
+-.hero-subtitle {
+-    font-size: 1.5rem;
+-    margin-bottom: 15px;
+-    opacity: 0.95;
+-    animation: slideInUp 1s ease-out 0.2s both;
+-    font-weight: 500;
+-}
+-
+-.hero-description {
+-    font-size: 1.2rem;
+-    margin-bottom: 40px;
+-    opacity: 0.9;
+-    animation: slideInUp 1s ease-out 0.4s both;
+-    font-weight: 400;
+-}
+-
+-.hero-container .cta-button {
+-    animation: slideInUp 1s ease-out 0.6s both;
+-}
+-
+-/* Robot Styles */
+-.robot-container {
+-    position: absolute;
+-    right: 10%;
+-    top: 50%;
+-    transform: translateY(-50%);
+-    cursor: pointer;
+-}
+-
+-.robot {
+-    width: 200px;
+-    height: 300px;
+-    position: relative;
+-    animation: robotFloat 3s ease-in-out infinite;
+-}
+-
+-@keyframes robotFloat {
+-    0%, 100% { transform: translateY(0); }
+-    50% { transform: translateY(-20px); }
+-}
+-
+-/* Robot Head */
+-.robot-head {
+-    width: 100px;
+-    height: 100px;
+-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+-    margin: 0 auto;
+-    border-radius: 20px;
+-    position: relative;
+-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+-}
+-
+-.antenna {
+-    width: 4px;
+-    height: 30px;
+-    background: #333;
+-    position: absolute;
+-    top: -25px;
+-    left: 50%;
+-    transform: translateX(-50%);
+-}
+-
+-.antenna::before {
+-    content: '';
+-    width: 12px;
+-    height: 12px;
+-    background: #ff6b6b;
+-    border-radius: 50%;
+-    position: absolute;
+-    top: -8px;
+-    left: 50%;
+-    transform: translateX(-50%);
+-    animation: antennaBlink 2s infinite;
+-}
+-
+-@keyframes antennaBlink {
+-    0%, 100% { opacity: 1; }
+-    50% { opacity: 0.3; }
+-}
+-
+-.eyes {
+-    display: flex;
+-    justify-content: space-around;
+-    padding: 25px 20px 0;
+-}
+-
+-.eye {
+-    width: 20px;
+-    height: 20px;
+-    background: white;
+-    border-radius: 50%;
+-    position: relative;
+-    overflow: hidden;
+-}
+-
+-.eye::before {
+-    content: '';
+-    width: 10px;
+-    height: 10px;
+-    background: #333;
+-    border-radius: 50%;
+-    position: absolute;
+-    top: 5px;
+-    left: 5px;
+-    animation: eyeMove 3s infinite;
+-}
+-
+-@keyframes eyeMove {
+-    0%, 100% { transform: translate(0, 0); }
+-    25% { transform: translate(-3px, 0); }
+-    75% { transform: translate(3px, 0); }
+-}
+-
+-.mouth {
+-    width: 40px;
+-    height: 8px;
+-    background: rgba(255, 255, 255, 0.8);
+-    margin: 15px auto;
+-    border-radius: 0 0 20px 20px;
+-}
+-
+-/* Robot Body */
+-.robot-body {
+-    width: 120px;
+-    height: 100px;
+-    background: linear-gradient(135deg, #96ceb4, #45b7d1);
+-    margin: 10px auto;
+-    border-radius: 20px;
+-    position: relative;
+-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+-}
+-
+-.chest-light {
+-    width: 30px;
+-    height: 30px;
+-    background: #feca57;
+-    border-radius: 50%;
+-    position: absolute;
+-    top: 20px;
+-    left: 50%;
+-    transform: translateX(-50%);
+-    animation: chestGlow 1.5s infinite;
+-}
+-
+-@keyframes chestGlow {
+-    0%, 100% { 
+-        box-shadow: 0 0 20px rgba(254, 202, 87, 0.8);
+-        transform: translateX(-50%) scale(1);
+-    }
+-    50% { 
+-        box-shadow: 0 0 40px rgba(254, 202, 87, 1);
+-        transform: translateX(-50%) scale(1.1);
+-    }
+-}
+-
+-.arm {
+-    width: 30px;
+-    height: 80px;
+-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+-    position: absolute;
+-    top: 10px;
+-    border-radius: 15px;
+-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+-}
+-
+-.arm.left {
+-    left: -35px;
+-    transform-origin: top center;
+-    animation: leftArmWave 2s infinite;
+-}
+-
+-.arm.right {
+-    right: -35px;
+-    transform-origin: top center;
+-    animation: rightArmWave 2s infinite;
+-}
+-
+-@keyframes leftArmWave {
+-    0%, 100% { transform: rotate(-10deg); }
+-    50% { transform: rotate(-30deg); }
+-}
+-
+-@keyframes rightArmWave {
+-    0%, 100% { transform: rotate(10deg); }
+-    50% { transform: rotate(30deg); }
+-}
+-
+-/* Robot Legs */
+-.robot-legs {
+-    display: flex;
+-    justify-content: center;
+-    gap: 20px;
+-}
+-
+-.leg {
+-    width: 35px;
+-    height: 60px;
+-    background: linear-gradient(135deg, #6c5ce7, #a55eea);
+-    border-radius: 0 0 15px 15px;
+-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+-}
+-
+-/* Interactive Hover Effects */
+-.robot:hover .eye::before {
+-    animation: eyeSpin 0.5s infinite;
+-}
+-
+-@keyframes eyeSpin {
+-    0% { transform: translate(0, 0); }
+-    100% { transform: translate(0, 0) rotate(360deg); }
+-}
+-
+-.robot:hover .arm.left {
+-    animation: leftArmWaveFast 0.5s infinite;
+-}
+-
+-.robot:hover .arm.right {
+-    animation: rightArmWaveFast 0.5s infinite;
+-}
+-
+-@keyframes leftArmWaveFast {
+-    0%, 100% { transform: rotate(-45deg); }
+-    50% { transform: rotate(10deg); }
+-}
+-
+-@keyframes rightArmWaveFast {
+-    0%, 100% { transform: rotate(45deg); }
+-    50% { transform: rotate(-10deg); }
+-}
+-
+-.robot:hover .chest-light {
+-    animation: chestGlowFast 0.3s infinite;
+-}
+-
+-/* Event Announcement */
+-.event-announcement {
+-    margin-top: 3rem;
+-    background: rgba(255, 255, 255, 0.95);
+-    border-radius: 20px;
+-    padding: 2rem;
+-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+-    position: relative;
+-    overflow: hidden;
+-    animation: slideInUp 1s ease-out 0.8s both;
+-}
+-
+-.event-announcement::before {
+-    content: '';
+-    position: absolute;
+-    top: 0;
+-    left: 0;
+-    right: 0;
+-    height: 4px;
+-    background: linear-gradient(90deg, #10b981 0%, #059669 50%, #10b981 100%);
+-    background-size: 200% 100%;
+-    animation: shimmer 3s linear infinite;
+-}
+-
+-@keyframes shimmer {
+-    0% { background-position: -200% 0; }
+-    100% { background-position: 200% 0; }
+-}
+-
+-.announcement-badge {
+-    display: inline-block;
+-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+-    color: white;
+-    padding: 0.4rem 1rem;
+-    border-radius: 50px;
+-    font-size: 0.85rem;
+-    font-weight: 600;
+-    margin-bottom: 1rem;
+-    animation: pulse 2s infinite;
+-}
+-
+-.event-announcement h3 {
+-    color: #059669;
+-    font-size: 1.5rem;
+-    margin-bottom: 0.5rem;
+-}
+-
+-.event-announcement p {
+-    color: #64748b;
+-    margin-bottom: 1.5rem;
+-}
+-
+-.event-button {
+-    display: inline-block;
+-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+-    color: white;
+-    padding: 0.75rem 2rem;
+-    border-radius: 50px;
+-    text-decoration: none;
+-    font-weight: 600;
+-    transition: all 0.3s ease;
+-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+-}
+-
+-.event-button:hover {
+-    transform: translateY(-2px);
+-    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+-}
+-
+-/* Responsive */
+-@media (max-width: 1024px) {
+-    .robot-container {
+-        position: static;
+-        transform: none;
+-        margin-top: 3rem;
+-    }
+-    
+-    .hero-container {
+-        flex-direction: column;
+-        padding-top: 40px;
+-    }
+-    
+-    .robot {
+-        transform: scale(0.8);
+-    }
+-}
+-
+-@media (max-width: 768px) {
+-    .hero-content h1 {
+-        font-size: 2.5rem;
+-    }
+-    
+-    .hero-subtitle {
+-        font-size: 1.2rem;
+-    }
+-    
+-    .hero-description {
+-        font-size: 1rem;
+-    }
+-    
+-    .robot {
+-        transform: scale(0.6);
+-        height: 200px;
+-    }
+-    
+-    .hero-container {
+-        padding-top: 20px;
+-    }
+-}
++/* HOMEPAGE SPECIFIC STYLES */
++
++/* HERO SECTION */
++.hero-container {
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    min-height: calc(100vh - 80px); /* Account for nav height */
++    text-align: center;
++    color: white;
++    padding: 20px;
++    position: relative;
++}
++
++.hero-content {
++    max-width: 800px;
++    z-index: 10;
++    position: relative;
++}
++
++.hero-content h1 {
++    font-size: 4rem;
++    margin-bottom: 20px;
++    animation: slideInUp 1s ease-out;
++    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
++}
++
++.hero-subtitle {
++    font-size: 1.5rem;
++    margin-bottom: 15px;
++    opacity: 0.95;
++    animation: slideInUp 1s ease-out 0.2s both;
++    font-weight: 500;
++}
++
++.hero-description {
++    font-size: 1.2rem;
++    margin-bottom: 40px;
++    opacity: 0.9;
++    animation: slideInUp 1s ease-out 0.4s both;
++    font-weight: 400;
++}
++
++/* CTA Group */
++.cta-group {
++    display: flex;
++    gap: 20px;
++    justify-content: center;
++    align-items: center;
++    margin-bottom: 40px;
++    animation: slideInUp 1s ease-out 0.6s both;
++}
++
++.secondary-button {
++    display: inline-block;
++    padding: 12px 24px;
++    background: rgba(255, 255, 255, 0.1);
++    color: white;
++    text-decoration: none;
++    border-radius: 50px;
++    border: 2px solid rgba(255, 255, 255, 0.3);
++    font-weight: 600;
++    transition: all 0.3s ease;
++    backdrop-filter: blur(10px);
++}
++
++.secondary-button:hover {
++    background: rgba(255, 255, 255, 0.2);
++    border-color: rgba(255, 255, 255, 0.5);
++    transform: translateY(-2px);
++}
++
++.hero-container .cta-button {
++    animation: none; /* Remove individual animation since it's in cta-group */
++}
++
++/* Loading States */
++.loading {
++    opacity: 0.7;
++    pointer-events: none;
++}
++
++.loading::after {
++    content: '';
++    position: absolute;
++    top: 50%;
++    left: 50%;
++    width: 20px;
++    height: 20px;
++    margin: -10px 0 0 -10px;
++    border: 2px solid transparent;
++    border-top: 2px solid var(--accent);
++    border-radius: 50%;
++    animation: spin 1s linear infinite;
++}
++
++/* Robot Styles */
++.robot-container {
++    position: absolute;
++    right: 10%;
++    top: 50%;
++    transform: translateY(-50%);
++    cursor: pointer;
++}
++
++.robot {
++    width: 200px;
++    height: 300px;
++    position: relative;
++    animation: robotFloat 3s ease-in-out infinite;
++}
++
++@keyframes robotFloat {
++    0%, 100% { transform: translateY(0); }
++    50% { transform: translateY(-20px); }
++}
++
++/* Robot Head */
++.robot-head {
++    width: 100px;
++    height: 100px;
++    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
++    margin: 0 auto;
++    border-radius: 20px;
++    position: relative;
++    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
++}
++
++.antenna {
++    width: 4px;
++    height: 30px;
++    background: #333;
++    position: absolute;
++    top: -25px;
++    left: 50%;
++    transform: translateX(-50%);
++}
++
++.antenna::before {
++    content: '';
++    width: 12px;
++    height: 12px;
++    background: #ff6b6b;
++    border-radius: 50%;
++    position: absolute;
++    top: -8px;
++    left: 50%;
++    transform: translateX(-50%);
++    animation: antennaBlink 2s infinite;
++}
++
++@keyframes antennaBlink {
++    0%, 100% { opacity: 1; }
++    50% { opacity: 0.3; }
++}
++
++.eyes {
++    display: flex;
++    justify-content: space-around;
++    padding: 25px 20px 0;
++}
++
++.eye {
++    width: 20px;
++    height: 20px;
++    background: white;
++    border-radius: 50%;
++    position: relative;
++    overflow: hidden;
++}
++
++.eye::before {
++    content: '';
++    width: 10px;
++    height: 10px;
++    background: #333;
++    border-radius: 50%;
++    position: absolute;
++    top: 5px;
++    left: 5px;
++    animation: eyeMove 3s infinite;
++}
++
++@keyframes eyeMove {
++    0%, 100% { transform: translate(0, 0); }
++    25% { transform: translate(-3px, 0); }
++    75% { transform: translate(3px, 0); }
++}
++
++.mouth {
++    width: 40px;
++    height: 8px;
++    background: rgba(255, 255, 255, 0.8);
++    margin: 15px auto;
++    border-radius: 0 0 20px 20px;
++}
++
++/* Robot Body */
++.robot-body {
++    width: 120px;
++    height: 100px;
++    background: linear-gradient(135deg, #96ceb4, #45b7d1);
++    margin: 10px auto;
++    border-radius: 20px;
++    position: relative;
++    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
++}
++
++.chest-light {
++    width: 30px;
++    height: 30px;
++    background: #feca57;
++    border-radius: 50%;
++    position: absolute;
++    top: 20px;
++    left: 50%;
++    transform: translateX(-50%);
++    animation: chestGlow 1.5s infinite;
++}
++
++@keyframes chestGlow {
++    0%, 100% { 
++        box-shadow: 0 0 20px rgba(254, 202, 87, 0.8);
++        transform: translateX(-50%) scale(1);
 +    }
-+    </script>
++    50% { 
++        box-shadow: 0 0 40px rgba(254, 202, 87, 1);
++        transform: translateX(-50%) scale(1.1);
++    }
++}
++
++.arm {
++    width: 30px;
++    height: 80px;
++    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
++    position: absolute;
++    top: 10px;
++    border-radius: 15px;
++    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
++}
++
++.arm.left {
++    left: -35px;
++    transform-origin: top center;
++    animation: leftArmWave 2s infinite;
++}
++
++.arm.right {
++    right: -35px;
++    transform-origin: top center;
++    animation: rightArmWave 2s infinite;
++}
++
++@keyframes leftArmWave {
++    0%, 100% { transform: rotate(-10deg); }
++    50% { transform: rotate(-30deg); }
++}
++
++@keyframes rightArmWave {
++    0%, 100% { transform: rotate(10deg); }
++    50% { transform: rotate(30deg); }
++}
++
++/* Robot Legs */
++.robot-legs {
++    display: flex;
++    justify-content: center;
++    gap: 20px;
++}
++
++.leg {
++    width: 35px;
++    height: 60px;
++    background: linear-gradient(135deg, #6c5ce7, #a55eea);
++    border-radius: 0 0 15px 15px;
++    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
++}
++
++/* Interactive Hover Effects */
++.robot:hover .eye::before {
++    animation: eyeSpin 0.5s infinite;
++}
++
++@keyframes eyeSpin {
++    0% { transform: translate(0, 0); }
++    100% { transform: translate(0, 0) rotate(360deg); }
++}
++
++.robot:hover .arm.left {
++    animation: leftArmWaveFast 0.5s infinite;
++}
++
++.robot:hover .arm.right {
++    animation: rightArmWaveFast 0.5s infinite;
++}
++
++@keyframes leftArmWaveFast {
++    0%, 100% { transform: rotate(-45deg); }
++    50% { transform: rotate(10deg); }
++}
++
++@keyframes rightArmWaveFast {
++    0%, 100% { transform: rotate(45deg); }
++    50% { transform: rotate(-10deg); }
++}
++
++.robot:hover .chest-light {
++    animation: chestGlowFast 0.3s infinite;
++}
++
++/* Event Announcement */
++.event-announcement {
++    margin-top: 3rem;
++    background: rgba(255, 255, 255, 0.95);
++    border-radius: 20px;
++    padding: 2rem;
++    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
++    position: relative;
++    overflow: hidden;
++    animation: slideInUp 1s ease-out 0.8s both;
++}
++
++.event-announcement::before {
++    content: '';
++    position: absolute;
++    top: 0;
++    left: 0;
++    right: 0;
++    height: 4px;
++    background: linear-gradient(90deg, #10b981 0%, #059669 50%, #10b981 100%);
++    background-size: 200% 100%;
++    animation: shimmer 3s linear infinite;
++}
++
++@keyframes shimmer {
++    0% { background-position: -200% 0; }
++    100% { background-position: 200% 0; }
++}
++
++.announcement-badge {
++    display: inline-block;
++    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
++    color: white;
++    padding: 0.4rem 1rem;
++    border-radius: 50px;
++    font-size: 0.85rem;
++    font-weight: 600;
++    margin-bottom: 1rem;
++    animation: pulse 2s infinite;
++}
++
++.event-announcement h3 {
++    color: #059669;
++    font-size: 1.5rem;
++    margin-bottom: 0.5rem;
++}
++
++.event-announcement p {
++    color: #64748b;
++    margin-bottom: 1.5rem;
++}
++
++.event-button {
++    display: inline-block;
++    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
++    color: white;
++    padding: 0.75rem 2rem;
++    border-radius: 50px;
++    text-decoration: none;
++    font-weight: 600;
++    transition: all 0.3s ease;
++    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
++}
++
++.event-button:hover {
++    transform: translateY(-2px);
++    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
++}
++
++/* Responsive */
++@media (max-width: 1024px) {
++    .robot-container {
++        position: static;
++        transform: none;
++        margin-top: 3rem;
++    }
 +    
-+    <!-- Service Worker Registration -->
-+    <script>
-+        if ('serviceWorker' in navigator) {
-+            window.addEventListener('load', () => {
-+                navigator.serviceWorker.register('/sw.js')
-+                    .then(registration => {
-+                        console.log('SW registered: ', registration);
-+                    })
-+                    .catch(registrationError => {
-+                        console.log('SW registration failed: ', registrationError);
-+                    });
-+            });
-+        }
-+    </script>
-+</head>
-+<body>
-+    <!-- Skip to main content for screen readers -->
-+    <a href="#main-content" class="skip-link">Skip to main content</a>
++    .hero-container {
++        flex-direction: column;
++        padding-top: 40px;
++    }
 +    
-+    <div class="animated-bg">
-+        <div class="floating-shapes">
-+            <div class="shape"></div>
-+            <div class="shape"></div>
-+            <div class="shape"></div>
-+            <div class="shape"></div>
-+            <div class="shape"></div>
-+            <div class="gear">⚙️</div>
-+            <div class="gear">⚙️</div>
-+            <div class="gear">⚙️</div>
-+        </div>
-+        <div class="particles">
-+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
-+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
-+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
-+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
-+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
-+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
-+        </div>
-+    </div>
++    .robot {
++        transform: scale(0.8);
++    }
++}
 +
-+    <nav>
-+        <div class="nav-container">
-+            <div class="logo">
-+                <div class="robot-icon" aria-label="Robot logo"></div>
-+                <span>Robotics Fun Club</span>
-+            </div>
-+            <ul class="nav-links" role="navigation" aria-label="Main navigation">
-+                <li><a href="home.html" aria-current="page">Home</a></li>
-+                <li><a href="projects.html">Projects</a></li>
-+                <li><a href="gallery.html">Gallery</a></li>
-+                <li><a href="about.html">About</a></li>
-+                <li><a href="events.html">Events</a></li>
-+                <li><a href="reviews.html">Reviews</a></li>
-+            </ul>
-+        </div>
-+    </nav>
-+
-+    <main class="hero-container" id="main-content">
-+        <div class="hero-content">
-+            <h1>🚀 Robotics Fun Club</h1>
-+            <p class="hero-subtitle">Discover amazing DIY STEM projects using everyday materials!</p>
-+            <p class="hero-description">Build robots, rockets, and cool gadgets with things you already have at home</p>
-+            <div class="cta-group">
-+                <a href="projects.html" class="cta-button">
-+                    <span>Start Building!</span>
-+                    <span class="sr-only">Explore our DIY STEM projects</span>
-+                </a>
-+                <a href="about.html" class="secondary-button">Learn More</a>
-+            </div>
-+            
-+            <!-- Event Announcement -->
-+            <div class="event-announcement" role="region" aria-label="Event announcement">
-+                <div class="announcement-badge">🌿 New Event!</div>
-+                <h3>Join the WeAreBrampton Nature Walk</h3>
-+                <p>A community event for families with STEM activities in nature</p>
-+                <a href="events.html" class="event-button">Learn More</a>
-+            </div>
-+        </div>
-+        
-+        <!-- Interactive Robot -->
-+        <div class="robot-container" role="img" aria-label="Animated robot mascot">
-+            <div class="robot">
-+                <div class="robot-head">
-+                    <div class="antenna"></div>
-+                    <div class="eyes">
-+                        <div class="eye left"></div>
-+                        <div class="eye right"></div>
-+                    </div>
-+                    <div class="mouth"></div>
-+                </div>
-+                <div class="robot-body">
-+                    <div class="chest-light"></div>
-+                    <div class="arm left"></div>
-+                    <div class="arm right"></div>
-+                </div>
-+                <div class="robot-legs">
-+                    <div class="leg left"></div>
-+                    <div class="leg right"></div>
-+                </div>
-+            </div>
-+        </div>
-+    </main>
-+
-+    <script src="navigation.js"></script>
-+</body>
-+</html>
++@media (max-width: 768px) {
++    .hero-content h1 {
++        font-size: 2.5rem;
++    }
++    
++    .hero-subtitle {
++        font-size: 1.2rem;
++    }
++    
++    .hero-description {
++        font-size: 1rem;
++    }
++    
++    .robot {
++        transform: scale(0.6);
++        height: 200px;
++    }
++    
++    .hero-container {
++        padding-top: 20px;
++    }
++}
 +

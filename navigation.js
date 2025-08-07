@@ -1,4 +1,4 @@
-// Enhanced Mobile Navigation Script
+// Enhanced Mobile Navigation Script - FIXED VERSION
 // This script provides mobile navigation functionality with improved accessibility and performance
 
 class MobileNavigation {
@@ -11,10 +11,13 @@ class MobileNavigation {
     }
 
     init() {
-        this.createMobileToggle();
-        this.setupEventListeners();
-        this.setupKeyboardNavigation();
-        this.setupAccessibility();
+        // Add a small delay to ensure DOM is ready
+        setTimeout(() => {
+            this.createMobileToggle();
+            this.setupEventListeners();
+            this.setupKeyboardNavigation();
+            this.setupAccessibility();
+        }, 100);
     }
 
     createMobileToggle() {
@@ -22,7 +25,9 @@ class MobileNavigation {
         const navLinks = document.querySelector('.nav-links');
         
         if (!navContainer || !navLinks) {
-            console.warn('Navigation elements not found');
+            console.warn('Navigation elements not found, retrying...');
+            // Retry after a short delay
+            setTimeout(() => this.createMobileToggle(), 200);
             return;
         }
 
@@ -30,8 +35,9 @@ class MobileNavigation {
         this.navLinks = navLinks;
 
         // Check if mobile toggle already exists
-        if (document.querySelector('.mobile-nav-toggle')) {
-            this.mobileToggle = document.querySelector('.mobile-nav-toggle');
+        const existingToggle = document.querySelector('.mobile-nav-toggle');
+        if (existingToggle) {
+            this.mobileToggle = existingToggle;
             return;
         }
 
@@ -45,19 +51,32 @@ class MobileNavigation {
             </button>
         `;
         
-        navLinks.insertAdjacentHTML('beforebegin', mobileNavHTML);
+        // Insert the button after the logo but before the nav links
+        const logo = navContainer.querySelector('.logo');
+        if (logo) {
+            logo.insertAdjacentHTML('afterend', mobileNavHTML);
+        } else {
+            navContainer.insertAdjacentHTML('beforeend', mobileNavHTML);
+        }
+        
         this.mobileToggle = document.querySelector('.mobile-nav-toggle');
         
         // Add ID to nav-links for aria-controls
-        navLinks.id = 'nav-links';
+        if (!navLinks.id) {
+            navLinks.id = 'nav-links';
+        }
     }
 
     setupEventListeners() {
-        if (!this.mobileToggle) return;
+        if (!this.mobileToggle) {
+            console.warn('Mobile toggle not found');
+            return;
+        }
 
         // Toggle menu on click
         this.mobileToggle.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             this.toggleMenu();
         });
         
@@ -76,7 +95,7 @@ class MobileNavigation {
         links.forEach(link => {
             link.addEventListener('click', () => {
                 // Add a small delay to allow the click to register
-                setTimeout(() => this.closeMenu(), 100);
+                setTimeout(() => this.closeMenu(), 150);
             });
         });
 
@@ -88,20 +107,33 @@ class MobileNavigation {
                 this.handleResize();
             }, 250);
         });
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                if (this.isMenuOpen) {
+                    this.closeMenu();
+                }
+            }, 100);
+        });
     }
 
     setupKeyboardNavigation() {
+        if (!this.navLinks) return;
+
         const navItems = this.navLinks.querySelectorAll('a');
         
         navItems.forEach((item, index) => {
             item.addEventListener('keydown', (e) => {
                 switch(e.key) {
                     case 'ArrowRight':
+                    case 'ArrowDown':
                         e.preventDefault();
                         const nextItem = navItems[index + 1] || navItems[0];
                         nextItem.focus();
                         break;
                     case 'ArrowLeft':
+                    case 'ArrowUp':
                         e.preventDefault();
                         const prevItem = navItems[index - 1] || navItems[navItems.length - 1];
                         prevItem.focus();
@@ -120,7 +152,9 @@ class MobileNavigation {
     }
 
     setupAccessibility() {
-        // Add focus management
+        if (!this.navLinks) return;
+
+        // Add focus management for tab navigation
         this.navLinks.addEventListener('keydown', (e) => {
             if (e.key === 'Tab' && this.isMenuOpen) {
                 const focusableElements = this.navLinks.querySelectorAll('a, button');
@@ -128,15 +162,28 @@ class MobileNavigation {
                 const lastElement = focusableElements[focusableElements.length - 1];
 
                 if (e.shiftKey) {
+                    // Shift + Tab - going backwards
                     if (document.activeElement === firstElement) {
                         e.preventDefault();
-                        lastElement.focus();
+                        this.mobileToggle.focus();
                     }
                 } else {
+                    // Tab - going forwards
                     if (document.activeElement === lastElement) {
                         e.preventDefault();
-                        firstElement.focus();
+                        this.mobileToggle.focus();
                     }
+                }
+            }
+        });
+
+        // Handle focus from toggle button
+        this.mobileToggle?.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' && this.isMenuOpen && !e.shiftKey) {
+                e.preventDefault();
+                const firstLink = this.navLinks.querySelector('a');
+                if (firstLink) {
+                    firstLink.focus();
                 }
             }
         });
@@ -172,41 +219,55 @@ class MobileNavigation {
 
     openMenu() {
         this.isMenuOpen = true;
+        
+        // Update button state
         this.mobileToggle.classList.add('active');
         this.mobileToggle.setAttribute('aria-expanded', 'true');
+        
+        // Show menu
         this.navLinks.classList.add('active');
         
-        // Focus management
-        const firstLink = this.navLinks.querySelector('a');
-        if (firstLink) {
-            setTimeout(() => firstLink.focus(), 100);
-        }
+        // Prevent body scroll on mobile
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('nav-open');
+        
+        // Focus management - focus first link after animation
+        setTimeout(() => {
+            const firstLink = this.navLinks.querySelector('a');
+            if (firstLink) {
+                firstLink.focus();
+            }
+        }, 300);
         
         // Announce to screen readers
         this.announceToScreenReader('Navigation menu opened');
-        
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
     }
 
     closeMenu() {
         this.isMenuOpen = false;
+        
+        // Update button state
         this.mobileToggle.classList.remove('active');
         this.mobileToggle.setAttribute('aria-expanded', 'false');
+        
+        // Hide menu
         this.navLinks.classList.remove('active');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        document.body.classList.remove('nav-open');
         
         // Return focus to toggle button
         this.mobileToggle.focus();
         
         // Announce to screen readers
         this.announceToScreenReader('Navigation menu closed');
-        
-        // Restore body scroll
-        document.body.style.overflow = '';
     }
 
     handleOutsideClick(event) {
-        if (this.isMenuOpen && !this.navContainer.contains(event.target)) {
+        if (this.isMenuOpen && 
+            !this.navContainer.contains(event.target) && 
+            !this.mobileToggle.contains(event.target)) {
             this.closeMenu();
         }
     }
@@ -215,6 +276,15 @@ class MobileNavigation {
         // Close menu on larger screens
         if (window.innerWidth > 768 && this.isMenuOpen) {
             this.closeMenu();
+        }
+
+        // Hide mobile toggle on desktop
+        if (this.mobileToggle) {
+            if (window.innerWidth > 768) {
+                this.mobileToggle.style.display = 'none';
+            } else {
+                this.mobileToggle.style.display = 'block';
+            }
         }
     }
 
@@ -243,41 +313,42 @@ function debounce(func, wait) {
     };
 }
 
-// Initialize navigation when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if we're on a mobile device
-    const isMobile = window.innerWidth <= 768;
-    
-    if (isMobile) {
+// Enhanced initialization with better error handling
+function initializeNavigation() {
+    try {
         new MobileNavigation();
-    } else {
-        // For desktop, just ensure the mobile toggle is hidden
-        const mobileToggle = document.querySelector('.mobile-nav-toggle');
-        if (mobileToggle) {
-            mobileToggle.style.display = 'none';
-        }
+    } catch (error) {
+        console.error('Navigation initialization failed:', error);
+        // Retry once after a delay
+        setTimeout(() => {
+            try {
+                new MobileNavigation();
+            } catch (retryError) {
+                console.error('Navigation retry failed:', retryError);
+            }
+        }, 500);
+    }
+}
+
+// Initialize navigation when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeNavigation);
+} else {
+    // DOM is already loaded
+    initializeNavigation();
+}
+
+// Handle page visibility change to close menu if hidden
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && window.mobileNav && window.mobileNav.isMenuOpen) {
+        window.mobileNav.closeMenu();
     }
 });
-
-// Handle orientation change on mobile devices
-window.addEventListener('orientationchange', debounce(() => {
-    // Reinitialize navigation after orientation change
-    setTimeout(() => {
-        const mobileNav = document.querySelector('.mobile-nav-toggle');
-        if (mobileNav && window.innerWidth <= 768) {
-            // Refresh the navigation state
-            const navLinks = document.querySelector('.nav-links');
-            if (navLinks && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileNav.classList.remove('active');
-                mobileNav.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            }
-        }
-    }, 100);
-}, 250));
 
 // Export for potential use in other scripts
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = MobileNavigation;
 }
+
+// Store reference globally for debugging and other scripts
+window.MobileNavigation = MobileNavigation;

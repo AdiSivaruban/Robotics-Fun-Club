@@ -4,10 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robotics Fun Club - DIY STEM Projects for Kids</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover amazing DIY STEM projects for kids using everyday materials! Build robots, rockets, and cool gadgets with things you already have at home.">
+    <meta name="keywords" content="STEM projects, robotics for kids, DIY science, educational activities, kids crafts, science experiments">
+    <meta name="author" content="Robotics Fun Club">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roboticsfunclub.com/">
+    <meta property="og:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
+    <meta property="og:description" content="Discover amazing DIY STEM projects for kids using everyday materials!">
+    <meta property="og:image" content="https://roboticsfunclub.com/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://roboticsfunclub.com/">
+    <meta property="twitter:title" content="Robotics Fun Club - DIY STEM Projects for Kids">
+    <meta property="twitter:description" content="Discover amazing DIY STEM projects for kids using everyday materials!">
+    <meta property="twitter:image" content="https://roboticsfunclub.com/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="home.css" as="style">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7c3aed">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="home.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Robotics Fun Club",
+        "description": "DIY STEM projects for kids using everyday materials",
+        "url": "https://roboticsfunclub.com",
+        "logo": "https://roboticsfunclub.com/images/logo.png",
+        "sameAs": [
+            "https://facebook.com/roboticsfunclub",
+            "https://instagram.com/roboticsfunclub"
+        ]
+    }
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div class="animated-bg">
         <div class="floating-shapes">
             <div class="shape"></div>
@@ -35,11 +101,11 @@
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <div class="robot-icon"></div>
-                Robotics Fun Club
+                <div class="robot-icon" aria-label="Robot logo"></div>
+                <span>Robotics Fun Club</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
+            <ul class="nav-links" role="navigation" aria-label="Main navigation">
+                <li><a href="home.html" aria-current="page">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="about.html">About</a></li>
@@ -49,15 +115,21 @@
         </div>
     </nav>
 
-    <main class="hero-container">
+    <main class="hero-container" id="main-content">
         <div class="hero-content">
             <h1>🚀 Robotics Fun Club</h1>
             <p class="hero-subtitle">Discover amazing DIY STEM projects using everyday materials!</p>
             <p class="hero-description">Build robots, rockets, and cool gadgets with things you already have at home</p>
-            <a href="projects.html" class="cta-button">Start Building!</a>
+            <div class="cta-group">
+                <a href="projects.html" class="cta-button">
+                    <span>Start Building!</span>
+                    <span class="sr-only">Explore our DIY STEM projects</span>
+                </a>
+                <a href="about.html" class="secondary-button">Learn More</a>
+            </div>
             
             <!-- Event Announcement -->
-            <div class="event-announcement">
+            <div class="event-announcement" role="region" aria-label="Event announcement">
                 <div class="announcement-badge">🌿 New Event!</div>
                 <h3>Join the WeAreBrampton Nature Walk</h3>
                 <p>A community event for families with STEM activities in nature</p>
@@ -66,7 +138,7 @@
         </div>
         
         <!-- Interactive Robot -->
-        <div class="robot-container">
+        <div class="robot-container" role="img" aria-label="Animated robot mascot">
             <div class="robot">
                 <div class="robot-head">
                     <div class="antenna"></div>

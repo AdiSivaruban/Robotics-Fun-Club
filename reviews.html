@@ -597,5 +597,382 @@
         }
     </script>
     <script src="navigation.js"></script>
+    <div class="review-prompt-modal" id="reviewPromptModal" style="display: none;">
+    <div class="review-prompt-content">
+        <button class="prompt-close" onclick="closeReviewPrompt()">✕</button>
+        
+        <div class="prompt-icon" id="promptIcon">🌟</div>
+        
+        <h3 id="promptTitle">Great job!</h3>
+        <p id="promptMessage">Would you like to share your experience?</p>
+        
+        <div class="prompt-actions">
+            <button class="prompt-btn-primary" onclick="goToReview()">
+                <span>✍️</span> Write a Review
+            </button>
+            <button class="prompt-btn-secondary" onclick="maybeLaterReview()">
+                Maybe Later
+            </button>
+        </div>
+        
+        <div class="prompt-footer">
+            <label class="dont-ask-again">
+                <input type="checkbox" id="dontAskAgain" onchange="updateAskPreference()">
+                <span>Don't ask me again today</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- Add these styles -->
+<style>
+/* Review Prompt Modal Styles */
+.review-prompt-modal {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500;
+    animation: slideInUp 0.5s ease-out;
+    max-width: 380px;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.review-prompt-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    border: 3px solid #f0f0f0;
+}
+
+.prompt-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.prompt-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.prompt-icon {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 15px;
+    animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.review-prompt-content h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.review-prompt-content p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.prompt-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.prompt-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.prompt-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.prompt-btn-secondary {
+    background: transparent;
+    color: #999;
+    border: 2px solid #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.prompt-btn-secondary:hover {
+    background: #f8f8f8;
+    border-color: #ccc;
+}
+
+.prompt-footer {
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.dont-ask-again {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.dont-ask-again input {
+    cursor: pointer;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .review-prompt-modal {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .review-prompt-content {
+        padding: 25px;
+    }
+}
+
+/* Subtle entrance for non-intrusive feel */
+.review-prompt-modal.gentle-show {
+    animation: gentleSlideIn 0.8s ease-out;
+}
+
+@keyframes gentleSlideIn {
+    0% {
+        transform: translateY(100%) scale(0.95);
+        opacity: 0;
+    }
+    70% {
+        transform: translateY(-5%) scale(1.02);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+</style>
+
+<!-- Add this JavaScript -->
+<script>
+// Smart Review Prompt System
+class SmartReviewPrompt {
+    constructor() {
+        this.STORAGE_KEYS = {
+            lastPrompt: 'lastReviewPrompt',
+            dontAskToday: 'dontAskReviewToday',
+            promptCount: 'reviewPromptCount',
+            hasReviewed: 'hasLeftReview',
+            completedProjects: 'completedProjects',
+            uploadedPhotos: 'uploadedPhotosCount'
+        };
+        
+        this.init();
+    }
+    
+    init() {
+        // Check if user has already reviewed
+        this.hasReviewed = localStorage.getItem(this.STORAGE_KEYS.hasReviewed) === 'true';
+        
+        // Check if we should skip prompts today
+        const dontAskToday = localStorage.getItem(this.STORAGE_KEYS.dontAskToday);
+        if (dontAskToday) {
+            const savedDate = new Date(dontAskToday);
+            const today = new Date();
+            if (savedDate.toDateString() !== today.toDateString()) {
+                // It's a new day, reset the preference
+                localStorage.removeItem(this.STORAGE_KEYS.dontAskToday);
+            }
+        }
+    }
+    
+    shouldShowPrompt() {
+        // Don't show if user has already reviewed
+        if (this.hasReviewed) return false;
+        
+        // Don't show if user said "don't ask today"
+        const dontAskToday = localStorage.getItem(this.STORAGE_KEYS.dontAskToday);
+        if (dontAskToday) {
+            const savedDate = new Date(dontAskToday);
+            const today = new Date();
+            if (savedDate.toDateString() === today.toDateString()) {
+                return false;
+            }
+        }
+        
+        // Check how many times we've prompted
+        const promptCount = parseInt(localStorage.getItem(this.STORAGE_KEYS.promptCount) || '0');
+        if (promptCount >= 3) {
+            // Maximum 3 prompts per week
+            const lastPrompt = localStorage.getItem(this.STORAGE_KEYS.lastPrompt);
+            if (lastPrompt) {
+                const daysSincePrompt = (Date.now() - new Date(lastPrompt).getTime()) / (1000 * 60 * 60 * 24);
+                if (daysSincePrompt < 7) {
+                    return false; // Wait a week before prompting again
+                } else {
+                    // Reset count after a week
+                    localStorage.setItem(this.STORAGE_KEYS.promptCount, '0');
+                }
+            }
+        }
+        
+        // Check if enough time has passed since last prompt (at least 2 days)
+        const lastPrompt = localStorage.getItem(this.STORAGE_KEYS.lastPrompt);
+        if (lastPrompt) {
+            const hoursSincePrompt = (Date.now() - new Date(lastPrompt).getTime()) / (1000 * 60 * 60);
+            if (hoursSincePrompt < 48) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    showPromptForProject(projectName) {
+        if (!this.shouldShowPrompt()) return;
+        
+        // Wait 3 seconds after project completion for better timing
+        setTimeout(() => {
+            const modal = document.getElementById('reviewPromptModal');
+            const icon = document.getElementById('promptIcon');
+            const title = document.getElementById('promptTitle');
+            const message = document.getElementById('promptMessage');
+            
+            // Customize for project completion
+            icon.textContent = '🎉';
+            title.textContent = 'Amazing work!';
+            message.textContent = `You completed the ${projectName}! Would you like to share how it went?`;
+            
+            modal.style.display = 'block';
+            modal.classList.add('gentle-show');
+            
+            this.updatePromptTracking();
+        }, 3000);
+    }
+    
+    showPromptForGallery() {
+        if (!this.shouldShowPrompt()) return;
+        
+        // Check if user has uploaded at least 2 photos before prompting
+        const uploadCount = parseInt(localStorage.getItem(this.STORAGE_KEYS.uploadedPhotos) || '0');
+        if (uploadCount < 2) return;
+        
+        // Wait 2 seconds after photo upload
+        setTimeout(() => {
+            const modal = document.getElementById('reviewPromptModal');
+            const icon = document.getElementById('promptIcon');
+            const title = document.getElementById('promptTitle');
+            const message = document.getElementById('promptMessage');
+            
+            // Customize for gallery upload
+            icon.textContent = '📸';
+            title.textContent = 'Beautiful creation!';
+            message.textContent = 'Your project looks great! Would you like to tell others about your experience?';
+            
+            modal.style.display = 'block';
+            modal.classList.add('gentle-show');
+            
+            this.updatePromptTracking();
+        }, 2000);
+    }
+    
+    updatePromptTracking() {
+        // Update last prompt time
+        localStorage.setItem(this.STORAGE_KEYS.lastPrompt, new Date().toISOString());
+        
+        // Increment prompt count
+        const count = parseInt(localStorage.getItem(this.STORAGE_KEYS.promptCount) || '0');
+        localStorage.setItem(this.STORAGE_KEYS.promptCount, (count + 1).toString());
+    }
+}
+
+// Initialize the smart prompt system
+const reviewPromptSystem = new SmartReviewPrompt();
+
+// Functions for button actions
+function closeReviewPrompt() {
+    const modal = document.getElementById('reviewPromptModal');
+    modal.style.display = 'none';
+}
+
+function goToReview() {
+    // Mark that user is going to review
+    localStorage.setItem('reviewPromptSource', 'prompt');
+    
+    // Get the completed project name if available
+    const completedProjects = JSON.parse(localStorage.getItem('completedProjects') || '[]');
+    if (completedProjects.length > 0) {
+        // Pre-fill the last completed project
+        localStorage.setItem('prefillProject', completedProjects[completedProjects.length - 1]);
+    }
+    
+    // Redirect to reviews page
+    window.location.href = 'reviews.html';
+}
+
+function maybeLaterReview() {
+    closeReviewPrompt();
+    // Track that user said maybe later (be less aggressive with future prompts)
+    localStorage.setItem('reviewMaybeLater', new Date().toISOString());
+}
+
+function updateAskPreference() {
+    const checkbox = document.getElementById('dontAskAgain');
+    if (checkbox.checked) {
+        // Don't ask again today
+        localStorage.setItem('dontAskReviewToday', new Date().toISOString());
+    }
+}
+</script>
 </body>
 </html>

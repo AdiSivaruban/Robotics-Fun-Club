@@ -829,7 +829,7 @@
             'boat': 'Rubber Band Boat',
             'robot': 'Robot Arm Grabber',
             'phone': 'String Phone',
-            'car': 'Balloon Car'
+            'car': 'Balloon Car',
             'catapult': 'Popsicle Stick Catapult'
         };
                 if (completedProjects.length === 2 || completedProjects.length === 3) {
@@ -884,7 +884,7 @@
             celebrationModal.style.display = 'flex';
             
             // Check if all projects completed
-            if (completedProjects.length === 4) {
+            if (completedProjects.length === 5) {
                 setTimeout(() => {
                     celebrationText.textContent = "🏆 You're a Master Engineer! All projects completed!";
                 }, 2000);
@@ -925,7 +925,7 @@
             updateProgress();
             updateProjectStatus();
             
-            if (completedProjects.length === 4) {
+            if (completedProjects.length === 5) {
                 showAchievements();
             }
         });

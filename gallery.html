@@ -467,6 +467,19 @@
                 // Show success notification with celebration
                 showSuccessNotification();
                 createCelebrationParticles();
+                
+// Track photo uploads and show review prompt
+const uploadCount = parseInt(localStorage.getItem('uploadedPhotosCount') || '0');
+const newUploadCount = uploadCount + 1;
+localStorage.setItem('uploadedPhotosCount', newUploadCount.toString());
+
+// Show review prompt after 2nd photo upload (not too early, not too late)
+if (newUploadCount === 2) {
+    // Check if the review prompt system exists
+    if (typeof reviewPromptSystem !== 'undefined') {
+        reviewPromptSystem.showPromptForGallery();
+    }
+}
             } catch (error) {
                 console.error('Upload error:', error);
                 showErrorNotification('Error uploading photo. Please try again with a smaller image.');

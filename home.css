@@ -56,10 +56,13 @@
     margin-bottom: var(--spacing-xl);
     font-size: 1.2rem;
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+    background: rgba(255, 255, 255, 0.95);  /* White background */
+    color: #7c3aed;  /* Purple text */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
 }
 
 .hero-container .cta-button::before {

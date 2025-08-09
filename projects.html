@@ -70,85 +70,6 @@
         </div>
         
         <div class="projects-grid">
-            <!-- Rubber Band Boat -->
-            <div class="project-card interactive-card" data-difficulty="medium" data-project="boat">
-                <div class="project-status" id="boat-status">🔒</div>
-                <div class="project-header">
-                    <div class="project-emoji bouncing">🚤</div>
-                    <div class="project-meta">
-                        <h3>Rubber Band Boat</h3>
-                        <div class="badges">
-                            <div class="difficulty-badge medium">Medium</div>
-                            <div class="time-badge">⏱️ 20 min</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <p class="project-description">Build a self-propelled boat using a plastic bottle and rubber band!</p>
-                
-                <div class="materials-preview">
-                    <div class="materials-toggle" onclick="toggleMaterials('boat')">
-                        <strong>📦 Materials</strong>
-                        <span class="toggle-arrow" id="boat-arrow">▼</span>
-                    </div>
-                    <div class="materials-list" id="boat-materials" style="display: none;">
-                        <div class="material-item">✓ 1 empty plastic water bottle</div>
-                        <div class="material-item">✓ 3 popsicle sticks</div>
-                        <div class="material-item">✓ 1 strong rubber band</div>
-                        <div class="material-item">✓ Tape</div>
-                    </div>
-                </div>
-                
-                <div class="project-actions">
-                    <button class="start-btn" id="boat-start" onclick="startProject('boat')">🚀 Start Building</button>
-                    <button class="complete-btn" id="boat-complete" onclick="toggleComplete('boat')" style="display: none;">✅ Mark Complete</button>
-                    <button class="undo-btn" id="boat-undo" onclick="undoComplete('boat')" style="display: none;">↩️ Undo Complete</button>
-                    <button class="close-btn" id="boat-close" onclick="closeInstructions('boat')" style="display: none;">❌ Close Instructions</button>
-                </div>
-
-                <div class="project-instructions" id="boat-instructions" style="display: none;">
-                    <div class="instruction-step active" data-step="1">
-                        <h4>Step 1: Prepare the Hull</h4>
-                        <p>Use the plastic bottle as your boat body. Make sure it's sealed and floats. Decorate it however you want!</p>
-                        <div class="step-nav">
-                            <button onclick="nextStep('boat', 2)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="2">
-                        <h4>Step 2: Create Paddle Support</h4>
-                        <p>Tape two popsicle sticks parallel to each other near the back of the bottle with a small gap between them.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 1)">← Previous</button>
-                            <button onclick="nextStep('boat', 3)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="3">
-                        <h4>Step 3: Add Rubber Band</h4>
-                        <p>Stretch the rubber band between the two popsicle sticks. Make sure it's tight but not about to snap.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 2)">← Previous</button>
-                            <button onclick="nextStep('boat', 4)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="4">
-                        <h4>Step 4: Make the Paddle</h4>
-                        <p>Cut a popsicle stick in half and slide it through the rubber band. Tape it together.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 3)">← Previous</button>
-                            <button onclick="nextStep('boat', 5)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="5">
-                        <h4>Step 5: Launch!</h4>
-                        <p>Wind the paddle backward, place in water, and release! Watch your boat zoom across the water!</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 4)">← Previous</button>
-                            <button onclick="completeProject('boat')" class="complete-step-btn">🎉 Complete Project!</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- String Phone -->
             <div class="project-card interactive-card" data-difficulty="easy" data-project="phone">
                 <div class="project-status" id="phone-status">🔒</div>
@@ -228,85 +149,7 @@
                 </div>
             </div>
 
-            <!-- Balloon Car -->
-            <div class="project-card interactive-card" data-difficulty="medium" data-project="car">
-                <div class="project-status" id="car-status">🔒</div>
-                <div class="project-header">
-                    <div class="project-emoji bouncing">🏎️</div>
-                    <div class="project-meta">
-                        <h3>Balloon Car</h3>
-                        <div class="badges">
-                            <div class="difficulty-badge medium">Medium</div>
-                            <div class="time-badge">⏱️ 35 min</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <p class="project-description">Build a car powered by escaping air from a balloon - learn about Newton's laws!</p>
-                
-                <div class="materials-preview">
-                    <div class="materials-toggle" onclick="toggleMaterials('car')">
-                        <strong>📦 Materials</strong>
-                        <span class="toggle-arrow" id="car-arrow">▼</span>
-                    </div>
-                    <div class="materials-list" id="car-materials" style="display: none;">
-                        <div class="material-item">✓ Plastic bottle or cardboard</div>
-                        <div class="material-item">✓ 4 bottle caps</div>
-                        <div class="material-item">✓ 2 wooden skewers</div>
-                        <div class="material-item">✓ 1 straw & 1 balloon</div>
-                        <div class="material-item">✓ Tape & scissors</div>
-                    </div>
-                </div>
-                
-                <div class="project-actions">
-                    <button class="start-btn" id="car-start" onclick="startProject('car')">🚀 Start Building</button>
-                    <button class="complete-btn" id="car-complete" onclick="toggleComplete('car')" style="display: none;">✅ Mark Complete</button>
-                    <button class="undo-btn" id="car-undo" onclick="undoComplete('car')" style="display: none;">↩️ Undo Complete</button>
-                    <button class="close-btn" id="car-close" onclick="closeInstructions('car')" style="display: none;">❌ Close Instructions</button>
-                </div>
-
-                <div class="project-instructions" id="car-instructions" style="display: none;">
-                    <div class="instruction-step active" data-step="1">
-                        <h4>Step 1: Make Wheels</h4>
-                        <p>Carefully poke holes through the center of 4 bottle caps. Push skewers through to create two axles with wheels.</p>
-                        <div class="step-nav">
-                            <button onclick="nextStep('car', 2)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="2">
-                        <h4>Step 2: Build Car Body</h4>
-                        <p>Cut the bottle in half lengthwise or use cardboard. Poke holes for axles and ensure wheels spin freely.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('car', 1)">← Previous</button>
-                            <button onclick="nextStep('car', 3)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="3">
-                        <h4>Step 3: Prepare Balloon System</h4>
-                        <p>Insert straw into balloon opening and tape it very securely - no air should escape!</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('car', 2)">← Previous</button>
-                            <button onclick="nextStep('car', 4)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="4">
-                        <h4>Step 4: Attach Propulsion</h4>
-                        <p>Tape balloon to car body with straw pointing backward. Make sure it's centered for straight driving.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('car', 3)">← Previous</button>
-                            <button onclick="nextStep('car', 5)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="5">
-                        <h4>Step 5: Race Time!</h4>
-                        <p>Blow up balloon through straw, pinch to hold air, place on smooth floor, and release! Measure how far it goes!</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('car', 4)">← Previous</button>
-                            <button onclick="completeProject('car')" class="complete-step-btn">🎉 Complete Project!</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         <!-- Catapult -->
 <div class="project-card interactive-card" data-difficulty="easy" data-project="catapult">
     <div class="project-status" id="catapult-status">🔒</div>
     <div class="project-header">
@@ -400,6 +243,165 @@
         </div>
     </div>
 </div>
+            <!-- Rubber Band Boat -->
+            <div class="project-card interactive-card" data-difficulty="medium" data-project="boat">
+                <div class="project-status" id="boat-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🚤</div>
+                    <div class="project-meta">
+                        <h3>Rubber Band Boat</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge medium">Medium</div>
+                            <div class="time-badge">⏱️ 20 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Build a self-propelled boat using a plastic bottle and rubber band!</p>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('boat')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="boat-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="boat-materials" style="display: none;">
+                        <div class="material-item">✓ 1 empty plastic water bottle</div>
+                        <div class="material-item">✓ 3 popsicle sticks</div>
+                        <div class="material-item">✓ 1 strong rubber band</div>
+                        <div class="material-item">✓ Tape</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" id="boat-start" onclick="startProject('boat')">🚀 Start Building</button>
+                    <button class="complete-btn" id="boat-complete" onclick="toggleComplete('boat')" style="display: none;">✅ Mark Complete</button>
+                    <button class="undo-btn" id="boat-undo" onclick="undoComplete('boat')" style="display: none;">↩️ Undo Complete</button>
+                    <button class="close-btn" id="boat-close" onclick="closeInstructions('boat')" style="display: none;">❌ Close Instructions</button>
+                </div>
+
+                <div class="project-instructions" id="boat-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Prepare the Hull</h4>
+                        <p>Use the plastic bottle as your boat body. Make sure it's sealed and floats. Decorate it however you want!</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('boat', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Create Paddle Support</h4>
+                        <p>Tape two popsicle sticks parallel to each other near the back of the bottle with a small gap between them.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 1)">← Previous</button>
+                            <button onclick="nextStep('boat', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Add Rubber Band</h4>
+                        <p>Stretch the rubber band between the two popsicle sticks. Make sure it's tight but not about to snap.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 2)">← Previous</button>
+                            <button onclick="nextStep('boat', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Make the Paddle</h4>
+                        <p>Cut a popsicle stick in half and slide it through the rubber band. Tape it together.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 3)">← Previous</button>
+                            <button onclick="nextStep('boat', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Launch!</h4>
+                        <p>Wind the paddle backward, place in water, and release! Watch your boat zoom across the water!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('boat', 4)">← Previous</button>
+                            <button onclick="completeProject('boat')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Balloon Car -->
+            <div class="project-card interactive-card" data-difficulty="medium" data-project="car">
+                <div class="project-status" id="car-status">🔒</div>
+                <div class="project-header">
+                    <div class="project-emoji bouncing">🏎️</div>
+                    <div class="project-meta">
+                        <h3>Balloon Car</h3>
+                        <div class="badges">
+                            <div class="difficulty-badge medium">Medium</div>
+                            <div class="time-badge">⏱️ 35 min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="project-description">Build a car powered by escaping air from a balloon - learn about Newton's laws!</p>
+                
+                <div class="materials-preview">
+                    <div class="materials-toggle" onclick="toggleMaterials('car')">
+                        <strong>📦 Materials</strong>
+                        <span class="toggle-arrow" id="car-arrow">▼</span>
+                    </div>
+                    <div class="materials-list" id="car-materials" style="display: none;">
+                        <div class="material-item">✓ Plastic bottle or cardboard</div>
+                        <div class="material-item">✓ 4 bottle caps</div>
+                        <div class="material-item">✓ 2 wooden skewers</div>
+                        <div class="material-item">✓ 1 straw & 1 balloon</div>
+                        <div class="material-item">✓ Tape & scissors</div>
+                    </div>
+                </div>
+                
+                <div class="project-actions">
+                    <button class="start-btn" id="car-start" onclick="startProject('car')">🚀 Start Building</button>
+                    <button class="complete-btn" id="car-complete" onclick="toggleComplete('car')" style="display: none;">✅ Mark Complete</button>
+                    <button class="undo-btn" id="car-undo" onclick="undoComplete('car')" style="display: none;">↩️ Undo Complete</button>
+                    <button class="close-btn" id="car-close" onclick="closeInstructions('car')" style="display: none;">❌ Close Instructions</button>
+                </div>
+
+                <div class="project-instructions" id="car-instructions" style="display: none;">
+                    <div class="instruction-step active" data-step="1">
+                        <h4>Step 1: Make Wheels</h4>
+                        <p>Carefully poke holes through the center of 4 bottle caps. Push skewers through to create two axles with wheels.</p>
+                        <div class="step-nav">
+                            <button onclick="nextStep('car', 2)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="2">
+                        <h4>Step 2: Build Car Body</h4>
+                        <p>Cut the bottle in half lengthwise or use cardboard. Poke holes for axles and ensure wheels spin freely.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 1)">← Previous</button>
+                            <button onclick="nextStep('car', 3)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="3">
+                        <h4>Step 3: Prepare Balloon System</h4>
+                        <p>Insert straw into balloon opening and tape it very securely - no air should escape!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 2)">← Previous</button>
+                            <button onclick="nextStep('car', 4)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="4">
+                        <h4>Step 4: Attach Propulsion</h4>
+                        <p>Tape balloon to car body with straw pointing backward. Make sure it's centered for straight driving.</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 3)">← Previous</button>
+                            <button onclick="nextStep('car', 5)">Next Step →</button>
+                        </div>
+                    </div>
+                    <div class="instruction-step" data-step="5">
+                        <h4>Step 5: Race Time!</h4>
+                        <p>Blow up balloon through straw, pinch to hold air, place on smooth floor, and release! Measure how far it goes!</p>
+                        <div class="step-nav">
+                            <button onclick="prevStep('car', 4)">← Previous</button>
+                            <button onclick="completeProject('car')" class="complete-step-btn">🎉 Complete Project!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
             <!-- Robot Arm Grabber -->
             <div class="project-card interactive-card" data-difficulty="hard" data-project="robot">
                 <div class="project-status" id="robot-status">🔒</div>

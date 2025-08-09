@@ -314,6 +314,53 @@
             }
             loadReviewsFromFirebase();
         });
+// Auto-fill functionality when coming from review prompt
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if user came from a prompt
+    const source = localStorage.getItem('reviewPromptSource');
+    const prefillProject = localStorage.getItem('prefillProject');
+    
+    if (source === 'prompt') {
+        // Clear the flag
+        localStorage.removeItem('reviewPromptSource');
+        
+        // Pre-fill project if available
+        if (prefillProject) {
+            const projectMap = {
+                'boat': 'Rubber Band Boat',
+                'robot': 'Robot Arm Grabber',
+                'phone': 'String Phone',
+                'car': 'Balloon Car'
+            };
+            
+            const projectSelect = document.getElementById('project-completed');
+            if (projectSelect && projectMap[prefillProject]) {
+                projectSelect.value = projectMap[prefillProject];
+            }
+            
+            localStorage.removeItem('prefillProject');
+        }
+        
+        // Add a welcome message
+        const formTitle = document.querySelector('.feedback-form h3');
+        if (formTitle) {
+            formTitle.textContent = '🌟 Thanks for taking the time to review!';
+            formTitle.style.color = '#10b981';
+        }
+    }
+    
+    // Mark as reviewed after submission
+    const reviewForm = document.getElementById('review-form');
+    if (reviewForm) {
+        const originalSubmit = reviewForm.onsubmit;
+        reviewForm.onsubmit = function(event) {
+            localStorage.setItem('hasLeftReview', 'true');
+            if (originalSubmit) {
+                return originalSubmit.call(this, event);
+            }
+        };
+    }
+});
 
         // Load reviews from Firebase
         function loadReviewsFromFirebase() {

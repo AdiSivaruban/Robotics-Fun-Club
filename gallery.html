@@ -740,5 +740,31 @@
         });
     </script>
     <script src="navigation.js"></script>
+<div class="review-prompt-modal" id="reviewPromptModal" style="display: none;">
+    <div class="review-prompt-content">
+        <button class="prompt-close" onclick="closeReviewPrompt()">✕</button>
+        
+        <div class="prompt-icon" id="promptIcon">🌟</div>
+        
+        <h3 id="promptTitle">Great job!</h3>
+        <p id="promptMessage">Would you like to share your experience?</p>
+        
+        <div class="prompt-actions">
+            <button class="prompt-btn-primary" onclick="goToReview()">
+                <span>✍️</span> Write a Review
+            </button>
+            <button class="prompt-btn-secondary" onclick="maybeLaterReview()">
+                Maybe Later
+            </button>
+        </div>
+        
+        <div class="prompt-footer">
+            <label class="dont-ask-again">
+                <input type="checkbox" id="dontAskAgain" onchange="updateAskPreference()">
+                <span>Don't ask me again today</span>
+            </label>
+        </div>
+    </div>
+</div>
 </body>
 </html>

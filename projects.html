@@ -998,7 +998,7 @@ function updateAskPreference() {
     if (typeof reviewPromptSystem !== 'undefined') {
         reviewPromptSystem.showPromptForProject(projectNames[project]);
             }
-        }
+        }, 5000); // 5 second delay
      }
 }
 

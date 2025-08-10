@@ -111,7 +111,702 @@
                         <h4>Step 1: Prepare the Cups</h4>
                         <p>Use a sharp pencil or nail to poke a small hole in the bottom center of each paper cup. Be careful!</p>
                         <div class="step-nav">
-                            <button onclick="nextStep('phone', 2)">Next Step →</button>
+                            <button onclick="closeCelebration()" class="celebration-close">Continue Building</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Prompt Modal -->
+    <div class="review-prompt-modal" id="reviewPromptModal" style="display: none;">
+        <div class="review-prompt-content">
+            <button class="prompt-close" onclick="closeReviewPrompt()">✕</button>
+            
+            <div class="prompt-icon" id="promptIcon">🌟</div>
+            
+            <h3 id="promptTitle">Great job!</h3>
+            <p id="promptMessage">Would you like to share your experience?</p>
+            
+            <div class="prompt-actions">
+                <button class="prompt-btn-primary" onclick="goToReview()">
+                    <span>✍️</span> Write a Review
+                </button>
+                <button class="prompt-btn-secondary" onclick="maybeLaterReview()">
+                    Maybe Later
+                </button>
+            </div>
+            
+            <div class="prompt-footer">
+                <label class="dont-ask-again">
+                    <input type="checkbox" id="dontAskAgain" onchange="updateAskPreference()">
+                    <span>Don't ask me again today</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Additional styles for new features */
+        .undo-btn, .close-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .undo-btn:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            background: #dc2626;
+        }
+
+        .close-btn:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Celebration Modal */
+        .celebration-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .celebration-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            max-width: 400px;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .celebration-message h2 {
+            color: #6c5ce7;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .celebration-message p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .celebration-icon {
+            font-size: 5rem;
+            margin: 20px 0;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .celebration-close {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .celebration-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Review Prompt Modal Styles */
+        .review-prompt-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .review-prompt-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .review-prompt-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            max-width: 450px;
+            width: 90%;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .review-prompt-modal.show .review-prompt-content {
+            transform: scale(1);
+        }
+
+        .prompt-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .prompt-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .prompt-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .review-prompt-content h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .review-prompt-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .prompt-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-direction: column;
+        }
+
+        .prompt-btn-primary, .prompt-btn-secondary {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .prompt-btn-primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+        }
+
+        .prompt-btn-primary:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .prompt-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .prompt-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .prompt-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+
+        .dont-ask-again {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .dont-ask-again input[type="checkbox"] {
+            accent-color: white;
+        }
+
+        .dont-ask-again:hover {
+            opacity: 1;
+        }
+
+        @media (min-width: 768px) {
+            .prompt-actions {
+                flex-direction: row;
+            }
+        }
+    </style>
+
+    <script>
+        let completedProjects = JSON.parse(localStorage.getItem('completedProjects') || '[]');
+        let currentSteps = {};
+
+        // Review Prompt System
+        const reviewPromptSystem = {
+            // Check if user has opted out today
+            shouldShowPrompt() {
+                const today = new Date().toDateString();
+                const lastOptOut = localStorage.getItem('reviewOptOutDate');
+                return lastOptOut !== today;
+            },
+
+            // Show the review prompt
+            showPromptForProject(projectName) {
+                if (!this.shouldShowPrompt()) {
+                    return;
+                }
+
+                const modal = document.getElementById('reviewPromptModal');
+                const title = document.getElementById('promptTitle');
+                const message = document.getElementById('promptMessage');
+                const icon = document.getElementById('promptIcon');
+
+                title.textContent = `Awesome work on the ${projectName}!`;
+                message.textContent = `How was your building experience? Share your thoughts to help other young engineers!`;
+                icon.textContent = '🌟';
+
+                // Store the current project for potential review
+                localStorage.setItem('lastCompletedProject', projectName);
+
+                // Show modal with animation
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('show'), 10);
+            },
+
+            // Hide the review prompt
+            hide() {
+                const modal = document.getElementById('reviewPromptModal');
+                modal.classList.remove('show');
+                setTimeout(() => modal.style.display = 'none', 300);
+            }
+        };
+
+        // Review prompt functions
+        function closeReviewPrompt() {
+            reviewPromptSystem.hide();
+        }
+
+        function goToReview() {
+            reviewPromptSystem.hide();
+            // Redirect to reviews page
+            window.location.href = 'reviews.html';
+        }
+
+        function maybeLaterReview() {
+            reviewPromptSystem.hide();
+        }
+
+        function updateAskPreference() {
+            const checkbox = document.getElementById('dontAskAgain');
+            if (checkbox.checked) {
+                const today = new Date().toDateString();
+                localStorage.setItem('reviewOptOutDate', today);
+            } else {
+                localStorage.removeItem('reviewOptOutDate');
+            }
+        }
+
+        function updateProgress() {
+            const totalProjects = 5;
+            const completed = completedProjects.length;
+            const percentage = (completed / totalProjects) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            
+            if (completed === 0) {
+                document.querySelector('.progress-text').textContent = 'Complete projects to unlock achievements!';
+            } else if (completed === totalProjects) {
+                document.querySelector('.progress-text').textContent = '🎉 Master Engineer! All projects completed!';
+                showAchievements();
+            } else {
+                document.querySelector('.progress-text').textContent = `${completed}/${totalProjects} projects completed - Keep building!`;
+            }
+        }
+
+        function updateProjectStatus() {
+            completedProjects.forEach(project => {
+                const statusEl = document.getElementById(project + '-status');
+                if (statusEl) statusEl.textContent = '✅';
+                
+                const card = document.querySelector(`[data-project="${project}"]`);
+                if (card) card.classList.add('completed');
+                
+                // Update button visibility
+                const completeBtn = document.getElementById(project + '-complete');
+                const undoBtn = document.getElementById(project + '-undo');
+                if (completeBtn) completeBtn.style.display = 'none';
+                if (undoBtn) undoBtn.style.display = 'inline-block';
+            });
+        }
+
+        function filterProjects(difficulty) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (difficulty === 'all' || card.dataset.difficulty === difficulty) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        function toggleMaterials(project) {
+            const materials = document.getElementById(project + '-materials');
+            const arrow = document.getElementById(project + '-arrow');
+            
+            if (materials.style.display === 'none') {
+                materials.style.display = 'block';
+                arrow.textContent = '▲';
+            } else {
+                materials.style.display = 'none';
+                arrow.textContent = '▼';
+            }
+        }
+
+        function startProject(project) {
+            const instructions = document.getElementById(project + '-instructions');
+            const startBtn = document.getElementById(project + '-start');
+            const completeBtn = document.getElementById(project + '-complete');
+            const closeBtn = document.getElementById(project + '-close');
+            
+            instructions.style.display = 'block';
+            startBtn.style.display = 'none';
+            closeBtn.style.display = 'inline-block';
+            
+            if (!completedProjects.includes(project)) {
+                completeBtn.style.display = 'inline-block';
+            }
+            
+            currentSteps[project] = 1;
+        }
+
+        function closeInstructions(project) {
+            const instructions = document.getElementById(project + '-instructions');
+            const startBtn = document.getElementById(project + '-start');
+            const completeBtn = document.getElementById(project + '-complete');
+            const undoBtn = document.getElementById(project + '-undo');
+            const closeBtn = document.getElementById(project + '-close');
+            
+            instructions.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+            completeBtn.style.display = 'none';
+            closeBtn.style.display = 'none';
+            
+            if (completedProjects.includes(project)) {
+                undoBtn.style.display = 'inline-block';
+                startBtn.style.display = 'none';
+            }
+        }
+
+        function nextStep(project, stepNum) {
+            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
+            const nextStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
+            
+            currentStep.classList.remove('active');
+            nextStep.classList.add('active');
+            currentSteps[project] = stepNum;
+        }
+
+        function prevStep(project, stepNum) {
+            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
+            const prevStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
+            
+            currentStep.classList.remove('active');
+            prevStep.classList.add('active');
+            currentSteps[project] = stepNum;
+        }
+
+        function toggleComplete(project) {
+            if (!completedProjects.includes(project)) {
+                completeProject(project);
+            }
+        }
+
+        function undoComplete(project) {
+            completedProjects = completedProjects.filter(p => p !== project);
+            localStorage.setItem('completedProjects', JSON.stringify(completedProjects));
+            
+            const statusEl = document.getElementById(project + '-status');
+            statusEl.textContent = '🔒';
+            
+            const card = document.querySelector(`[data-project="${project}"]`);
+            card.classList.remove('completed');
+            
+            const completeBtn = document.getElementById(project + '-complete');
+            const undoBtn = document.getElementById(project + '-undo');
+            const startBtn = document.getElementById(project + '-start');
+            
+            completeBtn.style.display = 'inline-block';
+            undoBtn.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+            
+            updateProgress();
+        }
+
+        function completeProject(project) {
+            if (!completedProjects.includes(project)) {
+                completedProjects.push(project);
+                localStorage.setItem('completedProjects', JSON.stringify(completedProjects));
+                
+                const statusEl = document.getElementById(project + '-status');
+                statusEl.textContent = '✅';
+                
+                const card = document.querySelector(`[data-project="${project}"]`);
+                card.classList.add('completed');
+                
+                // Update buttons
+                const completeBtn = document.getElementById(project + '-complete');
+                const undoBtn = document.getElementById(project + '-undo');
+                const closeBtn = document.getElementById(project + '-close');
+                const startBtn = document.getElementById(project + '-start');
+                
+                completeBtn.style.display = 'none';
+                undoBtn.style.display = 'inline-block';
+                closeBtn.style.display = 'none';
+                startBtn.style.display = 'none';
+                
+                // Hide instructions
+                const instructions = document.getElementById(project + '-instructions');
+                instructions.style.display = 'none';
+                
+                // Show celebration first
+                showCelebration(project);
+                
+                updateProgress();
+                
+                // Project names mapping
+                const projectNames = {
+                    'boat': 'Rubber Band Boat',
+                    'robot': 'Robot Arm Grabber',
+                    'phone': 'String Phone',
+                    'car': 'Balloon Car',
+                    'catapult': 'Popsicle Stick Catapult'
+                };
+                
+                // Show review prompt after 2nd or 3rd project completion
+                if (completedProjects.length === 2 || completedProjects.length === 3) {
+                    // Delay to show after celebration
+                    setTimeout(() => {
+                        reviewPromptSystem.showPromptForProject(projectNames[project]);
+                    }, 3000);
+                }
+            }
+        }
+
+        function showCelebration(project) {
+            const projectNames = {
+                'boat': 'Rubber Band Boat',
+                'robot': 'Robot Arm Grabber',
+                'phone': 'String Phone',
+                'car': 'Balloon Car',
+                'catapult': 'Popsicle Stick Catapult'
+            };
+            
+            const celebrationModal = document.getElementById('celebrationModal');
+            const celebrationText = document.getElementById('celebrationText');
+            const celebrationIcon = document.getElementById('celebrationIcon');
+            const confettiContainer = document.getElementById('confettiContainer');
+            
+            celebrationText.textContent = `You've completed the ${projectNames[project]}!`;
+            
+            // Project-specific icons
+            const icons = {
+                'boat': '🚤',
+                'robot': '🦾',
+                'phone': '☎️',
+                'car': '🏎️',
+                'catapult': '🎯'
+            };
+            celebrationIcon.textContent = icons[project];
+            
+            // Clear old confetti
+            confettiContainer.innerHTML = '';
+            
+            // Create confetti
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#dfe6e9'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confettiContainer.appendChild(confetti);
+            }
+            
+            celebrationModal.style.display = 'flex';
+            
+            // Check if all projects completed
+            if (completedProjects.length === 5) {
+                setTimeout(() => {
+                    celebrationText.textContent = "🏆 You're a Master Engineer! All projects completed!";
+                }, 2000);
+            }
+        }
+
+        function closeCelebration() {
+            const celebrationModal = document.getElementById('celebrationModal');
+            celebrationModal.style.display = 'none';
+        }
+
+        function showAchievements() {
+            const achievementsSection = document.getElementById('achievements');
+            const achievementList = document.getElementById('achievement-list');
+            
+            const achievements = [
+                { icon: '🚢', title: 'Naval Engineer', desc: 'Built your first boat!' },
+                { icon: '📞', title: 'Communication Expert', desc: 'Created a string telephone!' },
+                { icon: '🏁', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
+                { icon: '🤖', title: 'Robotics Master', desc: 'Created a mechanical grabber!' },
+                { icon: '🏹', title: 'Siege Engineer', desc: 'Built a working catapult!' },
+                { icon: '👑', title: 'Master Engineer', desc: 'Completed all projects!' }
+            ];
+            
+            achievementList.innerHTML = achievements.map(achievement => `
+                <div class="achievement-card">
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <h4>${achievement.title}</h4>
+                    <p>${achievement.desc}</p>
+                </div>
+            `).join('');
+            
+            achievementsSection.style.display = 'block';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            updateProjectStatus();
+            
+            if (completedProjects.length === 5) {
+                showAchievements();
+            }
+        });
+
+        // Close celebration on click outside
+        document.getElementById('celebrationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCelebration();
+            }
+        });
+
+        // Close review prompt on click outside
+        document.getElementById('reviewPromptModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeReviewPrompt();
+            }
+        });
+    </script>
+    <script src="navigation.js"></script>
+</body>
+</html>nextStep('phone', 2)">Next Step →</button>
                         </div>
                     </div>
                     <div class="instruction-step" data-step="2">
@@ -487,83 +1182,6 @@
                             <button onclick="completeProject('robot')" class="complete-step-btn">🎉 Complete Project!</button>
                         </div>
                     </div>
-<div class="project-card interactive-card" data-difficulty="easy" data-project="catapult">
-    <div class="project-status" id="catapult-status">🔒</div>
-    <div class="project-header">
-        <div class="project-emoji bouncing">🎯</div>
-        <div class="project-meta">
-            <h3>Popsicle Stick Catapult</h3>
-            <div class="badges">
-                <div class="difficulty-badge easy">Easy</div>
-                <div class="time-badge">⏱️ 15 min</div>
-            </div>
-        </div>
-    </div>
-    
-    <p class="project-description">Build a mini catapult that launches cotton balls - learn about levers and stored energy!</p>
-    
-    <div class="materials-preview">
-        <div class="materials-toggle" onclick="toggleMaterials('catapult')">
-            <strong>📦 Materials</strong>
-            <span class="toggle-arrow" id="catapult-arrow">▼</span>
-        </div>
-        <div class="materials-list" id="catapult-materials" style="display: none;">
-            <div class="material-item">✓ 8-10 popsicle sticks</div>
-            <div class="material-item">✓ 4-5 rubber bands</div>
-            <div class="material-item">✓ 1 plastic spoon</div>
-            <div class="material-item">✓ Cotton balls or pom-poms</div>
-        </div>
-    </div>
-    
-    <div class="project-actions">
-        <button class="start-btn" id="catapult-start" onclick="startProject('catapult')">🚀 Start Building</button>
-        <button class="complete-btn" id="catapult-complete" onclick="toggleComplete('catapult')" style="display: none;">✅ Mark Complete</button>
-        <button class="undo-btn" id="catapult-undo" onclick="undoComplete('catapult')" style="display: none;">↩️ Undo Complete</button>
-        <button class="close-btn" id="catapult-close" onclick="closeInstructions('catapult')" style="display: none;">❌ Close Instructions</button>
-    </div>
-
-    <div class="project-instructions" id="catapult-instructions" style="display: none;">
-        <div class="instruction-step active" data-step="1">
-            <h4>Step 1: Create the Base</h4>
-            <p>Stack 6 popsicle sticks on top of each other. Use rubber bands to secure both ends tightly. This will be your catapult's base and provide the spring power!</p>
-            <div class="step-nav">
-                <button onclick="nextStep('catapult', 2)">Next Step →</button>
-            </div>
-        </div>
-        <div class="instruction-step" data-step="2">
-            <h4>Step 2: Make the Arm</h4>
-            <p>Take 2 more popsicle sticks and rubber band them together at ONE end only. These will form your catapult arm!</p>
-            <div class="step-nav">
-                <button onclick="prevStep('catapult', 1)">← Previous</button>
-                <button onclick="nextStep('catapult', 3)">Next Step →</button>
-            </div>
-        </div>
-        <div class="instruction-step" data-step="3">
-            <h4>Step 3: Create the Lever</h4>
-            <p>Open the 2 sticks (like scissors) and slide the stack of 6 between them, about 1/3 from the rubber-banded end. This creates your lever mechanism!</p>
-            <div class="step-nav">
-                <button onclick="prevStep('catapult', 2)">← Previous</button>
-                <button onclick="nextStep('catapult', 4)">Next Step →</button>
-            </div>
-        </div>
-        <div class="instruction-step" data-step="4">
-            <h4>Step 4: Secure the Cross</h4>
-            <p>Wrap a rubber band in a criss-cross pattern where the stack and arm meet. Make it tight - this holds everything together and creates tension!</p>
-            <div class="step-nav">
-                <button onclick="prevStep('catapult', 3)">← Previous</button>
-                <button onclick="nextStep('catapult', 5)">Next Step →</button>
-            </div>
-        </div>
-        <div class="instruction-step" data-step="5">
-            <h4>Step 5: Attach the Spoon</h4>
-            <p>Use a rubber band to attach the plastic spoon to the end of the top stick. Make sure the bowl faces outward - this is your launching cup!</p>
-            <div class="step-nav">
-                <button onclick="prevStep('catapult', 4)">← Previous</button>
-                <button onclick="nextStep('catapult', 6)">Next Step →</button>
-            </div>
-        </div>
-    </div>
-</div>
                 </div>
             </div>
         </div>
@@ -585,463 +1203,4 @@
                 <h2>🎉 Amazing Job!</h2>
                 <p id="celebrationText">You've completed the project!</p>
                 <div class="celebration-icon" id="celebrationIcon">✨</div>
-                <button onclick="closeCelebration()" class="celebration-close">Continue Building</button>
-            </div>
-        </div>
-    </div>
-
-    <style>
-        /* Additional styles for new features */
-        .undo-btn, .close-btn {
-            background: #6b7280;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 12px 20px;
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            flex: 1;
-        }
-
-        .undo-btn:hover {
-            background: #4b5563;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .close-btn {
-            background: #dc2626;
-        }
-
-        .close-btn:hover {
-            background: #b91c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
-        }
-
-        /* Celebration Modal */
-        .celebration-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .celebration-content {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            max-width: 400px;
-            animation: bounceIn 0.6s ease;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .celebration-message h2 {
-            color: #6c5ce7;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .celebration-message p {
-            color: #666;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        .celebration-icon {
-            font-size: 5rem;
-            margin: 20px 0;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .celebration-close {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .celebration-close:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Confetti */
-        .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ff6b6b;
-            animation: confetti-fall 3s linear;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-    </style>
-
-    <script>
-        let completedProjects = JSON.parse(localStorage.getItem('completedProjects') || '[]');
-        let currentSteps = {};
-
-        function updateProgress() {
-            const totalProjects = 5;
-            const completed = completedProjects.length;
-            const percentage = (completed / totalProjects) * 100;
-            
-            document.getElementById('progressFill').style.width = percentage + '%';
-            
-            if (completed === 0) {
-                document.querySelector('.progress-text').textContent = 'Complete projects to unlock achievements!';
-            } else if (completed === totalProjects) {
-                document.querySelector('.progress-text').textContent = '🎉 Master Engineer! All projects completed!';
-                showAchievements();
-            } else {
-                document.querySelector('.progress-text').textContent = `${completed}/${totalProjects} projects completed - Keep building!`;
-            }
-        }
-
-        function updateProjectStatus() {
-            completedProjects.forEach(project => {
-                const statusEl = document.getElementById(project + '-status');
-                if (statusEl) statusEl.textContent = '✅';
-                
-                const card = document.querySelector(`[data-project="${project}"]`);
-                if (card) card.classList.add('completed');
-                
-                // Update button visibility
-                const completeBtn = document.getElementById(project + '-complete');
-                const undoBtn = document.getElementById(project + '-undo');
-                if (completeBtn) completeBtn.style.display = 'none';
-                if (undoBtn) undoBtn.style.display = 'inline-block';
-            });
-        }
-
-        function filterProjects(difficulty) {
-            const cards = document.querySelectorAll('.project-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            cards.forEach(card => {
-                if (difficulty === 'all' || card.dataset.difficulty === difficulty) {
-                    card.style.display = 'block';
-                    setTimeout(() => card.style.opacity = '1', 10);
-                } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
-                }
-            });
-        }
-
-        function toggleMaterials(project) {
-            const materials = document.getElementById(project + '-materials');
-            const arrow = document.getElementById(project + '-arrow');
-            
-            if (materials.style.display === 'none') {
-                materials.style.display = 'block';
-                arrow.textContent = '▲';
-            } else {
-                materials.style.display = 'none';
-                arrow.textContent = '▼';
-            }
-        }
-
-        function startProject(project) {
-            const instructions = document.getElementById(project + '-instructions');
-            const startBtn = document.getElementById(project + '-start');
-            const completeBtn = document.getElementById(project + '-complete');
-            const closeBtn = document.getElementById(project + '-close');
-            
-            instructions.style.display = 'block';
-            startBtn.style.display = 'none';
-            closeBtn.style.display = 'inline-block';
-            
-            if (!completedProjects.includes(project)) {
-                completeBtn.style.display = 'inline-block';
-            }
-            
-            currentSteps[project] = 1;
-        }
-
-        function closeInstructions(project) {
-            const instructions = document.getElementById(project + '-instructions');
-            const startBtn = document.getElementById(project + '-start');
-            const completeBtn = document.getElementById(project + '-complete');
-            const undoBtn = document.getElementById(project + '-undo');
-            const closeBtn = document.getElementById(project + '-close');
-            
-            instructions.style.display = 'none';
-            startBtn.style.display = 'inline-block';
-            completeBtn.style.display = 'none';
-            closeBtn.style.display = 'none';
-            
-            if (completedProjects.includes(project)) {
-                undoBtn.style.display = 'inline-block';
-                startBtn.style.display = 'none';
-            }
-        }
-
-        function nextStep(project, stepNum) {
-            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
-            const nextStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
-            
-            currentStep.classList.remove('active');
-            nextStep.classList.add('active');
-            currentSteps[project] = stepNum;
-        }
-
-        function prevStep(project, stepNum) {
-            const currentStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${currentSteps[project]}"]`);
-            const prevStep = document.querySelector(`#${project}-instructions .instruction-step[data-step="${stepNum}"]`);
-            
-            currentStep.classList.remove('active');
-            prevStep.classList.add('active');
-            currentSteps[project] = stepNum;
-        }
-
-        function toggleComplete(project) {
-            if (!completedProjects.includes(project)) {
-                completeProject(project);
-            }
-        }
-
-        function undoComplete(project) {
-            completedProjects = completedProjects.filter(p => p !== project);
-            localStorage.setItem('completedProjects', JSON.stringify(completedProjects));
-            
-            const statusEl = document.getElementById(project + '-status');
-            statusEl.textContent = '🔒';
-            
-            const card = document.querySelector(`[data-project="${project}"]`);
-            card.classList.remove('completed');
-            
-            const completeBtn = document.getElementById(project + '-complete');
-            const undoBtn = document.getElementById(project + '-undo');
-            const startBtn = document.getElementById(project + '-start');
-            
-            completeBtn.style.display = 'inline-block';
-            undoBtn.style.display = 'none';
-            startBtn.style.display = 'inline-block';
-            
-            updateProgress();
-        }
-
-        function completeProject(project) {
-            if (!completedProjects.includes(project)) {
-                completedProjects.push(project);
-                localStorage.setItem('completedProjects', JSON.stringify(completedProjects));
-                
-                const statusEl = document.getElementById(project + '-status');
-                statusEl.textContent = '✅';
-                
-                const card = document.querySelector(`[data-project="${project}"]`);
-                card.classList.add('completed');
-                
-                // Update buttons
-                const completeBtn = document.getElementById(project + '-complete');
-                const undoBtn = document.getElementById(project + '-undo');
-                const closeBtn = document.getElementById(project + '-close');
-                const startBtn = document.getElementById(project + '-start');
-                
-                completeBtn.style.display = 'none';
-                undoBtn.style.display = 'inline-block';
-                closeBtn.style.display = 'none';
-                startBtn.style.display = 'none';
-                
-                // Hide instructions
-                const instructions = document.getElementById(project + '-instructions');
-                instructions.style.display = 'none';
-                
-                // Show celebration
-                showCelebration(project);
-                
-                updateProgress();
-            const projectNames = {
-            'boat': 'Rubber Band Boat',
-            'robot': 'Robot Arm Grabber',
-            'phone': 'String Phone',
-            'car': 'Balloon Car',
-            'catapult': 'Popsicle Stick Catapult'
-        };
-                if (completedProjects.length === 2 || completedProjects.length === 3) {
-    // Check if the review prompt system exists
-    if (typeof reviewPromptSystem !== 'undefined') {
-        reviewPromptSystem.showPromptForProject(projectNames[project]);
-            }
-        }
-     }
-}
-
-        function showCelebration(project) {
-            const projectNames = {
-                'boat': 'Rubber Band Boat',
-                'robot': 'Robot Arm Grabber',
-                'phone': 'String Phone',
-                'car': 'Balloon Car',
-                'catapult': 'Popsicle Stick Catapult'
-            };
-            
-            const celebrationModal = document.getElementById('celebrationModal');
-            const celebrationText = document.getElementById('celebrationText');
-            const celebrationIcon = document.getElementById('celebrationIcon');
-            const confettiContainer = document.getElementById('confettiContainer');
-            
-            celebrationText.textContent = `You've completed the ${projectNames[project]}!`;
-            
-            // Project-specific icons
-            const icons = {
-                'boat': '🚤',
-                'robot': '🦾',
-                'phone': '☎️',
-                'car': '🏎️',
-                'catapult': '🎯'
-            };
-            celebrationIcon.textContent = icons[project];
-            
-            // Clear old confetti
-            confettiContainer.innerHTML = '';
-            
-            // Create confetti
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#dfe6e9'];
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 3 + 's';
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                confettiContainer.appendChild(confetti);
-            }
-            
-            celebrationModal.style.display = 'flex';
-            
-            // Check if all projects completed
-            if (completedProjects.length === 5) {
-                setTimeout(() => {
-                    celebrationText.textContent = "🏆 You're a Master Engineer! All projects completed!";
-                }, 2000);
-            }
-        }
-
-        function closeCelebration() {
-            const celebrationModal = document.getElementById('celebrationModal');
-            celebrationModal.style.display = 'none';
-        }
-
-        function showAchievements() {
-            const achievementsSection = document.getElementById('achievements');
-            const achievementList = document.getElementById('achievement-list');
-            
-            const achievements = [
-                { icon: '🚢', title: 'Naval Engineer', desc: 'Built your first boat!' },
-                { icon: '📞', title: 'Communication Expert', desc: 'Created a string telephone!' },
-                { icon: '🏁', title: 'Speed Racer', desc: 'Built a balloon-powered car!' },
-                { icon: '🤖', title: 'Robotics Master', desc: 'Created a mechanical grabber!' },
-                { icon: '🏹', title: 'Siege Engineer', desc: 'Built a working catapult!' },
-                { icon: '👑', title: 'Master Engineer', desc: 'Completed all projects!' }
-            ];
-            
-            achievementList.innerHTML = achievements.map(achievement => `
-                <div class="achievement-card">
-                    <div class="achievement-icon">${achievement.icon}</div>
-                    <h4>${achievement.title}</h4>
-                    <p>${achievement.desc}</p>
-                </div>
-            `).join('');
-            
-            achievementsSection.style.display = 'block';
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgress();
-            updateProjectStatus();
-            
-            if (completedProjects.length === 5) {
-                showAchievements();
-            }
-        });
-
-        // Close celebration on click outside
-        document.getElementById('celebrationModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeCelebration();
-            }
-        });
-    </script>
-    <script src="navigation.js"></script>
-    <div class="review-prompt-modal" id="reviewPromptModal" style="display: none;">
-    <div class="review-prompt-content">
-        <button class="prompt-close" onclick="closeReviewPrompt()">✕</button>
-        
-        <div class="prompt-icon" id="promptIcon">🌟</div>
-        
-        <h3 id="promptTitle">Great job!</h3>
-        <p id="promptMessage">Would you like to share your experience?</p>
-        
-        <div class="prompt-actions">
-            <button class="prompt-btn-primary" onclick="goToReview()">
-                <span>✍️</span> Write a Review
-            </button>
-            <button class="prompt-btn-secondary" onclick="maybeLaterReview()">
-                Maybe Later
-            </button>
-        </div>
-        
-        <div class="prompt-footer">
-            <label class="dont-ask-again">
-                <input type="checkbox" id="dontAskAgain" onchange="updateAskPreference()">
-                <span>Don't ask me again today</span>
-            </label>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+                <button onclick="

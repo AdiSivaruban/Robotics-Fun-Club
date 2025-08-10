@@ -728,7 +728,36 @@
     <script>
         let completedProjects = JSON.parse(localStorage.getItem('completedProjects') || '[]');
         let currentSteps = {};
+const reviewPromptSystem = {
+    shouldShowPrompt() {
+        const today = new Date().toDateString();
+        const lastOptOut = localStorage.getItem('reviewOptOutDate');
+        return lastOptOut !== today;
+    },
+    
+    showPromptForProject(projectName) {
+        if (!this.shouldShowPrompt()) return;
+        
+        document.getElementById('promptTitle').textContent = `Awesome work on the ${projectName}!`;
+        document.getElementById('promptMessage').textContent = 'How was your building experience?';
+        
+        const modal = document.getElementById('reviewPromptModal');
+        modal.style.display = 'flex';
+    },
+    
+    hide() {
+        document.getElementById('reviewPromptModal').style.display = 'none';
+    }
+};
 
+function closeReviewPrompt() { reviewPromptSystem.hide(); }
+function goToReview() { window.location.href = 'reviews.html'; }
+function maybeLaterReview() { reviewPromptSystem.hide(); }
+function updateAskPreference() {
+    if (document.getElementById('dontAskAgain').checked) {
+        localStorage.setItem('reviewOptOutDate', new Date().toDateString());
+    }
+}
         function updateProgress() {
             const totalProjects = 5;
             const completed = completedProjects.length;

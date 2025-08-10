@@ -994,12 +994,12 @@ function updateAskPreference() {
             'catapult': 'Popsicle Stick Catapult'
         };
                 if (completedProjects.length === 2 || completedProjects.length === 3) {
-    // Check if the review prompt system exists
-    if (typeof reviewPromptSystem !== 'undefined') {
-        reviewPromptSystem.showPromptForProject(projectNames[project]);
-            }
-        }, 5000); // 5 second delay
-     }
+    setTimeout(() => {
+        if (typeof reviewPromptSystem !== 'undefined') {
+            reviewPromptSystem.showPromptForProject(projectNames[project]);
+        }
+    }, 5000);
+}
 }
 
         function showCelebration(project) {

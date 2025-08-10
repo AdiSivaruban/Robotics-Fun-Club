@@ -689,6 +689,29 @@
                 opacity: 0;
             }
         }
+
+          /* Mobile: Reverse button order in step navigation */
+        @media (max-width: 768px) {
+            .step-nav {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            
+            .step-nav button {
+                flex: 1;
+            }
+        }
+
+        /* Desktop: Keep normal order */
+        @media (min-width: 769px) {
+            .step-nav {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+            }
+        }
     </style>
 
     <script>

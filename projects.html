@@ -836,10 +836,13 @@ const reviewPromptSystem = {
         
         const modal = document.getElementById('reviewPromptModal');
         modal.style.display = 'flex';
+        modal.classList.add('show');
     },
     
     hide() {
-        document.getElementById('reviewPromptModal').style.display = 'none';
+    const modal = document.getElementById('reviewPromptModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
     }
 };
 

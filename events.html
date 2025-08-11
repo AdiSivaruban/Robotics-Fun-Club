@@ -3,9 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events - Robotics Fun Club</title>
+    <title>Nature Walk Recap - Robotics Fun Club</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="events.css">
+    <style>
+        /* Event Recap Styles */
+        .recap-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recap-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 50%, #10b981 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .recap-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .recap-title {
+            color: #059669;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .recap-subtitle {
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .recap-description {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Community Section */
+        .community-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--dark);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Activity Overview */
+        .activities-overview {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .activity-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .activity-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .activity-name {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Photo Gallery Section */
+        .gallery-section {
+            margin: 3rem 0;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .photo-placeholder {
+            background: linear-gradient(135deg, #e6f7f0 0%, #dcfce7 100%);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            font-size: 1.2rem;
+            color: #059669;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .photo-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .large-photo {
+            grid-column: span 2;
+            min-height: 350px;
+        }
+
+        /* Community Impact Section */
+        .impact-section {
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .impact-content {
+            color: var(--dark);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .impact-highlight {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #059669;
+        }
+
+        /* Thank You Section */
+        .thank-you-section {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.3);
+        }
+
+        .thank-you-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .thank-you-section p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .feedback-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: white;
+            color: #059669;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .large-photo {
+                grid-column: span 1;
+            }
+            
+            .recap-title {
+                font-size: 2rem;
+            }
+            
+            .community-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="animated-bg">
@@ -32,207 +279,156 @@
         </div>
     </div>
 
-   <nav>
-    <div class="nav-container">
-        <a href="home.html" class="logo" aria-label="Robotics Fun Club - Go to homepage">
-            <div class="robot-icon" aria-label="Robot logo"></div>
-            <span>Robotics Fun Club</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-        </ul>
-    </div>
-</nav>
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo" aria-label="Robotics Fun Club - Go to homepage">
+                <div class="robot-icon" aria-label="Robot logo"></div>
+                <span>Robotics Fun Club</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container">
-        <h1 class="section-title">🌿 Community Events</h1>
+        <h1 class="section-title">🌿 WeAreBrampton Nature Walk</h1>
         
-        <!-- WeAreBrampton Section -->
-        <div class="event-intro">
-            <div class="brand-section">
-                <h2 class="brand-title">WeAreBrampton: About Us</h2>
-                <p class="brand-description">
-                    WeAreBrampton is a community-rooted initiative built to amplify local voices, nurture empathy, and spark conversations that bring people closer together. What began as a research project aimed at understanding what Brampton residents need when it comes to community and well-being, soon grew into something much more. It became a real-life space where people can gather, listen, reflect, and connect.
+        <!-- Event Recap Hero -->
+        <div class="recap-hero">
+            <div class="recap-badge">Community Event Complete!</div>
+            <h2 class="recap-title">Bringing Brampton Together</h2>
+            <p class="recap-subtitle">Sunday, August 10th at Churchville Park</p>
+            <p class="recap-description">
+                The WeAreBrampton Nature Walk was more than just an event – it was a celebration of our local community coming together. Families from across Brampton joined us for a day of connection, creativity, and shared experiences in our beautiful Churchville Park.
+            </p>
+        </div>
+
+        <!-- Community Impact Section -->
+        <div class="impact-section">
+            <div class="section-header">
+                <h2 class="section-title">Building Community Connections</h2>
+            </div>
+            <div class="impact-content">
+                <p>
+                    This event truly embodied what WeAreBrampton is all about – creating spaces where neighbors become friends and where our community grows stronger together. Throughout the day, we witnessed something special: families who had never met before working side by side, children making new friends, and parents connecting over shared experiences.
+                </p>
+                <div class="impact-highlight">
+                    <p>
+                        <strong>The power of community was evident everywhere:</strong> From families helping each other during activities to the spontaneous conversations that sparked between neighbors. This wasn't just an event – it was Brampton coming together to celebrate what makes our community special.
+                    </p>
+                </div>
+                <p>
+                    The diversity of our community was beautifully represented, with families from different backgrounds sharing their unique perspectives and experiences. Children learned from each other, parents exchanged stories, and everyone contributed to making this a memorable day for our local community.
                 </p>
             </div>
         </div>
 
-        <!-- Nature Walk Event -->
-        <div class="featured-event">
-            <div class="event-header">
-                <h2 class="event-title">🌳 The WeAreBrampton Walk with Nature</h2>
-                <div class="event-badge">Featured Event</div>
+        <!-- Activities Overview -->
+        <div class="activities-overview">
+            <div class="section-header">
+                <h2 class="section-title">What We Did Together</h2>
+                <p class="section-description">
+                    The day was filled with activities that brought out creativity, teamwork, and lots of smiles. Here's what our community enjoyed:
+                </p>
             </div>
-            
-            <div class="event-content">
-                <div class="event-description">
-                    <p>
-                        The WeAreBrampton Nature Walk is a new step in our journey, quite literally! This event is about getting outside, connecting with each other and the land we live on, and learning together. It's especially designed with families and kids in mind, with fun, STEM-inspired activities that encourage creativity, curiosity and collaboration.
-                    </p>
-                    <p class="event-highlight">
-                        At its heart, the walk is about building community. We want to spark joy, conversation, and connection in a way that's simple but meaningful.
-                    </p>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <span class="activity-emoji">🥾</span>
+                    <div class="activity-name">Nature Hike</div>
                 </div>
-
-                <!-- Event Details Card -->
-                <div class="event-details-card">
-                    <h3>📅 Event Details</h3>
-                    <div class="detail-item">
-                        <strong>Date:</strong> Sunday, August 10th
-                    </div>
-                    <div class="detail-item">
-                        <strong>Time:</strong> TBD (afternoon)
-                    </div>
-                    <div class="detail-item">
-                        <strong>Location:</strong> Churchville Park
-                    </div>
-                    <div class="detail-item">
-                        <strong>Who:</strong> All ages welcome — perfect for kids and families!
-                    </div>
-                    <div class="detail-item">
-                        <strong>Cost:</strong> Free!
-                    </div>
+                <div class="activity-item">
+                    <span class="activity-emoji">🎯</span>
+                    <div class="activity-name">Catapult Building</div>
                 </div>
-            </div>
-
-            <!-- What to Bring Section -->
-            <div class="preparation-section">
-                <h3>🎒 Extra Details for the Walk</h3>
-                <p>To make sure you have the best experience possible, here are a few things to keep in mind:</p>
-                <div class="checklist">
-                    <div class="checklist-item">
-                        <span class="check-icon">👟</span>
-                        <div>
-                            <strong>Wear comfy shoes</strong> — we'll be walking along natural trails.
-                        </div>
-                    </div>
-                    <div class="checklist-item">
-                        <span class="check-icon">💧</span>
-                        <div>
-                            <strong>Bring a filled water bottle</strong> to stay hydrated.
-                        </div>
-                    </div>
-                    <div class="checklist-item">
-                        <span class="check-icon">☀️</span>
-                        <div>
-                            <strong>Apply sunscreen</strong> and consider bringing <strong>bug spray</strong> to stay comfortable.
-                        </div>
-                    </div>
-                    <div class="checklist-item">
-                        <span class="check-icon">🍎</span>
-                        <div>
-                            We'll be providing <strong>light snacks</strong> to keep your energy up.
-                        </div>
-                    </div>
-                    <div class="checklist-item">
-                        <span class="check-icon">🌧️</span>
-                        <div>
-                            In case of <strong>rainy weather</strong>, the walk will be <strong>rescheduled</strong>—we'll let you know ahead of time.
-                        </div>
-                    </div>
+                <div class="activity-item">
+                    <span class="activity-emoji">🎨</span>
+                    <div class="activity-name">Craft Making</div>
                 </div>
-                <p class="note">We want this to be a relaxed and enjoyable time for everyone, so feel free to bring anything else that makes you feel comfortable outdoors!</p>
-            </div>
-
-            <!-- Event Poster -->
-            <div class="poster-section">
-                <h3>📌 Event Poster</h3>
-                <div class="poster-container" onclick="viewFullPoster()">
-                    <img src="nature-walk-poster.jpg" alt="WeAreBrampton Nature Walk Poster" class="event-poster" id="event-poster-img">
-                    <p class="poster-caption">Click to view full size</p>
+                <div class="activity-item">
+                    <span class="activity-emoji">🎲</span>
+                    <div class="activity-name">Nature Bingo</div>
                 </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="event-actions">
-                <h3>🎯 Get Involved!</h3>
-                <p>To learn more about the Nature Walk, check out our event poster, sign up using our registration form, and don't forget to share your thoughts after the event through our feedback form—we'd love to hear from you!</p>
-                <div class="action-buttons">
-                    <a href="https://forms.gle/fFtiGqhUXRCWd9aT9" target="_blank" class="action-btn register-btn">
-                        <span class="btn-icon">📝</span>
-                        Register Now
-                    </a>
-                    <a href="https://forms.gle/KuRicmkqCdZkqwHF9" target="_blank" class="action-btn feedback-btn">
-                        <span class="btn-icon">💬</span>
-                        Share Feedback
-                    </a>
+                <div class="activity-item">
+                    <span class="activity-emoji">🎮</span>
+                    <div class="activity-name">Community Games</div>
+                </div>
+                <div class="activity-item">
+                    <span class="activity-emoji">🏆</span>
+                    <div class="activity-name">Prize Giving</div>
                 </div>
             </div>
         </div>
 
-        <!-- Activities Preview -->
-        <div class="activities-preview">
-            <h3>🎨 What to Expect</h3>
-            <div class="activity-grid">
-                <div class="activity-card">
-                    <div class="activity-icon">🦋</div>
-                    <h4>Explore the Outdoors</h4>
-                    <p>Discover nature through guided walks and observation</p>
+        <!-- Community Stories Section -->
+        <div class="community-section">
+            <div class="section-header">
+                <h2 class="section-title">The Heart of Brampton</h2>
+            </div>
+            <div class="section-description">
+                <p>
+                    What made this event truly special was seeing how our local community embraced the opportunity to connect. Parents collaborated on building catapults with their children, sharing tips and celebrating each other's successes. During the nature hike, families who had just met were walking together, with children excitedly pointing out discoveries to their new friends.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    The craft station became a hub of intergenerational exchange, with grandparents teaching traditional techniques while kids shared their creative ideas. The bingo game had everyone working together, helping each other spot items and cheering when someone won. Even the prize giving became a community celebration, with everyone applauding each winner.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    This event proved that when we create spaces for our community to gather, magic happens. The connections made, the laughter shared, and the memories created are what WeAreBrampton is all about – strengthening the fabric of our local community, one event at a time.
+                </p>
+            </div>
+        </div>
+
+        <!-- Photo Gallery Section -->
+        <div class="gallery-section">
+            <div class="section-header">
+                <h2 class="section-title">Memories from the Day</h2>
+            </div>
+            <div class="photo-grid">
+                <div class="photo-placeholder">
+                    📸 Event Photo 1
                 </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🔬</div>
-                    <h4>STEM Activities</h4>
-                    <p>Fun, hands-on experiments inspired by nature</p>
+                <div class="photo-placeholder">
+                    📸 Event Photo 2
                 </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🎨</div>
-                    <h4>Get Creative</h4>
-                    <p>Art and craft activities using natural materials</p>
+                <div class="photo-placeholder large-photo">
+                    📸 Event Photo 3
                 </div>
-                <div class="activity-card">
-                    <div class="activity-icon">🤝</div>
-                    <h4>Build Community</h4>
-                    <p>Connect with neighbors and make new friends</p>
+                <div class="photo-placeholder">
+                    📸 Event Photo 4
+                </div>
+                <div class="photo-placeholder">
+                    📸 Event Photo 5
+                </div>
+                <div class="photo-placeholder">
+                    📸 Event Photo 6
+                </div>
+                <div class="photo-placeholder">
+                    📸 Event Photo 7
                 </div>
             </div>
+        </div>
+
+        <!-- Thank You Section -->
+        <div class="thank-you-section">
+            <h2>Thank You, Brampton! 💚</h2>
+            <p>
+                This event was a beautiful reminder of what makes our community special – the people. Thank you to every family who joined us, every child who participated with enthusiasm, and every community member who helped make this day possible.
+            </p>
+            <p>
+                Your participation didn't just make this event successful; it strengthened the bonds that make Brampton a wonderful place to live. We look forward to continuing to build our community together through more WeAreBrampton events.
+            </p>
+            <a href="https://forms.gle/KuRicmkqCdZkqwHF9" target="_blank" class="feedback-cta">
+                <span>💬</span>
+                Share Your Feedback
+            </a>
         </div>
     </div>
 
-    <script>
-        // View poster in full quality
-        function viewFullPoster() {
-            const img = document.getElementById('event-poster-img');
-            
-            // Create a modal to show full-size image
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-                cursor: pointer;
-                padding: 20px;
-            `;
-            
-            const fullImg = document.createElement('img');
-            fullImg.src = img.src;
-            fullImg.style.cssText = `
-                max-width: 90%;
-                max-height: 90vh;
-                object-fit: contain;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            `;
-            
-            modal.appendChild(fullImg);
-            document.body.appendChild(modal);
-            
-            // Close on click
-            modal.onclick = function() {
-                document.body.removeChild(modal);
-            };
-        }
-    </script>
     <script src="navigation.js"></script>
 </body>
 </html>

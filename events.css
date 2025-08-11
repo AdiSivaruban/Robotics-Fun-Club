@@ -405,42 +405,68 @@ nav {
 
 .photo-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 250px);
     gap: 1.5rem;
     margin-top: 2rem;
+    grid-auto-flow: dense;
 }
 
 .photo-placeholder {
     background: linear-gradient(135deg, #e6f7f0 0%, #dcfce7 100%);
     border-radius: 16px;
-    padding: 3rem 2rem;
+    padding: 2rem;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 200px;
     font-size: 1.1rem;
     color: #059669;
     font-weight: 600;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    aspect-ratio: 4/3;
 }
 
 .photo-placeholder:hover {
     transform: scale(1.05) translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
-/* Special positioning for specific photos */
+/* Layout for 7 photos */
 .photo-placeholder:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 1;
+    grid-column: 1 / 3;
+    grid-row: 1;
+}
+
+.photo-placeholder:nth-child(2) {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.photo-placeholder:nth-child(3) {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.photo-placeholder:nth-child(4) {
+    grid-column: 1 / 2;
+    grid-row: 2;
+}
+
+.photo-placeholder:nth-child(5) {
+    grid-column: 2 / 4;
+    grid-row: 2;
+}
+
+.photo-placeholder:nth-child(6) {
+    grid-column: 4;
+    grid-row: 2;
 }
 
 .photo-placeholder:nth-child(7) {
-    grid-column: span 3;
-    min-height: 250px;
+    grid-column: 1 / 5;
+    grid-row: 3;
 }
 
 /* Community Impact Section */
@@ -521,14 +547,26 @@ nav {
 @media (max-width: 968px) {
     .photo-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
     }
     
     .photo-placeholder:nth-child(1) {
-        grid-column: span 2;
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
+    
+    .photo-placeholder:nth-child(2),
+    .photo-placeholder:nth-child(3),
+    .photo-placeholder:nth-child(4),
+    .photo-placeholder:nth-child(5),
+    .photo-placeholder:nth-child(6) {
+        grid-column: span 1;
+        grid-row: auto;
     }
     
     .photo-placeholder:nth-child(7) {
-        grid-column: span 2;
+        grid-column: 1 / 3;
+        grid-row: auto;
     }
 }
 
@@ -543,10 +581,26 @@ nav {
 
     .photo-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1rem;
     }
     
-    .large-photo {
-        grid-column: span 1;
+    .photo-placeholder {
+        min-height: 180px;
+    }
+    
+    .photo-placeholder:nth-child(1),
+    .photo-placeholder:nth-child(7) {
+        grid-column: 1;
+        min-height: 200px;
+    }
+    
+    .photo-placeholder:nth-child(2),
+    .photo-placeholder:nth-child(3),
+    .photo-placeholder:nth-child(4),
+    .photo-placeholder:nth-child(5),
+    .photo-placeholder:nth-child(6) {
+        grid-column: 1;
     }
     
     .recap-title {

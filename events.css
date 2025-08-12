@@ -254,12 +254,13 @@ nav {
 
 /* Event Recap Styles */
 .recap-hero {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    padding: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
 }
@@ -289,55 +290,58 @@ nav {
 }
 
 .recap-title {
-    color: #059669;
+    color: #6c5ce7;
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
 }
 
 .recap-subtitle {
-    color: var(--dark);
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    color: #666;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 500;
 }
 
 .recap-description {
-    color: var(--gray);
+    color: #666;
     font-size: 1.1rem;
     max-width: 800px;
     margin: 0 auto;
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
 /* Community Section */
 .community-section {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 30px;
 }
 
 .section-title {
-    color: var(--primary);
+    color: #6c5ce7;
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .section-description {
-    color: var(--dark);
+    color: #666;
     font-size: 1.1rem;
-    line-height: 1.8;
+    line-height: 1.7;
     max-width: 800px;
     margin: 0 auto;
 }
 
 .section-description p {
     margin-bottom: 1.5rem;
+    color: #666;
 }
 
 .section-description p:last-child {
@@ -346,27 +350,29 @@ nav {
 
 /* Activity Overview */
 .activities-overview {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
-    background-color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .activity-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap: 25px;
+    margin-top: 30px;
 }
 
 .activity-item {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
+    border-left: 4px solid #6c5ce7;
 }
 
 .activity-item:hover {
@@ -382,24 +388,25 @@ nav {
 }
 
 .activity-name {
-    color: var(--primary);
+    color: #6c5ce7;
     font-size: 1.2rem;
     font-weight: 600;
 }
 
 /* Photo Gallery Section */
 .gallery-section {
-    margin: 3rem 0;
+    margin: 3rem 0 50px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .gallery-section .section-header h2 {
-    color: var(--primary);
+    color: #6c5ce7;
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -471,76 +478,81 @@ nav {
 
 /* Community Impact Section */
 .impact-section {
-    background: rgba(16, 185, 129, 0.05);
-    background-color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .impact-content {
-    color: var(--dark);
+    color: #666;
     font-size: 1.1rem;
-    line-height: 1.9;
+    line-height: 1.7;
 }
 
 .impact-content p {
     margin-bottom: 1rem;
+    color: #666;
 }
 
 .impact-highlight {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 1.5rem 0;
-    border-left: 4px solid #059669;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #10b981;
 }
 
 .impact-highlight p {
     margin: 0;
+    color: #333;
 }
 
 /* Thank You Section */
 .thank-you-section {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 3rem;
+    padding: 40px;
     text-align: center;
-    margin-top: 3rem;
-    box-shadow: 0 20px 50px rgba(16, 185, 129, 0.3);
+    margin-top: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .thank-you-section h2 {
+    color: #6c5ce7;
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
 }
 
 .thank-you-section p {
+    color: #666;
     font-size: 1.1rem;
     max-width: 700px;
-    margin: 0 auto 2rem;
-    line-height: 1.8;
+    margin: 0 auto 25px;
+    line-height: 1.6;
 }
 
 .feedback-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: white;
-    color: #059669;
-    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #6c5ce7 0%, #06b6d4 100%);
+    color: white;
+    padding: 15px 30px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(108, 92, 231, 0.3);
 }
 
 .feedback-cta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 35px rgba(108, 92, 231, 0.4);
 }
 
 /* Responsive Design */

@@ -536,3 +536,96 @@
         width: 100%;
     }
 }
+
+/* Fix for aligning Start Building buttons */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; /* Ensure all cards have minimum height */
+}
+
+.project-header {
+    flex-shrink: 0;
+}
+
+.project-description {
+    flex-shrink: 0;
+    min-height: 60px; /* Give consistent height to descriptions */
+}
+
+.materials-preview {
+    flex-shrink: 0;
+    margin-bottom: auto; /* This pushes everything below to the bottom */
+}
+
+.project-actions {
+    margin-top: auto; /* This pushes the buttons to the bottom */
+    padding-top: 20px; /* Add some spacing above buttons */
+}
+
+/* Alternative solution using grid if the above doesn't work */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    align-items: stretch; /* Make all cards same height */
+}
+
+.project-card.interactive-card {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto auto;
+    min-height: 420px;
+}
+
+.project-status {
+    grid-row: 1;
+}
+
+.project-header {
+    grid-row: 2;
+}
+
+.project-description {
+    grid-row: 3;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.materials-preview {
+    grid-row: 4;
+    align-self: start;
+}
+
+.project-actions {
+    grid-row: 5;
+    align-self: end;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.project-instructions {
+    grid-row: 6;
+}
+
+/* Ensure consistent button styling */
+.start-btn, .complete-btn, .undo-btn, .close-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* If materials are expanded, maintain alignment */
+.materials-list {
+    margin-bottom: 15px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-card.interactive-card {
+        min-height: auto;
+    }
+}

@@ -243,84 +243,92 @@
         </div>
     </div>
 </div>
-            <!-- Rubber Band Boat -->
             <div class="project-card interactive-card" data-difficulty="medium" data-project="boat">
-                <div class="project-status" id="boat-status">🔒</div>
-                <div class="project-header">
-                    <div class="project-emoji bouncing">🚤</div>
-                    <div class="project-meta">
-                        <h3>Rubber Band Boat</h3>
-                        <div class="badges">
-                            <div class="difficulty-badge medium">Medium</div>
-                            <div class="time-badge">⏱️ 20 min</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <p class="project-description">Build a self-propelled boat using a plastic bottle and rubber band!</p>
-                
-                <div class="materials-preview">
-                    <div class="materials-toggle" onclick="toggleMaterials('boat')">
-                        <strong>📦 Materials</strong>
-                        <span class="toggle-arrow" id="boat-arrow">▼</span>
-                    </div>
-                    <div class="materials-list" id="boat-materials" style="display: none;">
-                        <div class="material-item">✓ 1 empty plastic water bottle</div>
-                        <div class="material-item">✓ 3 popsicle sticks</div>
-                        <div class="material-item">✓ 1 strong rubber band</div>
-                        <div class="material-item">✓ Tape</div>
-                    </div>
-                </div>
-                
-                <div class="project-actions">
-                    <button class="start-btn" id="boat-start" onclick="startProject('boat')">🚀 Start Building</button>
-                    <button class="complete-btn" id="boat-complete" onclick="toggleComplete('boat')" style="display: none;">✅ Mark Complete</button>
-                    <button class="undo-btn" id="boat-undo" onclick="undoComplete('boat')" style="display: none;">↩️ Undo Complete</button>
-                    <button class="close-btn" id="boat-close" onclick="closeInstructions('boat')" style="display: none;">❌ Close Instructions</button>
-                </div>
-
-                <div class="project-instructions" id="boat-instructions" style="display: none;">
-                    <div class="instruction-step active" data-step="1">
-                        <h4>Step 1: Prepare the Hull</h4>
-                        <p>Use the plastic bottle as your boat body. Make sure it's sealed and floats. Decorate it however you want!</p>
-                        <div class="step-nav">
-                            <button onclick="nextStep('boat', 2)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="2">
-                        <h4>Step 2: Create Paddle Support</h4>
-                        <p>Tape two popsicle sticks parallel to each other near the back of the bottle with a small gap between them.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 1)">← Previous</button>
-                            <button onclick="nextStep('boat', 3)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="3">
-                        <h4>Step 3: Add Rubber Band</h4>
-                        <p>Stretch the rubber band between the two popsicle sticks. Make sure it's tight but not about to snap.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 2)">← Previous</button>
-                            <button onclick="nextStep('boat', 4)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="4">
-                        <h4>Step 4: Make the Paddle</h4>
-                        <p>Cut a popsicle stick in half and slide it through the rubber band. Tape it together.</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 3)">← Previous</button>
-                            <button onclick="nextStep('boat', 5)">Next Step →</button>
-                        </div>
-                    </div>
-                    <div class="instruction-step" data-step="5">
-                        <h4>Step 5: Launch!</h4>
-                        <p>Wind the paddle backward, place in water, and release! Watch your boat zoom across the water!</p>
-                        <div class="step-nav">
-                            <button onclick="prevStep('boat', 4)">← Previous</button>
-                            <button onclick="completeProject('boat')" class="complete-step-btn">🎉 Complete Project!</button>
-                        </div>
-                    </div>
-                </div>
+    <div class="project-status" id="boat-status">🔒</div>
+    <div class="project-header">
+        <div class="project-emoji bouncing">⛵</div>
+        <div class="project-meta">
+            <h3>Ziploc Bag Sailboat</h3>
+            <div class="badges">
+                <div class="difficulty-badge medium">Medium</div>
+                <div class="time-badge">⏱️ 20 min</div>
             </div>
+        </div>
+    </div>
+    
+    <p class="project-description">Build a sailboat using plastic bottles and a Ziploc bag sail that catches the wind!</p>
+    
+    <div class="materials-preview">
+        <div class="materials-toggle" onclick="toggleMaterials('boat')">
+            <strong>📦 Materials</strong>
+            <span class="toggle-arrow" id="boat-arrow">▼</span>
+        </div>
+        <div class="materials-list" id="boat-materials" style="display: none;">
+            <div class="material-item">✓ 2 small plastic water bottles</div>
+            <div class="material-item">✓ 1 pencil (unsharpened works best)</div>
+            <div class="material-item">✓ 1 Ziploc bag (sandwich or quart size)</div>
+            <div class="material-item">✓ Tape (duct tape or strong tape)</div>
+            <div class="material-item">✓ Scissors</div>
+        </div>
+    </div>
+    
+    <div class="project-actions">
+        <button class="start-btn" id="boat-start" onclick="startProject('boat')">🚀 Start Building</button>
+        <button class="complete-btn" id="boat-complete" onclick="toggleComplete('boat')" style="display: none;">✅ Mark Complete</button>
+        <button class="undo-btn" id="boat-undo" onclick="undoComplete('boat')" style="display: none;">↩️ Undo Complete</button>
+        <button class="close-btn" id="boat-close" onclick="closeInstructions('boat')" style="display: none;">❌ Close Instructions</button>
+    </div>
+
+    <div class="project-instructions" id="boat-instructions" style="display: none;">
+        <div class="instruction-step active" data-step="1">
+            <h4>Step 1: Create the Hull</h4>
+            <p>Place the two plastic bottles side by side, about 2-3 inches apart. Make sure the caps are on tight so they float! Tape them together firmly at both ends, keeping that gap in the middle.</p>
+            <div class="step-nav">
+                <button onclick="nextStep('boat', 2)">Next Step →</button>
+            </div>
+        </div>
+        <div class="instruction-step" data-step="2">
+            <h4>Step 2: Install the Mast</h4>
+            <p>Take your pencil and push it down between the two bottles in the middle gap. The pencil should stand straight up like a mast. Secure it with tape wrapped around both bottles and the pencil.</p>
+            <div class="step-nav">
+                <button onclick="prevStep('boat', 1)">← Previous</button>
+                <button onclick="nextStep('boat', 3)">Next Step →</button>
+            </div>
+        </div>
+        <div class="instruction-step" data-step="3">
+            <h4>Step 3: Prepare the Sail</h4>
+            <p>Take your Ziploc bag and make sure it's open and flat. You can decorate it with permanent markers if you want! This will be your sail that catches the wind.</p>
+            <div class="step-nav">
+                <button onclick="prevStep('boat', 2)">← Previous</button>
+                <button onclick="nextStep('boat', 4)">Next Step →</button>
+            </div>
+        </div>
+        <div class="instruction-step" data-step="4">
+            <h4>Step 4: Attach the Sail</h4>
+            <p>Carefully pierce the pencil through the Ziploc bag about 1 inch from the top and 1 inch from the bottom. Slide the bag onto the pencil so it can catch wind. The bag should billow out like a real sail!</p>
+            <div class="step-nav">
+                <button onclick="prevStep('boat', 3)">← Previous</button>
+                <button onclick="nextStep('boat', 5)">Next Step →</button>
+            </div>
+        </div>
+        <div class="instruction-step" data-step="5">
+            <h4>Step 5: Set Sail!</h4>
+            <p>Your sailboat is ready! Test it in a bathtub, pool, or large container of water. Blow on the sail or use a fan to make it move. Try adjusting the sail angle for better speed!</p>
+            <div class="safety-warning">
+                <h4>💡 Pro Tips:</h4>
+                <ul>
+                    <li>Make sure bottles are sealed tight for best floating</li>
+                    <li>Try different sail sizes - bigger catches more wind!</li>
+                    <li>Add a small weight (like a coin) to the bottom of bottles if it tips over</li>
+                </ul>
+            </div>
+            <div class="step-nav">
+                <button onclick="prevStep('boat', 4)">← Previous</button>
+                <button onclick="completeProject('boat')" class="complete-step-btn">🎉 Complete Project!</button>
+            </div>
+        </div>
+    </div>
+</div>
             
             <!-- Balloon Car -->
             <div class="project-card interactive-card" data-difficulty="medium" data-project="car">
